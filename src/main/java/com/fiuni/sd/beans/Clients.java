@@ -1,9 +1,14 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
@@ -24,10 +29,20 @@ public class Clients {
 	@Column(name = "clientRuc")
 	private Integer clientRuc; 
 	
-	@Column(name = "roleId")
-	private Integer roleId;
+
+	@ManyToOne
+	private Roles _role;
+	
+	@OneToMany(mappedBy="_clients")
+	private Set<ProductOrder>_productOrders= new HashSet<>();
 	
 	
+	public Set<ProductOrder> get_productOrders() {
+		return _productOrders;
+	}
+	public void set_productOrders(Set<ProductOrder> _productOrders) {
+		this._productOrders = _productOrders;
+	}
 	public Integer getClientId() {
 		return clientId;
 	}
@@ -46,12 +61,11 @@ public class Clients {
 	public void setClientRuc(Integer clientRuc) {
 		this.clientRuc = clientRuc;
 	}
-	public Integer getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
-	}
 
-
+	public Roles get_role() {
+		return _role;
+	}
+	public void set_role(Roles _role) {
+		this._role = _role;
+	}
 }

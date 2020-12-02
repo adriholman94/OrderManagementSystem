@@ -1,11 +1,15 @@
 package com.fiuni.sd.beans;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
@@ -18,14 +22,12 @@ public class ProductOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer productOrderId;
-	@Column(name = "orderId")
-	private Integer orderId;
 	
 	@Column(name = "orderDate")
 	private Date orderDate;
 	
-	@Column(name = "clientId")
-	private Integer clientId;
+	@ManyToOne
+	private Clients _clients;
 	
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
@@ -33,31 +35,38 @@ public class ProductOrder {
 	@Column(name = "isCanceled")
 	private Boolean isCanceled;
 	
+	@OneToMany(mappedBy="_productOrder")
+	private Set<ProductOrderDetail>_productOrderDetails= new HashSet<>();
 	
+	
+
+	public Clients get_clients() {
+		return _clients;
+	}
+	public void set_clients(Clients _clients) {
+		this._clients = _clients;
+	}
+	
+	public Set<ProductOrderDetail> get_productOrderDetails() {
+		return _productOrderDetails;
+	}
+	public void set_productOrderDetails(Set<ProductOrderDetail> _productOrderDetails) {
+		this._productOrderDetails = _productOrderDetails;
+	}
 	public Integer getProductOrderId() {
 		return productOrderId;
 	}
 	public void setProductOrderId(Integer productOrderId) {
 		this.productOrderId = productOrderId;
 	}
-	public Integer getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
+
 	public Date getOrderDate() {
 		return orderDate;
 	}
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
-	public Integer getClientId() {
-		return clientId;
-	}
-	public void setClientId(Integer clientId) {
-		this.clientId = clientId;
-	}
+
 	public Integer getFinalPrice() {
 		return finalPrice;
 	}

@@ -1,9 +1,13 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -34,6 +38,27 @@ public class Users {
 	
 	@Column(name = "userMail")
 	private	String userMail;
+	
+	@OneToMany(mappedBy="_user")
+	private Set<Clients>_clients= new HashSet<>();
+	
+	@OneToMany(mappedBy="_user")
+	private Set<Admin>_admin= new HashSet<>();
+	
+	
+	
+	public Set<Clients> get_clients() {
+		return _clients;
+	}
+	public void set_clients(Set<Clients> _clients) {
+		this._clients = _clients;
+	}
+	public Set<Admin> get_admin() {
+		return _admin;
+	}
+	public void set_admin(Set<Admin> _admin) {
+		this._admin = _admin;
+	}
 	
 	public Integer getUserId() {
 		return userId;
