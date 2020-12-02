@@ -9,18 +9,17 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
 
+//registro de compras
 @Entity
-@Table(name = "productRegistration")
-public class ProductRegistration {
+@Table(name = "purchaseRecords")
+public class PurchaseRecords {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
-	private Integer productRegistrationId;
+	private Integer purchaseRecordsId;
 	
-	@Column(name = "productPurchaseId")
-	private Integer	productPurchaseId;
-	
+		
 	@Column(name = "date")
 	private Date date;
 	
@@ -28,13 +27,13 @@ public class ProductRegistration {
 	private Integer	finalPrice;
 
 
+	public Integer getPurchaseRecordsId() {
+		return purchaseRecordsId;
+	}
+	public void setPurchaseRecordsId(Integer purchaseRecordsId) {
+		this.purchaseRecordsId = purchaseRecordsId;
+	}
 
-public Integer getProductPurchaseId() {
-	return productPurchaseId;
-}
-public void setProductPurchaseIdId(Integer productPurchaseId) {
-	this.productPurchaseId = productPurchaseId;
-}
 public Date getDate() {
 	return date;
 }

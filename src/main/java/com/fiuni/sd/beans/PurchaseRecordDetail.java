@@ -1,23 +1,27 @@
 package com.fiuni.sd.beans;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
  
 import org.springframework.data.annotation.Id;
+
+//registr de compra detalle
 @Entity
-@Table(name = "productRegistrationDetail")
-public class ProductRegistrationDetail {
+@Table(name = "purchaseRecordDetail")
+public class PurchaseRecordDetail {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
-	private Integer	productRegistrationDetailId;
+	private Integer	purchaseRecordDetailId;
 	
-	@Column(name = "productRegistrationId")
-	private Integer	productRegistrationId;
+	
+	@Column(name = "purchaseRecordId")
+	private Integer	purchaseRecordId;
 	
 	@Column(name = "productsSupplierId")
 	private Integer	productsSupplierId;
@@ -32,18 +36,19 @@ public class ProductRegistrationDetail {
 	private Integer	totalPrice;
 
 
-public Integer getProductRegistrationDetailId() {
-	return productRegistrationDetailId;
-}
-public void setProductRegistrationDetailId(Integer productRegistrationDetailId) {
-	this.productRegistrationDetailId = productRegistrationDetailId;
-}
-public Integer getProductRegistrationId() {
-	return productRegistrationId;
-}
-public void setProductRegistrationId(Integer productRegistrationId) {
-	this.productRegistrationId = productRegistrationId;
-}
+	public Integer getPurchaseRecordDetailId() {
+		return purchaseRecordDetailId;
+	}
+	public void setPurchaseRecordDetailId(Integer purchaseRecordDetailId) {
+		this.purchaseRecordDetailId = purchaseRecordDetailId;
+	}
+	public Integer getPurchaseRecordId() {
+		return purchaseRecordId;
+	}
+	public void setPurchaseRecordId(Integer purchaseRecordId) {
+		this.purchaseRecordId = purchaseRecordId;
+	}
+
 public Integer getProductsSupplierId() {
 	return productsSupplierId;
 }
