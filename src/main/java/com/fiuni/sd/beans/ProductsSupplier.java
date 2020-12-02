@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
@@ -18,32 +20,32 @@ public class ProductsSupplier {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer	productSupplierId;
 	
-	@Column(name = "supplierId")
-	private Integer	supplierId;
-	
-	@Column(name = "productId")
-	private Integer	productId;
+	@ManyToOne
+	private Suppliers	_suppliers;
 	
 	
-
+	@OneToOne
+	private Products	_products;
+	
+	@OneToOne
+	private PurchaseRecordDetail _purchaseRecordDetail;
+	
+	
+	public Suppliers get_suppliers() {
+		return _suppliers;
+	}
+	public void set_suppliers(Suppliers _suppliers) {
+		this._suppliers = _suppliers;
+	}
+	
 public Integer getProductSupplierId() {
 	return productSupplierId;
 }
 public void setProductSupplierId(Integer productSupplierId) {
 	this.productSupplierId = productSupplierId;
 }
-public Integer getSupplierId() {
-	return supplierId;
-}
-public void setSupplierId(Integer supplierId) {
-	this.supplierId = supplierId;
-}
-public Integer getProductId() {
-	return productId;
-}
-public void setProductId(Integer productId) {
-	this.productId = productId;
-}
+
+
 
 
 }

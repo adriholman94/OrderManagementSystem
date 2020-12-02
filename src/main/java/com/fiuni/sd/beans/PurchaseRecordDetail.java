@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
  
 import org.springframework.data.annotation.Id;
@@ -19,12 +21,12 @@ public class PurchaseRecordDetail {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer	purchaseRecordDetailId;
 	
+	@ManyToOne
+	private PurchaseRecords	_purchaseRecords;
 	
-	@Column(name = "purchaseRecordId")
-	private Integer	purchaseRecordId;
+	@OneToOne
+	private ProductsSupplier	_productsSupplier;
 	
-	@Column(name = "productsSupplierId")
-	private Integer	productsSupplierId;
 	
 	@Column(name = "productQuantity")
 	private Integer	productQuantity;
@@ -42,19 +44,20 @@ public class PurchaseRecordDetail {
 	public void setPurchaseRecordDetailId(Integer purchaseRecordDetailId) {
 		this.purchaseRecordDetailId = purchaseRecordDetailId;
 	}
-	public Integer getPurchaseRecordId() {
-		return purchaseRecordId;
-	}
-	public void setPurchaseRecordId(Integer purchaseRecordId) {
-		this.purchaseRecordId = purchaseRecordId;
-	}
 
-public Integer getProductsSupplierId() {
-	return productsSupplierId;
-}
-public void setProductsSupplierId(Integer productsSupplierId) {
-	this.productsSupplierId = productsSupplierId;
-}
+
+	public PurchaseRecords get_purchaseRecords() {
+		return _purchaseRecords;
+	}
+	public void set_purchaseRecords(PurchaseRecords _purchaseRecords) {
+		this._purchaseRecords = _purchaseRecords;
+	}
+	public ProductsSupplier get_productsSupplier() {
+		return _productsSupplier;
+	}
+	public void set_productsSupplier(ProductsSupplier _productsSupplier) {
+		this._productsSupplier = _productsSupplier;
+	}
 public Integer getProductQuantity() {
 	return productQuantity;
 }

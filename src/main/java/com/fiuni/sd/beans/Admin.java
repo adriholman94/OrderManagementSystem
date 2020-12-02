@@ -1,9 +1,14 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
@@ -16,30 +21,34 @@ public class Admin {
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer	adminId;
 	
-	@Column(name = "userId")
-	private Integer	userId;
+	@ManyToOne
+	private Users	_user;
+
+	@ManyToOne
+	private Roles	_role;
+
 	
-	@Column(name = "roleId")
-	private Integer	roleId;
 	
+	public Users get_user() {
+		return _user;
+	}
+	public void set_user(Users _user) {
+		this._user = _user;
+	}
+	public Roles get_role() {
+		return _role;
+	}
+	public void set_role(Roles _role) {
+		this._role = _role;
+	}
+
 	public Integer getAdminId() {
 		return adminId;
 	}
 	public void setAdminId(Integer adminId) {
 		this.adminId = adminId;
 	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-	public Integer getRoleId() {
-		return roleId;
-	}
-	public void setRoleId(Integer roleId) {
-		this.roleId = roleId;
-	}
+
 
 
 }
