@@ -1,5 +1,8 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "Products")
@@ -39,7 +42,7 @@ public class Product implements BaseBean {
 	private Stock stock;
 
 	@OneToMany
-	private OrderDetail orderDetail;
+	private Set<OrderDetail> orderDetail = new HashSet<>();
 
 	public Category get_categories() {
 		return categories;
@@ -57,11 +60,11 @@ public class Product implements BaseBean {
 		this.stock = stock;
 	}
 
-	public OrderDetail get_productOrderDetail() {
+	public Set<OrderDetail> get_productOrderDetail() {
 		return orderDetail;
 	}
 
-	public void set_productOrderDetail(OrderDetail orderDetail) {
+	public void set_productOrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 

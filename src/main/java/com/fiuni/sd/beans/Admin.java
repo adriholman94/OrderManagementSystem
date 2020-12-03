@@ -1,5 +1,6 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -7,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "Admins")
@@ -26,8 +28,9 @@ public class Admin implements BaseBean {
 	@JoinColumn(name = "userId")
 	private User user;
 
-	@ManyToMany(mappedBy = "Admin")
-	private Set<AdminRole> adminRoles;
+	@ManyToMany
+    @JoinTable
+    private Set<AdminRole> adminRoles;
 
 	public User get_user() {
 		return user;

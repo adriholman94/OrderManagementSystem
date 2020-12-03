@@ -1,16 +1,18 @@
 package com.fiuni.sd.beans;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
 
 @Entity
 @Table(name = "AdminRoles")
@@ -25,8 +27,7 @@ public class AdminRole implements BaseBean {
 	@Column(name = "roleName", unique = true)
 	private String roleName;
 	
-    @ManyToMany
-    @JoinTable
+    @ManyToMany(mappedBy = "adminRoles")
 	private Set<Admin> admins;
 	
 	public Integer getId() {

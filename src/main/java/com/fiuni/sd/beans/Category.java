@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "Categories")
@@ -25,7 +25,7 @@ public class Category implements BaseBean {
 	@Column(name = "categoryName")
 	private String categoryName;
 
-	@OneToMany(mappedBy = "Product")
+	@OneToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
 
 	public Integer getId() {
