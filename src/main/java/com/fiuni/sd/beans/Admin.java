@@ -1,14 +1,10 @@
 package com.fiuni.sd.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
@@ -26,8 +22,6 @@ public class Admin implements BaseBeans{
 
 	@ManyToOne
 	private Roles	_role;
-
-	
 	
 	public Users get_user() {
 		return _user;

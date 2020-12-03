@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS migrations."Clients" DROP COLUMN "roleId";
