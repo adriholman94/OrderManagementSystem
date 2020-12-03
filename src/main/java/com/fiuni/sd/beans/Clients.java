@@ -15,49 +15,54 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "clients")
-public class Clients implements BaseBeans{
+public class Clients implements BaseBeans {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
-	private Integer clientId; 
-	
+	private Integer clientId;
+
 	@Column(name = "userId")
 	private Integer userId;
-	
+
 	@Column(name = "clientRuc")
-	private Integer clientRuc; 
-	
+	private Integer clientRuc;
 
 	@ManyToOne
 	private Roles _role;
-	
-	@OneToMany(mappedBy="_clients")
-	private Set<ProductOrder>_productOrders= new HashSet<>();
-	
-	
+
+	@OneToMany(mappedBy = "_clients")
+	private Set<ProductOrder> _productOrders = new HashSet<>();
+
 	public Set<ProductOrder> get_productOrders() {
 		return _productOrders;
 	}
+
 	public void set_productOrders(Set<ProductOrder> _productOrders) {
 		this._productOrders = _productOrders;
 	}
+
 	public Integer getClientId() {
 		return clientId;
 	}
+
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
+
 	public Integer getUserId() {
 		return userId;
 	}
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
 	public Integer getClientRuc() {
 		return clientRuc;
 	}
+
 	public void setClientRuc(Integer clientRuc) {
 		this.clientRuc = clientRuc;
 	}
@@ -65,12 +70,13 @@ public class Clients implements BaseBeans{
 	public Roles get_role() {
 		return _role;
 	}
+
 	public void set_role(Roles _role) {
 		this._role = _role;
 	}
-	
+
 	public String toString() {
-		return "Cliente [id=" + clientId + ", userId=" + userId + ", ruc=" + clientRuc 
-				+ ", role=" + _role +", productOrder=" + _productOrders +"]";
+		return "Cliente [id=" + clientId + ", userId=" + userId + ", ruc=" + clientRuc + ", role=" + _role
+				+ ", productOrder=" + _productOrders + "]";
 	}
 }

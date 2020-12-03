@@ -15,41 +15,45 @@ import org.springframework.data.annotation.Id;
 //proveedores
 @Entity
 @Table(name = "suppliers")
-public class Suppliers implements BaseBeans{
+public class Suppliers implements BaseBeans {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
-	private Integer	supplierId;
-	
+	private Integer supplierId;
+
 	@Column(name = "supplierName")
-	private String	supplierName;
-	
-	@OneToMany(mappedBy="_suppliers")
-	private Set<ProductsSupplier>_productsSuppliers= new HashSet<>();
-	
+	private String supplierName;
+
+	@OneToMany(mappedBy = "_suppliers")
+	private Set<ProductsSupplier> _productsSuppliers = new HashSet<>();
+
 	public Set<ProductsSupplier> get_productsSuppliers() {
 		return _productsSuppliers;
 	}
+
 	public void set_productsSuppliers(Set<ProductsSupplier> _productsSuppliers) {
 		this._productsSuppliers = _productsSuppliers;
 	}
+
 	public Integer getSupplierId() {
 		return supplierId;
 	}
+
 	public void setSupplierId(Integer supplierId) {
 		this.supplierId = supplierId;
 	}
+
 	public String getSupplierName() {
 		return supplierName;
 	}
+
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
 	}
 
 	public String toString() {
-		return "suppliers[id=" + supplierId + ", supplierName=" +supplierName + 
-				", _productsSuppliers=" + _productsSuppliers 
-				+ ", _productsSuppliers=" + _productsSuppliers +"]";
+		return "suppliers[id=" + supplierId + ", supplierName=" + supplierName + ", _productsSuppliers="
+				+ _productsSuppliers + ", _productsSuppliers=" + _productsSuppliers + "]";
 	}
 }

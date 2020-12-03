@@ -12,54 +12,58 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
+
 @Entity
 @Table(name = "role")
-public class Roles implements BaseBeans{
+public class Roles implements BaseBeans {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	private Integer roleId;
-	
+
 	@Column(name = "roleName")
 	private String roleName;
-	
 
-	@OneToMany(mappedBy="_role")
-	private Set<Clients>_clients= new HashSet<>();
-	
-	@OneToMany(mappedBy="_role")
-	private Set<Admin>_admin= new HashSet<>();
-	
-	
+	@OneToMany(mappedBy = "_role")
+	private Set<Clients> _clients = new HashSet<>();
+
+	@OneToMany(mappedBy = "_role")
+	private Set<Admin> _admin = new HashSet<>();
+
 	public Set<Clients> get_clients() {
 		return _clients;
 	}
+
 	public void set_clients(Set<Clients> _clients) {
 		this._clients = _clients;
 	}
+
 	public Set<Admin> get_admin() {
 		return _admin;
 	}
+
 	public void set_admin(Set<Admin> _admin) {
 		this._admin = _admin;
 	}
-	
+
 	public Integer getRoleId() {
 		return roleId;
 	}
+
 	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
+
 	public String getRoleName() {
 		return roleName;
 	}
+
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
 
 	public String toString() {
-		return "role [id=" + roleId + ", roleName=" + roleName + ", _clients=" + _clients
-				+ ", _admin=" + _admin  +"]";
+		return "role [id=" + roleId + ", roleName=" + roleName + ", _clients=" + _clients + ", _admin=" + _admin + "]";
 	}
 }

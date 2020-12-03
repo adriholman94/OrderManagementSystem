@@ -13,49 +13,52 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
+
 @Entity
 @Table(name = "productOrder")
-public class ProductOrder implements BaseBeans{
+public class ProductOrder implements BaseBeans {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	private Integer productOrderId;
-	
+
 	@Column(name = "orderDate")
 	private Date orderDate;
-	
+
 	@ManyToOne
 	private Clients _clients;
-	
+
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
-	
+
 	@Column(name = "isCanceled")
 	private Boolean isCanceled;
-	
-	@OneToMany(mappedBy="_productOrder")
-	private Set<ProductOrderDetail>_productOrderDetails= new HashSet<>();
-	
-	
+
+	@OneToMany(mappedBy = "_productOrder")
+	private Set<ProductOrderDetail> _productOrderDetails = new HashSet<>();
 
 	public Clients get_clients() {
 		return _clients;
 	}
+
 	public void set_clients(Clients _clients) {
 		this._clients = _clients;
 	}
-	
+
 	public Set<ProductOrderDetail> get_productOrderDetails() {
 		return _productOrderDetails;
 	}
+
 	public void set_productOrderDetails(Set<ProductOrderDetail> _productOrderDetails) {
 		this._productOrderDetails = _productOrderDetails;
 	}
+
 	public Integer getProductOrderId() {
 		return productOrderId;
 	}
+
 	public void setProductOrderId(Integer productOrderId) {
 		this.productOrderId = productOrderId;
 	}
@@ -63,6 +66,7 @@ public class ProductOrder implements BaseBeans{
 	public Date getOrderDate() {
 		return orderDate;
 	}
+
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
@@ -70,18 +74,22 @@ public class ProductOrder implements BaseBeans{
 	public Integer getFinalPrice() {
 		return finalPrice;
 	}
+
 	public void setFinalPrice(Integer finalPrice) {
 		this.finalPrice = finalPrice;
 	}
+
 	public Boolean getIsCanceled() {
 		return isCanceled;
 	}
+
 	public void setIsCanceled(Boolean isCanceled) {
 		this.isCanceled = isCanceled;
 	}
 
 	public String toString() {
-		return "ProductOrder [id=" + productOrderId + ", orderDate=" + orderDate + ", cliente=" + _clients 
-				+ ", final price=" + finalPrice +", estado =" + isCanceled +", _productOrderDetails =" + _productOrderDetails +"]";
+		return "ProductOrder [id=" + productOrderId + ", orderDate=" + orderDate + ", cliente=" + _clients
+				+ ", final price=" + finalPrice + ", estado =" + isCanceled + ", _productOrderDetails ="
+				+ _productOrderDetails + "]";
 	}
 }
