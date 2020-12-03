@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 
 
-public class ProductOrderDetailDTO implements Serializable{
+public class OrderDetailDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer orderId;
 	private Integer productId;

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "OrderDetail")
+@Table(name = "OrderDetails")
 public class OrderDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	

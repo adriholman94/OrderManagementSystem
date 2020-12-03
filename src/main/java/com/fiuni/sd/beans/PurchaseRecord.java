@@ -21,13 +21,13 @@ public class PurchaseRecord implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "purchaseRecordId", nullable = false, unique = true)
+	@Column(name = "purchase_Record_Id", nullable = false, unique = true)
 	private Integer purchaseRecordsId;
 
-	@Column(name = "date")
+	@Column(name = "record_date")
 	private Date date;
 
-	@Column(name = "finalPrice")
+	@Column(name = "final_Price")
 	private Integer finalPrice;
 
 	@OneToMany(mappedBy = "purchaseRecord")

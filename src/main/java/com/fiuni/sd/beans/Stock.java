@@ -16,14 +16,14 @@ public class Stock implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "stockId", nullable = false, unique = true)
+	@Column(name = "Id", nullable = false, unique = true)
 	private Integer stockId;
 
-	@Column(name = "productQuantity")
+	@Column(name = "product_Quantity")
 	private Integer productQuantity;
 
 	@OneToOne
-	@JoinColumn(name = "productId")
+	@JoinColumn(name = "product_Id")
 	private Product product;
 
 	public Product get_product() {

@@ -14,22 +14,22 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Table(name = "ProductOrder")
+@Table(name = "Orders")
 public class Order implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "orderId", nullable = false, unique = true)
-	private Integer productOrderId;
+	@Column(name = "order_Id", nullable = false, unique = true)
+	private Integer orderId;
 
-	@Column(name = "orderDate")
+	@Column(name = "order_Date")
 	private Date orderDate;
 
-	@Column(name = "finalPrice")
+	@Column(name = "final_Price")
 	private Integer finalPrice;
 
-	@Column(name = "isCanceled")
+	@Column(name = "is_Canceled")
 	private Boolean isCanceled;
 
 	@OneToMany(mappedBy = "order")
@@ -39,16 +39,16 @@ public class Order implements BaseBean {
 		return orderDetails;
 	}
 
-	public void set_productOrderDetails(Set<OrderDetail> orderDetails) {
+	public void set_orderDetails(Set<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
-	public Integer getProductOrderId() {
-		return productOrderId;
+	public Integer getOrderId() {
+		return orderId;
 	}
 
 	public void setProductOrderId(Integer productOrderId) {
-		this.productOrderId = productOrderId;
+		this.orderId = productOrderId;
 	}
 
 	public Date getOrderDate() {
@@ -76,7 +76,7 @@ public class Order implements BaseBean {
 	}
 
 	public String toString() {
-		return "ProductOrder [id=" + productOrderId + ", orderDate=" + orderDate
+		return "Order [id=" + orderId + ", orderDate=" + orderDate
 				+ ", final price=" + finalPrice + ", estado =" + isCanceled + ", orderDetails ="
 				+ orderDetails + "]";
 	}

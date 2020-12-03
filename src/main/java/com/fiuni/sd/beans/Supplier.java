@@ -20,10 +20,10 @@ public class Supplier implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "supplierId", nullable = false, unique = true)
+	@Column(name = "supplier_Id", nullable = false, unique = true)
 	private Integer supplierId;
 
-	@Column(name = "supplierName")
+	@Column(name = "supplier_Name")
 	private String supplierName;
 
 	@OneToMany(mappedBy = "supplier")

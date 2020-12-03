@@ -16,16 +16,16 @@ public class User implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "userId", nullable = false, unique = true)
+	@Column(name = "user_Id", nullable = false, unique = true)
 	private Integer id;
 	
-	@Column(name = "userName")
+	@Column(name = "user_Name")
 	private String userName;
 	
-	@Column(name = "userMail")
+	@Column(name = "user_Mail")
 	private String email;	
 		
-	@Column(name = "userPassword")
+	@Column(name = "user_Password")
 	private String password;
 
 	@OneToOne(mappedBy = "user")
