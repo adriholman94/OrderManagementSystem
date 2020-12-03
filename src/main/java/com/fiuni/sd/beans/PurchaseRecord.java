@@ -30,7 +30,7 @@ public class PurchaseRecord implements BaseBean {
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
 
-	@OneToMany(mappedBy = "PurchaseRecord")
+	@OneToMany(mappedBy = "purchaseRecords")
 	private Set<PurchaseRecordDetail> purchaseRecordDetails = new HashSet<>();
 
 	public Set<PurchaseRecordDetail> get_purchaseRecordDetails() {

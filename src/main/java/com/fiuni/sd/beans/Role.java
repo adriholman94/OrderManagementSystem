@@ -1,33 +1,39 @@
 package com.fiuni.sd.beans;
 
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Role implements BaseBean{
+@Table(name = "Roles")
+public class Role implements BaseBean {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6353963609310956029L;
 
-	
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-	@GenericGenerator(name="native",strategy="native")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String description;
+
+	@OneToMany(mappedBy = "role")
+	private Set<UserRole> users;
 
 	public Long getId() {
 		return id;
@@ -52,7 +58,7 @@ public class Role implements BaseBean{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,7 +100,13 @@ public class Role implements BaseBean{
 	public String toString() {
 		return "Role [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
-	
-	
-}
 
+	public Set<UserRole> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<UserRole> users) {
+		this.users = users;
+	}
+
+}

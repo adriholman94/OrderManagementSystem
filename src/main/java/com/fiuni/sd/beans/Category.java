@@ -25,7 +25,7 @@ public class Category implements BaseBean {
 	@Column(name = "categoryName")
 	private String categoryName;
 
-	@OneToMany(mappedBy = "Category")
+	@OneToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();
 
 	public Integer getId() {

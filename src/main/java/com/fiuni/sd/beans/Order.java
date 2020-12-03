@@ -32,7 +32,7 @@ public class Order implements BaseBean {
 	@Column(name = "isCanceled")
 	private Boolean isCanceled;
 
-	@OneToMany(mappedBy = "Order")
+	@OneToMany(mappedBy = "order")
 	private Set<OrderDetail> orderDetails = new HashSet<>();
 
 	public Set<OrderDetail> get_orderDetails() {

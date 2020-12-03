@@ -26,7 +26,7 @@ public class ProductsSupplier implements BaseBean {
 	@JoinColumn(name = "suppilerId")
 	private Supplier suppliers;
 
-	@OneToOne(mappedBy = "ProductsSupplier")
+	@OneToOne(mappedBy = "productsSupplier")
 	private Product products;
 
 	@OneToOne

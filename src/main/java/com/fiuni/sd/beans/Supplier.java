@@ -26,7 +26,7 @@ public class Supplier implements BaseBean {
 	@Column(name = "supplierName")
 	private String supplierName;
 
-	@OneToMany(mappedBy = "Supplier")
+	@OneToMany(mappedBy = "suppliers")
 	private Set<ProductsSupplier> productsSuppliers = new HashSet<>();
 
 	public Set<ProductsSupplier> get_productsSuppliers() {

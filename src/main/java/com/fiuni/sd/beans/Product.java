@@ -39,10 +39,10 @@ public class Product implements BaseBean {
 	@JoinColumn(name = "productSupplierId")
 	private ProductsSupplier productsSupplier;
 
-	@OneToOne(mappedBy = "Product")
+	@OneToOne(mappedBy = "product")
 	private Stock stock;
 
-	@OneToMany(mappedBy = "Product")
+	@OneToMany(mappedBy = "product")
 	private Set<OrderDetail> orderDetail = new HashSet<>();
 
 	public Category get_categories() {

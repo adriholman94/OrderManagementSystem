@@ -11,42 +11,41 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name = "Users")
 public class User implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator="native")
-	@GenericGenerator(name="native",strategy="native")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Long id;
-	
+
 	@Column(name = "userName")
-	private String userName;
-	
+	private String username;
+
 	@Column(name = "userMail")
-	private String email;	
-		
+	private String email;
+
 	@Column(name = "userPassword")
 	private String password;
 
-	@OneToOne(mappedBy = "User")
+	@OneToOne(mappedBy = "user")
 	private Client client;
-	
+
 	@Transient
 	private String confirmPassword;
-	
-	@Size(min=1)
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_roles",
-			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="role_id"))
-	private Set<Role> roles;
+
+	@OneToMany(mappedBy = "user")
+	private Set<UserRole> roles;
 
 	public User() {
 		super();
@@ -74,11 +73,11 @@ public class User implements BaseBean {
 	}
 
 	public String getUsername() {
-		return userName;
+		return username;
 	}
 
 	public void setUsername(String username) {
-		this.userName = username;
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -107,9 +106,8 @@ public class User implements BaseBean {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email
-				+ ", username=" + userName + ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", roles=" + roles + "]";
+		return "User [id=" + id + ", email=" + email + ", userName=" + username + ", password=" + password
+				+ ", confirmPassword=" + confirmPassword + ", roles=" + roles + "]";
 	}
 
 	@Override
@@ -121,7 +119,7 @@ public class User implements BaseBean {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -154,10 +152,10 @@ public class User implements BaseBean {
 				return false;
 		} else if (!roles.equals(other.roles))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}

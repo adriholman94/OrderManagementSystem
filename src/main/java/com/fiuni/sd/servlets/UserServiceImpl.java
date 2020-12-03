@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
 		return repository.findAll();
 	}
 	
-	private boolean checkUsernameAvailable(User user) throws Exception {
+	private boolean checkUserNameAvailable(User user) throws Exception {
 		Optional<User> userFound = repository.findByUsername(user.getUsername());
 		if (userFound.isPresent()) {
 			throw new CustomeFieldValidationException("Username no disponible","username");
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User createUser(User user) throws Exception {
-		if (checkUsernameAvailable(user) && checkPasswordValid(user)) {
+		if (checkUserNameAvailable(user) && checkPasswordValid(user)) {
 			String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 			user.setPassword(encodedPassword);
 			user = repository.save(user);
@@ -88,8 +88,6 @@ public class UserServiceImpl implements UserService{
 		User user = getUserById(id);
 		repository.delete(user);
 	}
-
-	
 	
 	@Override
 	public User changePassword(ChangePasswordForm form) throws Exception {
