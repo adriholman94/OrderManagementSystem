@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 //registr de compra detalle
 @Entity
