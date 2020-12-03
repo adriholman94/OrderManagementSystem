@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "products")
-public class Products implements BaseBeans {
+public class Product implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class Products implements BaseBeans {
 	private Integer productPrice;
 
 	@ManyToOne
-	private Categories _categories;
+	private Category _categories;
 
 	@OneToOne
 	private ProductsSupplier _productsSupplier;
@@ -37,11 +37,11 @@ public class Products implements BaseBeans {
 	@OneToOne
 	private ProductOrderDetail _productOrderDetail;
 
-	public Categories get_categories() {
+	public Category get_categories() {
 		return _categories;
 	}
 
-	public void set_categories(Categories _categories) {
+	public void set_categories(Category _categories) {
 		this._categories = _categories;
 	}
 

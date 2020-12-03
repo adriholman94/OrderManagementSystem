@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "productOrderDetail")
-public class ProductOrderDetail implements BaseBeans {
+public class ProductOrderDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +23,7 @@ public class ProductOrderDetail implements BaseBeans {
 	private ProductOrder _productOrder;
 
 	@OneToOne
-	private Products _products;
+	private Product _products;
 
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
@@ -39,11 +39,11 @@ public class ProductOrderDetail implements BaseBeans {
 		this._productOrder = _productOrder;
 	}
 
-	public Products getProducts() {
+	public Product getProducts() {
 		return _products;
 	}
 
-	public void setProducts(Products products) {
+	public void setProducts(Product products) {
 		this._products = products;
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
 //registr de compra detalle
 @Entity
 @Table(name = "purchaseRecordDetail")
-public class PurchaseRecordDetail implements BaseBeans {
+public class PurchaseRecordDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +22,7 @@ public class PurchaseRecordDetail implements BaseBeans {
 	private Integer purchaseRecordDetailId;
 
 	@ManyToOne
-	private PurchaseRecords _purchaseRecords;
+	private PurchaseRecord _purchaseRecords;
 
 	@OneToOne
 	private ProductsSupplier _productsSupplier;
@@ -44,11 +44,11 @@ public class PurchaseRecordDetail implements BaseBeans {
 		this.purchaseRecordDetailId = purchaseRecordDetailId;
 	}
 
-	public PurchaseRecords get_purchaseRecords() {
+	public PurchaseRecord get_purchaseRecords() {
 		return _purchaseRecords;
 	}
 
-	public void set_purchaseRecords(PurchaseRecords _purchaseRecords) {
+	public void set_purchaseRecords(PurchaseRecord _purchaseRecords) {
 		this._purchaseRecords = _purchaseRecords;
 	}
 

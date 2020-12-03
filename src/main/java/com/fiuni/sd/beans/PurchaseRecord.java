@@ -16,7 +16,7 @@ import org.springframework.data.annotation.Id;
 //registro de compras
 @Entity
 @Table(name = "purchaseRecords")
-public class PurchaseRecords implements BaseBeans {
+public class PurchaseRecord implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

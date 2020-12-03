@@ -16,7 +16,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "productOrder")
-public class ProductOrder implements BaseBeans {
+public class ProductOrder implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,7 +28,7 @@ public class ProductOrder implements BaseBeans {
 	private Date orderDate;
 
 	@ManyToOne
-	private Clients _clients;
+	private Client _clients;
 
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
@@ -39,11 +39,11 @@ public class ProductOrder implements BaseBeans {
 	@OneToMany(mappedBy = "_productOrder")
 	private Set<ProductOrderDetail> _productOrderDetails = new HashSet<>();
 
-	public Clients get_clients() {
+	public Client get_clients() {
 		return _clients;
 	}
 
-	public void set_clients(Clients _clients) {
+	public void set_clients(Client _clients) {
 		this._clients = _clients;
 	}
 

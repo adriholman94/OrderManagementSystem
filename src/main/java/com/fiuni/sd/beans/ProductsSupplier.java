@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Id;
 //producto por proveedor
 @Entity
 @Table(name = "productsSupplier")
-public class ProductsSupplier implements BaseBeans {
+public class ProductsSupplier implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,19 +21,19 @@ public class ProductsSupplier implements BaseBeans {
 	private Integer productSupplierId;
 
 	@ManyToOne
-	private Suppliers _suppliers;
+	private Supplier _suppliers;
 
 	@OneToOne
-	private Products _products;
+	private Product _products;
 
 	@OneToOne
 	private PurchaseRecordDetail _purchaseRecordDetail;
 
-	public Suppliers get_suppliers() {
+	public Supplier get_suppliers() {
 		return _suppliers;
 	}
 
-	public void set_suppliers(Suppliers _suppliers) {
+	public void set_suppliers(Supplier _suppliers) {
 		this._suppliers = _suppliers;
 	}
 

@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "stock")
-public class Stock implements BaseBeans {
+public class Stock implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,13 +25,13 @@ public class Stock implements BaseBeans {
 	private Integer productQuantity;
 
 	@OneToMany(mappedBy = "_stock")
-	private Set<Products> _products = new HashSet<>();
+	private Set<Product> _products = new HashSet<>();
 
-	public Set<Products> get_products() {
+	public Set<Product> get_products() {
 		return _products;
 	}
 
-	public void set_products(Set<Products> _products) {
+	public void set_products(Set<Product> _products) {
 		this._products = _products;
 	}
 
