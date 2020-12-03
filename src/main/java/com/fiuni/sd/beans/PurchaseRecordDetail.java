@@ -14,7 +14,7 @@ import org.springframework.data.annotation.Id;
 //registr de compra detalle
 @Entity
 @Table(name = "purchaseRecordDetail")
-public class PurchaseRecordDetail {
+public class PurchaseRecordDetail implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -77,5 +77,10 @@ public void setTotalPrice(Integer totalPrice) {
 	this.totalPrice = totalPrice;
 }
 
-
+public String toString() {
+	return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", _purchaseRecords=" + _purchaseRecords +
+			", _productsSupplier=" + _productsSupplier 
+			+ ", _productsSupplier=" + _productsSupplier +", productQuantity =" + productQuantity 
+			+", unitPrice =" + unitPrice +", _productOrderDetail =" + totalPrice +"]";
+}
 }

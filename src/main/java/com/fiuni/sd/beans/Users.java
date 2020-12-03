@@ -9,11 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
 @Entity
-
+@Table(name = "users")
 public class Users {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -24,7 +25,7 @@ public class Users {
 	@Column(name = "userName")
 	private	String userName;
 	
-	@Column(name = "userPassword")
+	@Transient
 	private	String userPassword; 
 	
 	@Column(name = "firstName")
@@ -102,6 +103,10 @@ public class Users {
 	public void setUserMail(String userMail) {
 		this.userMail = userMail;
 	}
-
+	public String toString() {
+		return "user[id=" +userId + ", userName=" + userName + ", userPassword=" + userPassword 
+				+ ", firstName=" + firstName +", lastName =" + lastName 
+				+", userPhone =" + userPhone +", userMail =" + userMail +", _clients =" +_clients +", _admin =" +_admin+ "]";
+	}
 
 }

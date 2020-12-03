@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "products")
-public class Products {
+public class Products implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -83,6 +83,10 @@ public class Products {
 		this.productPrice = productPrice;
 	}
 	
-
+	public String toString() {
+		return "Product[id=" + productId + ", productName=" + productName + ", productPrice=" + productPrice 
+				+ ", _categories=" + _categories +", _productsSupplier =" + _productsSupplier 
+				+", _stock =" + _stock +", _productOrderDetail =" + _productOrderDetail +"]";
+	}
 
 }

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "stock")
-public class Stock {
+public class Stock implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,5 +50,7 @@ public Integer getStockId() {
 		this.productQuantity = productQuantity;
 	}
 
-
+	public String toString() {
+		return "stock[id=" + stockId + ",productQuantity=" + productQuantity + ", _products=" + _products +"]";
+	}
 }

@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Id;
 //proveedores
 @Entity
 @Table(name = "suppliers")
-public class Suppliers {
+public class Suppliers implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,5 +47,9 @@ public class Suppliers {
 		this.supplierName = supplierName;
 	}
 
-
+	public String toString() {
+		return "suppliers[id=" + supplierId + ", supplierName=" +supplierName + 
+				", _productsSuppliers=" + _productsSuppliers 
+				+ ", _productsSuppliers=" + _productsSuppliers +"]";
+	}
 }

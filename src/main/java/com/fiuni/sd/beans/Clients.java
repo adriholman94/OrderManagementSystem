@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 @Table(name = "clients")
-public class Clients {
+public class Clients implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -67,5 +67,10 @@ public class Clients {
 	}
 	public void set_role(Roles _role) {
 		this._role = _role;
+	}
+	
+	public String toString() {
+		return "Cliente [id=" + clientId + ", userId=" + userId + ", ruc=" + clientRuc 
+				+ ", role=" + _role +", productOrder=" + _productOrders +"]";
 	}
 }
