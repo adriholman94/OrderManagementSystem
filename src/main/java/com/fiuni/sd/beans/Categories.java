@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "categories")
-public class Categories {
+public class Categories implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,5 +48,7 @@ public class Categories {
 		this.categoryName = categoryName;
 	}
 
-
+	public String toString() {
+		return "Categories [id=" + categoryId + ", categoria=" + categoryName + ", producto=" + _products + "]";
+	}
 }

@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.Id;
 @Entity
-
-public class Roles {
+@Table(name = "role")
+public class Roles implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -58,5 +58,8 @@ public class Roles {
 		this.roleName = roleName;
 	}
 
-
+	public String toString() {
+		return "role [id=" + roleId + ", roleName=" + roleName + ", _clients=" + _clients
+				+ ", _admin=" + _admin  +"]";
+	}
 }

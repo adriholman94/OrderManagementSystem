@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "admin")
-public class Admin {
+public class Admin implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,6 +49,8 @@ public class Admin {
 		this.adminId = adminId;
 	}
 
-
+	public String toString() {
+		return "Admin [id=" + adminId + ", user=" + _user + ", role=" + _role + "]";
+	}
 
 }

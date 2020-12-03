@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 @Entity
 @Table(name = "productOrder")
-public class ProductOrder {
+public class ProductOrder implements BaseBeans{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -80,5 +80,8 @@ public class ProductOrder {
 		this.isCanceled = isCanceled;
 	}
 
-
+	public String toString() {
+		return "ProductOrder [id=" + productOrderId + ", orderDate=" + orderDate + ", cliente=" + _clients 
+				+ ", final price=" + finalPrice +", estado =" + isCanceled +", _productOrderDetails =" + _productOrderDetails +"]";
+	}
 }
