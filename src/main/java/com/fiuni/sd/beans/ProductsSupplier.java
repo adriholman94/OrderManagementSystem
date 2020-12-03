@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 //producto por proveedor
 @Entity
@@ -24,20 +24,20 @@ public class ProductsSupplier implements BaseBean {
 
 	@ManyToOne
 	@JoinColumn(name = "suppilerId")
-	private Supplier suppliers;
+	private Supplier supplier;
 
-	@OneToOne(mappedBy = "ProductsSupplier")
+	@OneToOne(mappedBy = "productsSupplier")
 	private Product products;
 
 	@OneToOne
 	private PurchaseRecordDetail purchaseRecordDetail;
 
 	public Supplier get_suppliers() {
-		return suppliers;
+		return supplier;
 	}
 
 	public void set_suppliers(Supplier suppliers) {
-		this.suppliers = suppliers;
+		this.supplier = suppliers;
 	}
 
 	public Integer getProductSupplierId() {
@@ -49,7 +49,7 @@ public class ProductsSupplier implements BaseBean {
 	}
 
 	public String toString() {
-		return "productSupplier [id=" + productSupplierId + ", suppliers=" + suppliers + ", products=" + products
+		return "productSupplier [id=" + productSupplierId + ", suppliers=" + supplier + ", products=" + products
 				+ ", purchaseRecordDetail=" + purchaseRecordDetail + "]";
 	}
 

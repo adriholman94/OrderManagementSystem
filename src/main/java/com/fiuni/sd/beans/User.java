@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "Users")
@@ -28,10 +28,7 @@ public class User implements BaseBean {
 	@Column(name = "userPassword")
 	private String password;
 
-	@OneToOne(mappedBy = "Admin")
-	private Admin admin;
-
-	@OneToOne(mappedBy = "Client")
+	@OneToOne(mappedBy = "user")
 	private Client client;
 	
 	public Integer getId() {

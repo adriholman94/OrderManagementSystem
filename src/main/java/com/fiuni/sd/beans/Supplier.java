@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 //proveedores
 @Entity
@@ -26,7 +26,7 @@ public class Supplier implements BaseBean {
 	@Column(name = "supplierName")
 	private String supplierName;
 
-	@OneToMany(mappedBy = "Supplier")
+	@OneToMany(mappedBy = "supplier")
 	private Set<ProductsSupplier> productsSuppliers = new HashSet<>();
 
 	public Set<ProductsSupplier> get_productsSuppliers() {

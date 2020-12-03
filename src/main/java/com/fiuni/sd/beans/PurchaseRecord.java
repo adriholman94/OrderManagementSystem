@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 //registro de compras
 @Entity
@@ -30,7 +30,7 @@ public class PurchaseRecord implements BaseBean {
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
 
-	@OneToMany(mappedBy = "PurchaseRecord")
+	@OneToMany(mappedBy = "purchaseRecord")
 	private Set<PurchaseRecordDetail> purchaseRecordDetails = new HashSet<>();
 
 	public Set<PurchaseRecordDetail> get_purchaseRecordDetails() {

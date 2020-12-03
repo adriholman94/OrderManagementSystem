@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 //registr de compra detalle
 @Entity
@@ -26,7 +26,7 @@ public class PurchaseRecordDetail implements BaseBean {
 
 	@ManyToOne
 	@JoinColumn(name = "purchaseRecordId")
-	private PurchaseRecord purchaseRecords;
+	private PurchaseRecord purchaseRecord;
 
 	@OneToOne
 	@JoinColumn(name = "categoryId")
@@ -50,11 +50,11 @@ public class PurchaseRecordDetail implements BaseBean {
 	}
 
 	public PurchaseRecord get_purchaseRecords() {
-		return purchaseRecords;
+		return purchaseRecord;
 	}
 
 	public void set_purchaseRecords(PurchaseRecord purchaseRecords) {
-		this.purchaseRecords = purchaseRecords;
+		this.purchaseRecord = purchaseRecords;
 	}
 
 	public ProductsSupplier get_productsSupplier() {
@@ -90,7 +90,7 @@ public class PurchaseRecordDetail implements BaseBean {
 	}
 
 	public String toString() {
-		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", purchaseRecords=" + purchaseRecords
+		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", purchaseRecords=" + purchaseRecord
 				+ ", productsSupplier=" + productsSupplier + ", productsSupplier=" + productsSupplier
 				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", orderDetail ="
 				+ totalPrice + "]";

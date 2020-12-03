@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "ProductOrder")
@@ -32,7 +32,7 @@ public class Order implements BaseBean {
 	@Column(name = "isCanceled")
 	private Boolean isCanceled;
 
-	@OneToMany(mappedBy = "Order")
+	@OneToMany(mappedBy = "order")
 	private Set<OrderDetail> orderDetails = new HashSet<>();
 
 	public Set<OrderDetail> get_orderDetails() {
