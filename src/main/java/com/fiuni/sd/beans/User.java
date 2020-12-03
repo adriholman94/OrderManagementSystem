@@ -1,13 +1,9 @@
 package com.fiuni.sd.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Users")
@@ -30,6 +26,14 @@ public class User implements BaseBean {
 
 	@OneToOne(mappedBy = "user")
 	private Client client;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+            )
+    private Set<Role> roles = new HashSet<>();
 	
 	public Integer getId() {
 		return id;
