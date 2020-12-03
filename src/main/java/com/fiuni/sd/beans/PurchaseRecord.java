@@ -15,12 +15,13 @@ import org.springframework.data.annotation.Id;
 
 //registro de compras
 @Entity
-@Table(name = "purchaseRecords")
+@Table(name = "PurchaseRecords")
 public class PurchaseRecord implements BaseBean {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "purchaseRecordId", nullable = false, unique = true)
 	private Integer purchaseRecordsId;
 
 	@Column(name = "date")
@@ -29,15 +30,15 @@ public class PurchaseRecord implements BaseBean {
 	@Column(name = "finalPrice")
 	private Integer finalPrice;
 
-	@OneToMany(mappedBy = "_purchaseRecords")
-	private Set<PurchaseRecordDetail> _purchaseRecordDetails = new HashSet<>();
+	@OneToMany(mappedBy = "PurchaseRecord")
+	private Set<PurchaseRecordDetail> purchaseRecordDetails = new HashSet<>();
 
 	public Set<PurchaseRecordDetail> get_purchaseRecordDetails() {
-		return _purchaseRecordDetails;
+		return purchaseRecordDetails;
 	}
 
-	public void set_purchaseRecordDetails(Set<PurchaseRecordDetail> _purchaseRecordDetails) {
-		this._purchaseRecordDetails = _purchaseRecordDetails;
+	public void set_purchaseRecordDetails(Set<PurchaseRecordDetail> purchaseRecordDetails) {
+		this.purchaseRecordDetails = purchaseRecordDetails;
 	}
 
 	public Integer getPurchaseRecordsId() {
@@ -66,7 +67,7 @@ public class PurchaseRecord implements BaseBean {
 
 	public String toString() {
 		return "purchaseRecords[id=" + purchaseRecordsId + ", date=" + date + ", finalPrice=" + finalPrice
-				+ ", _purchaseRecordDetails=" + _purchaseRecordDetails + "]";
+				+ ", purchaseRecordDetails=" + purchaseRecordDetails + "]";
 	}
 
 }

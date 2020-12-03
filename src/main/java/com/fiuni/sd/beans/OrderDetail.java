@@ -4,47 +4,50 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "productOrderDetail")
-public class ProductOrderDetail implements BaseBean {
+@Table(name = "OrderDetail")
+public class OrderDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "orderDetailid", nullable = false, unique = true)
 	private Integer productOrderDetailId;
-
-	@ManyToOne
-	private ProductOrder _productOrder;
-
-	@OneToOne
-	private Product _products;
-
+	
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
 
 	@Column(name = "quantityPrice")
 	private Integer quantityPrice;
 
-	public ProductOrder get_productOrder() {
-		return _productOrder;
+	@ManyToOne
+	@JoinColumn(name = "orderId")
+	private Order order;
+
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
+
+	public Order get_productOrder() {
+		return order;
 	}
 
-	public void set_productOrder(ProductOrder _productOrder) {
-		this._productOrder = _productOrder;
+	public void set_productOrder(Order order) {
+		this.order = order;
 	}
 
 	public Product getProducts() {
-		return _products;
+		return product;
 	}
 
-	public void setProducts(Product products) {
-		this._products = products;
+	public void setProducts(Product product) {
+		this.product = product;
 	}
 
 	public Integer getProductOrderDetailId() {
@@ -76,7 +79,7 @@ public class ProductOrderDetail implements BaseBean {
 	}
 
 	public String toString() {
-		return "ProductOrderDetails[id=" + productOrderDetailId + ", productOrder=" + _productOrder + ", products="
-				+ _products + ", productQuantity=" + productQuantity + ", quantityPrice =" + quantityPrice + "]";
+		return "ProductOrderDetails[id=" + productOrderDetailId + ", productOrder=" + order + ", products="
+				+ product + ", productQuantity=" + productQuantity + ", quantityPrice =" + quantityPrice + "]";
 	}
 }

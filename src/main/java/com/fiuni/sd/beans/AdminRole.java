@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -24,7 +25,8 @@ public class AdminRole implements BaseBean {
 	@Column(name = "roleName", unique = true)
 	private String roleName;
 	
-	@ManyToMany(mappedBy = "AdminRole")
+    @ManyToMany
+    @JoinTable
 	private Set<Admin> admins;
 	
 	public Integer getId() {

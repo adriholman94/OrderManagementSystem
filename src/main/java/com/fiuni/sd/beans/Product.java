@@ -4,19 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "products")
+@Table(name = "Products")
 public class Product implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "productId", nullable = false, unique = true)
 	private Integer productId;
 
 	@Column(name = "productName")
@@ -26,47 +28,49 @@ public class Product implements BaseBean {
 	private Integer productPrice;
 
 	@ManyToOne
-	private Category _categories;
+	@JoinColumn(name = "categoryId")
+	private Category categories;
 
 	@OneToOne
-	private ProductsSupplier _productsSupplier;
-
-	@ManyToOne
-	private Stock _stock;
+	@JoinColumn(name = "productSupplierId")
+	private ProductsSupplier productsSupplier;
 
 	@OneToOne
-	private ProductOrderDetail _productOrderDetail;
+	private Stock stock;
+
+	@OneToMany
+	private OrderDetail orderDetail;
 
 	public Category get_categories() {
-		return _categories;
+		return categories;
 	}
 
-	public void set_categories(Category _categories) {
-		this._categories = _categories;
+	public void set_categories(Category categories) {
+		this.categories = categories;
 	}
 
 	public Stock get_stock() {
-		return _stock;
+		return stock;
 	}
 
-	public void set_stock(Stock _stock) {
-		this._stock = _stock;
+	public void set_stock(Stock stock) {
+		this.stock = stock;
 	}
 
-	public ProductOrderDetail get_productOrderDetail() {
-		return _productOrderDetail;
+	public OrderDetail get_productOrderDetail() {
+		return orderDetail;
 	}
 
-	public void set_productOrderDetail(ProductOrderDetail _productOrderDetail) {
-		this._productOrderDetail = _productOrderDetail;
+	public void set_productOrderDetail(OrderDetail orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 	public ProductsSupplier get_productsSupplier() {
-		return _productsSupplier;
+		return productsSupplier;
 	}
 
-	public void set_productsSupplier(ProductsSupplier _productsSupplier) {
-		this._productsSupplier = _productsSupplier;
+	public void set_productsSupplier(ProductsSupplier productsSupplier) {
+		this.productsSupplier = productsSupplier;
 	}
 
 	public Integer getProductId() {
@@ -95,8 +99,8 @@ public class Product implements BaseBean {
 
 	public String toString() {
 		return "Product[id=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
-				+ ", _categories=" + _categories + ", _productsSupplier =" + _productsSupplier + ", _stock =" + _stock
-				+ ", _productOrderDetail =" + _productOrderDetail + "]";
+				+ ", categories=" + categories + ", productsSupplier =" + productsSupplier + ", stock =" + stock
+				+ ", orderDetail =" + orderDetail + "]";
 	}
 
 }

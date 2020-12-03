@@ -5,27 +5,32 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
 
 //registr de compra detalle
 @Entity
-@Table(name = "purchaseRecordDetail")
+@Table(name = "PurchaseRecordDetails")
 public class PurchaseRecordDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "purchaseRecordDetailId", nullable = false, unique = true)
 	private Integer purchaseRecordDetailId;
 
 	@ManyToOne
-	private PurchaseRecord _purchaseRecords;
+	@JoinColumn(name = "purchaseRecordId")
+	private PurchaseRecord purchaseRecords;
 
 	@OneToOne
-	private ProductsSupplier _productsSupplier;
+	@JoinColumn(name = "categoryId")
+	private ProductsSupplier productsSupplier;
 
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
@@ -45,19 +50,19 @@ public class PurchaseRecordDetail implements BaseBean {
 	}
 
 	public PurchaseRecord get_purchaseRecords() {
-		return _purchaseRecords;
+		return purchaseRecords;
 	}
 
-	public void set_purchaseRecords(PurchaseRecord _purchaseRecords) {
-		this._purchaseRecords = _purchaseRecords;
+	public void set_purchaseRecords(PurchaseRecord purchaseRecords) {
+		this.purchaseRecords = purchaseRecords;
 	}
 
 	public ProductsSupplier get_productsSupplier() {
-		return _productsSupplier;
+		return productsSupplier;
 	}
 
-	public void set_productsSupplier(ProductsSupplier _productsSupplier) {
-		this._productsSupplier = _productsSupplier;
+	public void set_productsSupplier(ProductsSupplier productsSupplier) {
+		this.productsSupplier = productsSupplier;
 	}
 
 	public Integer getProductQuantity() {
@@ -85,9 +90,9 @@ public class PurchaseRecordDetail implements BaseBean {
 	}
 
 	public String toString() {
-		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", _purchaseRecords=" + _purchaseRecords
-				+ ", _productsSupplier=" + _productsSupplier + ", _productsSupplier=" + _productsSupplier
-				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", _productOrderDetail ="
+		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", purchaseRecords=" + purchaseRecords
+				+ ", productsSupplier=" + productsSupplier + ", productsSupplier=" + productsSupplier
+				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", orderDetail ="
 				+ totalPrice + "]";
 	}
 }

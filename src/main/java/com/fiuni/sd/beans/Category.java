@@ -13,34 +13,27 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "Categories")
 public class Category implements BaseBean {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
-	private Integer categoryId;
+	@Column(name = "categoryId", nullable = false, unique = true)
+	private Integer Id;
 
 	@Column(name = "categoryName")
 	private String categoryName;
 
-	@OneToMany(mappedBy = "_categories")
-	private Set<Product> _products = new HashSet<>();
+	@OneToMany(mappedBy = "Product")
+	private Set<Product> products = new HashSet<>();
 
-	public Set<Product> get_products() {
-		return _products;
+	public Integer getId() {
+		return Id;
 	}
 
-	public void set_products(Set<Product> _products) {
-		this._products = _products;
-	}
-
-	public Integer getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(Integer categoryId) {
-		this.categoryId = categoryId;
+	public void setId(Integer Id) {
+		this.Id = Id;
 	}
 
 	public String getCategoryName() {
@@ -51,7 +44,15 @@ public class Category implements BaseBean {
 		this.categoryName = categoryName;
 	}
 
+	public void set_products(Set<Product> products) {
+		this.products = products;
+	}
+
+	public Set<Product> get_products() {
+		return products;
+	}
+
 	public String toString() {
-		return "Categories [id=" + categoryId + ", categoria=" + categoryName + ", producto=" + _products + "]";
+		return "Categories [id=" + Id + ", category=" + categoryName + ", products=" + products +"]";
 	}
 }

@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -12,29 +13,31 @@ import org.springframework.data.annotation.Id;
 
 //producto por proveedor
 @Entity
-@Table(name = "productsSupplier")
+@Table(name = "ProductsSupplier")
 public class ProductsSupplier implements BaseBean {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "productSupplierId", nullable = false, unique = true)
 	private Integer productSupplierId;
 
 	@ManyToOne
-	private Supplier _suppliers;
+	@JoinColumn(name = "suppilerId")
+	private Supplier suppliers;
+
+	@OneToOne(mappedBy = "ProductsSupplier")
+	private Product products;
 
 	@OneToOne
-	private Product _products;
-
-	@OneToOne
-	private PurchaseRecordDetail _purchaseRecordDetail;
+	private PurchaseRecordDetail purchaseRecordDetail;
 
 	public Supplier get_suppliers() {
-		return _suppliers;
+		return suppliers;
 	}
 
-	public void set_suppliers(Supplier _suppliers) {
-		this._suppliers = _suppliers;
+	public void set_suppliers(Supplier suppliers) {
+		this.suppliers = suppliers;
 	}
 
 	public Integer getProductSupplierId() {
@@ -46,8 +49,8 @@ public class ProductsSupplier implements BaseBean {
 	}
 
 	public String toString() {
-		return "productSupplier [id=" + productSupplierId + ", _suppliers=" + _suppliers + ",_products=" + _products
-				+ ", _purchaseRecordDetail=" + _purchaseRecordDetail + "]";
+		return "productSupplier [id=" + productSupplierId + ", suppliers=" + suppliers + ", products=" + products
+				+ ", purchaseRecordDetail=" + purchaseRecordDetail + "]";
 	}
 
 }
