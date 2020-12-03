@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS migrations."Clients" ADD "firstName" varchar(255) NOT NULL;
