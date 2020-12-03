@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS migrations."Orders" ALTER COLUMN "clientRuc" TYPE varchar(255) USING "clientRuc"::varchar;
