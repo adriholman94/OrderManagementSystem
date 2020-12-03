@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -28,10 +29,10 @@ public class User implements BaseBean {
 	@Column(name = "userPassword")
 	private String password;
 
-	@OneToOne(mappedBy = "Admin")
+	@OneToOne(mappedBy = "User")
 	private Admin admin;
 
-	@OneToOne(mappedBy = "Client")
+	@OneToOne(mappedBy = "User")
 	private Client client;
 	
 	public Integer getId() {
