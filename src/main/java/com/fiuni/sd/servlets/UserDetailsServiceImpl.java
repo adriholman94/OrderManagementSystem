@@ -32,8 +32,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Login Username Invalido."));
 		
 		Set<GrantedAuthority> grantList = new HashSet<GrantedAuthority>(); 
-		for (Role role: appUser.getRoles()) {
-			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getDescription());
+		for (UserRole role : appUser.getRoles()) {
+			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole().getName());
             grantList.add(grantedAuthority);
 		}
 		UserDetails user = (UserDetails) new User(username,appUser.getPassword(),grantList);

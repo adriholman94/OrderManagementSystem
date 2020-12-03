@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
 @Table(name = "Roles")
 public class Role implements BaseBean {
@@ -22,8 +20,8 @@ public class Role implements BaseBean {
 	private static final long serialVersionUID = 6353963609310956029L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-	@GenericGenerator(name = "native", strategy = "native")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "roleId", nullable = false, unique = true)
 	private Long id;
 
 	@Column

@@ -4,20 +4,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Users")
@@ -25,8 +18,8 @@ public class User implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-	@GenericGenerator(name = "native", strategy = "native")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "userId", nullable = false, unique = true)
 	private Long id;
 
 	@Column(name = "userName")
@@ -96,11 +89,11 @@ public class User implements BaseBean {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public Set<Role> getRoles() {
+	public Set<UserRole> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<UserRole> roles) {
 		this.roles = roles;
 	}
 
