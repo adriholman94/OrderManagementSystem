@@ -7,12 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "Roles")
-public class Role {
+public class Role implements BaseBean{
+	
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
+	@Column(name="role_id")
     private int roleId;
 
-    @Column(name = "roleName")
+    @Column(name = "role_Name")
 	private String roleName;
 
 	public int getRoleId() {

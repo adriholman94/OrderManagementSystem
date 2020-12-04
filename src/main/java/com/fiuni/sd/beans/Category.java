@@ -19,10 +19,10 @@ public class Category implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "categoryId", nullable = false, unique = true)
+	@Column(name = "category_Id", nullable = false, unique = true)
 	private Integer Id;
 
-	@Column(name = "categoryName")
+	@Column(name = "category_Name")
 	private String categoryName;
 
 	@OneToMany(mappedBy = "categories")

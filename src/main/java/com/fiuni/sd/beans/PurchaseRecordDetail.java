@@ -21,15 +21,15 @@ public class PurchaseRecordDetail implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "purchaseRecordDetailId", nullable = false, unique = true)
+	@Column(name = "purchase_Record_Detail_Id", nullable = false, unique = true)
 	private Integer purchaseRecordDetailId;
 
 	@ManyToOne
-	@JoinColumn(name = "purchaseRecordId")
+	@JoinColumn(name = "purchase_Record_Id")
 	private PurchaseRecord purchaseRecord;
 
 	@OneToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "product_Supplier_id")
 	private ProductsSupplier productsSupplier;
 
 	@Column(name = "productQuantity")

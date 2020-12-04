@@ -17,19 +17,19 @@ public class Client implements BaseBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "clientId", nullable = false, unique = true)
+	@Column(name = "client_Id", nullable = false, unique = true)
 	private Integer id;
 
-	@Column(name = "firstName")
+	@Column(name = "first_Name")
 	private String firstName;
 
-	@Column(name = "lastName")
+	@Column(name = "last_Name")
 	private String lastName;
 
-	@Column(name = "clientRuc")
+	@Column(name = "client_Ruc")
 	private String clientRuc;
 
-	@Column(name = "userPhone")
+	@Column(name = "client_Phone")
 	private String clientPhone;
 
 	@OneToOne
