@@ -19,7 +19,7 @@ public class Order implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_Id", nullable = false, unique = true)
 	private Integer orderId;
 

@@ -1,10 +1,10 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
+
 
 //proveedores
 
-public class SupplierDTO implements Serializable{
+public class SupplierDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	
 	public String getSupplierName() {

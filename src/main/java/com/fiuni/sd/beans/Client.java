@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import javax.persistence.Id;
 
 @Entity
@@ -16,7 +15,7 @@ public class Client implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "client_Id", nullable = false, unique = true)
 	private Integer id;
 

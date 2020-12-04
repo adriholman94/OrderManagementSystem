@@ -1,9 +1,9 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
 
 
-public class CategoryDTO implements Serializable{
+
+public class CategoryDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	
 	private String categoryName;

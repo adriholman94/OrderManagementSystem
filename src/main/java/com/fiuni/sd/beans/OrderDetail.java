@@ -16,7 +16,7 @@ public class OrderDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "orderDetailid", nullable = false, unique = true)
 	private Integer orderDetailId;
 	
