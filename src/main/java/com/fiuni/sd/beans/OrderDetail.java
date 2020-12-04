@@ -18,7 +18,7 @@ public class OrderDetail implements BaseBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "orderDetailid", nullable = false, unique = true)
-	private Integer productOrderDetailId;
+	private Integer orderDetailId;
 	
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
@@ -50,12 +50,12 @@ public class OrderDetail implements BaseBean {
 		this.product = product;
 	}
 
-	public Integer getProductOrderDetailId() {
-		return productOrderDetailId;
+	public Integer getOrderDetailId() {
+		return orderDetailId;
 	}
 
-	public void setProductOrderDetailId(Integer productOrderDetailId) {
-		this.productOrderDetailId = productOrderDetailId;
+	public void setOrderDetailId(Integer OrderDetailId) {
+		this.orderDetailId = OrderDetailId;
 	}
 
 	public Integer getProductQuantity() {
@@ -79,7 +79,7 @@ public class OrderDetail implements BaseBean {
 	}
 
 	public String toString() {
-		return "ProductOrderDetails[id=" + productOrderDetailId + ", productOrder=" + order + ", products="
+		return "OrderDetails[id=" + orderDetailId + ", productOrder=" + order + ", products="
 				+ product + ", productQuantity=" + productQuantity + ", quantityPrice =" + quantityPrice + "]";
 	}
 }
