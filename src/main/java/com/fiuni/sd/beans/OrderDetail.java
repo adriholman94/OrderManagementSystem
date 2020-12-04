@@ -34,11 +34,11 @@ public class OrderDetail implements BaseBean {
 	@JoinColumn(name = "productId")
 	private Product product;
 
-	public Order get_productOrder() {
+	public Order get_Order() {
 		return order;
 	}
 
-	public void set_productOrder(Order order) {
+	public void set_Order(Order order) {
 		this.order = order;
 	}
 
@@ -46,7 +46,7 @@ public class OrderDetail implements BaseBean {
 		return product;
 	}
 
-	public void setProducts(Product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
@@ -79,7 +79,7 @@ public class OrderDetail implements BaseBean {
 	}
 
 	public String toString() {
-		return "OrderDetails[id=" + orderDetailId + ", productOrder=" + order + ", products="
+		return "OrderDetails[id=" + orderDetailId + ", Order=" + order + ", product="
 				+ product + ", productQuantity=" + productQuantity + ", quantityPrice =" + quantityPrice + "]";
 	}
 }
