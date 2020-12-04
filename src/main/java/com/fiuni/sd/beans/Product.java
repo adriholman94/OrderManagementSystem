@@ -21,21 +21,21 @@ public class Product implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "productId", nullable = false, unique = true)
+	@Column(name = "product_Id", nullable = false, unique = true)
 	private Integer productId;
 
-	@Column(name = "productName")
+	@Column(name = "product_Name")
 	private String productName;
 
-	@Column(name = "productPrice")
+	@Column(name = "product_Price")
 	private Integer productPrice;
 
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
+	@JoinColumn(name = "category_Id")
 	private Category categories;
 
 	@OneToOne
-	@JoinColumn(name = "productSupplierId")
+	@JoinColumn(name = "product_Supplier_Id")
 	private ProductsSupplier productsSupplier;
 
 	@OneToOne

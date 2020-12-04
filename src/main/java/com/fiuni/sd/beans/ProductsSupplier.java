@@ -19,11 +19,11 @@ public class ProductsSupplier implements BaseBean {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "productSupplierId", nullable = false, unique = true)
+	@Column(name = "product_Supplier_Id", nullable = false, unique = true)
 	private Integer productSupplierId;
 
 	@ManyToOne
-	@JoinColumn(name = "suppilerId")
+	@JoinColumn(name = "suppiler_Id")
 	private Supplier supplier;
 
 	@OneToOne(mappedBy = "productsSupplier")
