@@ -1,1 +1,0 @@
-ALTER TABLE IF EXISTS migrations."Orders" RENAME COLUMN "clientId" TO "clientRuc";

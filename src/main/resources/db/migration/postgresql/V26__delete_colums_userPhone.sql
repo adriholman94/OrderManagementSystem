@@ -1,1 +1,0 @@
-ALTER TABLE IF EXISTS migrations."Users" DROP COLUMN "userPhone";
