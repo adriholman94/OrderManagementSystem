@@ -60,11 +60,11 @@ public class Product implements BaseBean {
 		this.stock = stock;
 	}
 
-	public Set<OrderDetail> get_productOrderDetail() {
+	public Set<OrderDetail> get_OrderDetail() {
 		return orderDetail;
 	}
 
-	public void set_productOrderDetail(Set<OrderDetail> orderDetail) {
+	public void set_OrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 
