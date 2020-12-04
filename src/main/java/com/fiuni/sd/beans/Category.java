@@ -18,8 +18,9 @@ public class Category implements BaseBean {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "category_Id", nullable = false, unique = true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	@Column(name = "category_Id", nullable = false, unique = true,columnDefinition = "serial")
 	private Integer Id;
 
 	@Column(name = "category_Name")

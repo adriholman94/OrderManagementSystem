@@ -1,10 +1,9 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
 
 //producto por proveedor
 
-public class ProductSupplierDTO implements Serializable{
+public class ProductSupplierDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private Integer supplierId;
 	private Integer productId;

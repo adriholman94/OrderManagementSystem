@@ -1,10 +1,10 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
 
 
 
-public class ClientDTO implements Serializable{
+
+public class ClientDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
