@@ -1,1 +1,0 @@
-ALTER TABLE IF EXISTS migrations."ProductSuppliers" RENAME COLUMN "producSupplierId" TO "productSupplierId";

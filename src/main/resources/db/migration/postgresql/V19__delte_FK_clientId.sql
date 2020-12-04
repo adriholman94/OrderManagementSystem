@@ -1,1 +1,0 @@
-ALTER TABLE IF EXISTS migrations."Orders" DROP CONSTRAINT "Orders_clientId_fkey";
