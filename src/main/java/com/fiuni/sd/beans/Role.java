@@ -14,7 +14,7 @@ public class Role implements BaseBean{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	@Column(name="role_id")
     private int roleId;

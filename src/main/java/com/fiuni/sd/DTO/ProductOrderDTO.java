@@ -1,10 +1,10 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 
-public class ProductOrderDTO implements Serializable{
+public class ProductOrderDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private Date orderDate;
 	private String clientRuc;

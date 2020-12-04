@@ -1,9 +1,9 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
 
 
-public class UserDTO implements Serializable{
+
+public class UserDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	
 

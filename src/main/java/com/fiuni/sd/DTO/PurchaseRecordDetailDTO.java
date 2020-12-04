@@ -1,10 +1,10 @@
 package com.fiuni.sd.DTO;
 
-import java.io.Serializable;
+
 
 //registr de compra detalle
 
-public class PurchaseRecordDetailDTO implements Serializable{
+public class PurchaseRecordDetailDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private Integer purchaseRecordId;
 	private Integer productsSupplierId;
