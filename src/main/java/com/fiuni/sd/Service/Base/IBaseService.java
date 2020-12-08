@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 
+import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.DTO.Base.BaseDTO;
 import com.fiuni.sd.DTO.Base.BaseResult;
-import com.fiuni.sd.beans.Base.BaseBean;
 
 
 public interface IBaseService<DOMAIN extends BaseBean,DTO extends BaseDTO, R extends BaseResult<DTO>> {

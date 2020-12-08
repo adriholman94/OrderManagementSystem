@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Role;
+package com.fiuni.sd.Beans.Role;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.fiuni.sd.beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Base.BaseBean;
 
 @Entity(name = "Roles")
 public class Role implements BaseBean{

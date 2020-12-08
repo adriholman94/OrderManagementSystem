@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Product;
+package com.fiuni.sd.Beans.Product;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,11 +13,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.Category.Category;
-import com.fiuni.sd.beans.Order.OrderDetail;
-import com.fiuni.sd.beans.Stock.Stock;
-import com.fiuni.sd.beans.Supplier.ProductsSupplier;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Category.Category;
+import com.fiuni.sd.Beans.Order.OrderDetail;
+import com.fiuni.sd.Beans.Stock.Stock;
+import com.fiuni.sd.Beans.Supplier.ProductsSupplier;
 
 import javax.persistence.Id;
 

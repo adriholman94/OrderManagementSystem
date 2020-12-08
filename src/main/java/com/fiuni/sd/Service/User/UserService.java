@@ -13,11 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fiuni.sd.Beans.User.User;
 import com.fiuni.sd.DAO.User.IUserDAO;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
-import com.fiuni.sd.beans.User.User;
 
 
 
