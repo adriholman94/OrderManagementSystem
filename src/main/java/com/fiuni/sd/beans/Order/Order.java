@@ -49,8 +49,8 @@ public class Order implements BaseBean {
 		return orderId;
 	}
 
-	public void setProductOrderId(Integer productOrderId) {
-		this.orderId = productOrderId;
+	public void setOrderId(Integer OrderId) {
+		this.orderId = OrderId;
 	}
 
 	public Date getOrderDate() {
