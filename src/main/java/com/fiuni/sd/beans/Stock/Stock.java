@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Stock;
+package com.fiuni.sd.Beans.Stock;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.Product.Product;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Product.Product;
 
 import javax.persistence.Id;
 

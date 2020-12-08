@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.PurchaseRecord;
+package com.fiuni.sd.Beans.PurchaseRecord;
 
 import javax.persistence.Column;
 
@@ -11,8 +11,8 @@ import javax.persistence.OneToOne;
 
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.Supplier.ProductsSupplier;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Supplier.ProductsSupplier;
 
 import javax.persistence.Id;
 

@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Supplier;
+package com.fiuni.sd.Beans.Supplier;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.Product.Product;
-import com.fiuni.sd.beans.PurchaseRecord.PurchaseRecordDetail;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Product.Product;
+import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;
 
 import javax.persistence.Id;
 

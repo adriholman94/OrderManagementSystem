@@ -13,11 +13,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fiuni.sd.Beans.Role.Role;
 import com.fiuni.sd.DAO.Role.IRoleDAO;
 import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
-import com.fiuni.sd.beans.Role.Role;
 
 
 @Service

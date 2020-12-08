@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Order;
+package com.fiuni.sd.Beans.Order;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Base.BaseBean;
 
 import javax.persistence.Id;
 

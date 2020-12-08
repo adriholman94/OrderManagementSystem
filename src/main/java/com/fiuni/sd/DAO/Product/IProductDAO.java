@@ -1,11 +1,11 @@
 package com.fiuni.sd.DAO.Product;
 
+import com.fiuni.sd.Beans.Product.Product;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
-import com.fiuni.sd.beans.Product.Product;
 
 @Repository
 public interface IProductDAO extends CrudRepository<Product, Integer> {

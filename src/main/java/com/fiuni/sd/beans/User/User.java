@@ -1,13 +1,13 @@
-package com.fiuni.sd.beans.User;
+package com.fiuni.sd.Beans.User;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.Client.Client;
-import com.fiuni.sd.beans.Role.Role;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Client.Client;
+import com.fiuni.sd.Beans.Role.Role;
 
 @Entity
 @Table(name = "Users")

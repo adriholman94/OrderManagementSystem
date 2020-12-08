@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Supplier;
+package com.fiuni.sd.Beans.Supplier;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
+import com.fiuni.sd.Beans.Base.BaseBean;
 
 import javax.persistence.Id;
 

@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Base;
+package com.fiuni.sd.Beans.Base;
 
 import java.io.Serializable;
 

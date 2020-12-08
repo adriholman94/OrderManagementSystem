@@ -1,4 +1,4 @@
-package com.fiuni.sd.beans.Client;
+package com.fiuni.sd.Beans.Client;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fiuni.sd.beans.Base.BaseBean;
-import com.fiuni.sd.beans.User.User;
+import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.User.User;
 
 import javax.persistence.Id;
 
