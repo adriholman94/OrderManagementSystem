@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlElement;
 public abstract class BaseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Long _id;
+	private Integer _id;
 
 	@XmlElement
-	public Long getId() {
+	public Integer getId() {
 		return _id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		_id = id;
 	}
 
