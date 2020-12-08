@@ -1,0 +1,22 @@
+2020-12-08 01:17:19.063  INFO DESKTOP-QCI2NRU --- [kground-preinit] o.h.v.i.u.Version                        : HV000001: Hibernate Validator 6.1.6.Final
+2020-12-08 01:17:19.144  INFO DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Starting OrderManagementSystemApplication using Java 15 on DESKTOP-QCI2NRU with PID 2852 (C:\Users\adrih\Documents\GitHub\OrderManagementSystem\target\classes started by adrih in C:\Users\adrih\Documents\GitHub\OrderManagementSystem)
+2020-12-08 01:17:19.153  INFO DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : No active profile set, falling back to default profiles: default
+2020-12-08 01:17:21.909  INFO DESKTOP-QCI2NRU --- [  restartedMain] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2020-12-08 01:17:21.913  INFO DESKTOP-QCI2NRU --- [  restartedMain] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2020-12-08 01:17:21.914  INFO DESKTOP-QCI2NRU --- [  restartedMain] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.39]
+2020-12-08 01:17:22.119  INFO DESKTOP-QCI2NRU --- [  restartedMain] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2020-12-08 01:17:22.459  INFO DESKTOP-QCI2NRU --- [         task-1] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-12-08 01:17:22.595  INFO DESKTOP-QCI2NRU --- [         task-1] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.23.Final
+2020-12-08 01:17:22.910  INFO DESKTOP-QCI2NRU --- [         task-1] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2020-12-08 01:17:23.168  INFO DESKTOP-QCI2NRU --- [         task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2020-12-08 01:17:23.233  INFO DESKTOP-QCI2NRU --- [  restartedMain] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2020-12-08 01:17:23.346  INFO DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Started OrderManagementSystemApplication in 4.761 seconds (JVM running for 6.244)
+2020-12-08 01:17:23.352  INFO DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Info log
+2020-12-08 01:17:23.354  WARN DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Hey, This is a warning!
+2020-12-08 01:17:23.355 ERROR DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Oops! We have an Error. OK
+2020-12-08 01:17:23.355 FATAL DESKTOP-QCI2NRU --- [  restartedMain] c.f.s.OrderManagementSystemApplication   : Damn! Fatal error. Please fix me.
+2020-12-08 01:17:23.483  INFO DESKTOP-QCI2NRU --- [         task-1] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2020-12-08 01:17:23.528  INFO DESKTOP-QCI2NRU --- [         task-1] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2020-12-08 01:17:26.428  INFO DESKTOP-QCI2NRU --- [         task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-12-08 01:17:49.620  INFO DESKTOP-QCI2NRU --- [extShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2020-12-08 01:17:49.635  INFO DESKTOP-QCI2NRU --- [extShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
