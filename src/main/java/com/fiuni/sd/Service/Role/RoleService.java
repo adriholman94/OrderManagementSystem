@@ -51,8 +51,6 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		final RoleDTO role = new RoleDTO();
 		role.setId(bean.getRoleId());
 		role.setRoleName(bean.getRoleName());
-		
-		
 		return role;
 	}
 
@@ -80,10 +78,15 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 
 	@Override
+	@Transactional
 	public RoleDTO getById(Integer roleId) {
 		// TODO Auto-generated method stub
-		return null;
+		if (roleDAO.findById(roleId).isPresent()){
+			final Role userBeans = roleDAO.findById(roleId).get();
+			return convertDomainToDto(userBeans);
+		}else {
+			return null;
+		}
 	}
-
 }
 

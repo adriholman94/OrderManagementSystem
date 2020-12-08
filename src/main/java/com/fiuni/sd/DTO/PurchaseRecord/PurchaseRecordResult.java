@@ -1,6 +1,5 @@
 package com.fiuni.sd.DTO.PurchaseRecord;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -14,7 +13,6 @@ public class PurchaseRecordResult extends BaseResult<PurchaseRecordDTO> {
 
 	private static final long serialVersionUID = 1L;
 
-	@XmlElement
 	public List<PurchaseRecordDTO> getPurchaseRecords() {
 		return getList();
 	}

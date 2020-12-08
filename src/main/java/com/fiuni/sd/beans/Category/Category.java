@@ -29,7 +29,7 @@ public class Category implements BaseBean {
 	@Column(name = "category_Name")
 	private String categoryName;
 
-	@OneToMany(mappedBy = "categories")
+	@OneToMany(mappedBy = "category")
 	private Set<Product> products = new HashSet<>();
 
 	public Integer getId() {

@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
+import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;
 
 import javax.persistence.Id;
 
@@ -19,7 +21,7 @@ import javax.persistence.Id;
 @Table(name = "Suppliers")
 public class Supplier implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "supplier_Id", nullable = false, unique = true)
@@ -28,16 +30,8 @@ public class Supplier implements BaseBean {
 	@Column(name = "supplier_Name")
 	private String supplierName;
 
-	@OneToMany(mappedBy = "supplier")
-	private Set<ProductsSupplier> productsSuppliers = new HashSet<>();
-
-	public Set<ProductsSupplier> get_productsSuppliers() {
-		return productsSuppliers;
-	}
-
-	public void set_productsSuppliers(Set<ProductsSupplier> productsSuppliers) {
-		this.productsSuppliers = productsSuppliers;
-	}
+	@OneToOne
+	private PurchaseRecordDetail purchaseRecordDetails;
 
 	public Integer getSupplierId() {
 		return supplierId;
@@ -56,7 +50,6 @@ public class Supplier implements BaseBean {
 	}
 
 	public String toString() {
-		return "suppliers[id=" + supplierId + ", supplierName=" + supplierName + ", productsSuppliers="
-				+ productsSuppliers + ", productsSuppliers=" + productsSuppliers + "]";
+		return "suppliers[id=" + supplierId + ", supplierName=" + supplierName + "]";
 	}
 }

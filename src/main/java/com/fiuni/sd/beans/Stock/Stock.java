@@ -17,7 +17,7 @@ import javax.persistence.Id;
 @Table(name = "Stock")
 public class Stock implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id", nullable = false, unique = true)

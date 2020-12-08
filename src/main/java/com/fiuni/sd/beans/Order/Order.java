@@ -78,8 +78,7 @@ public class Order implements BaseBean {
 	}
 
 	public String toString() {
-		return "Order [id=" + orderId + ", orderDate=" + orderDate
-				+ ", final price=" + finalPrice + ", estado =" + isCanceled + ", orderDetails ="
-				+ orderDetails + "]";
+		return "Order [id=" + orderId + ", orderDate=" + orderDate + ", final price=" + finalPrice + ", estado ="
+				+ isCanceled + ", orderDetails =" + orderDetails + "]";
 	}
 }

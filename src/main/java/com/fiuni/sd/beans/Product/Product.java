@@ -1,23 +1,19 @@
 package com.fiuni.sd.Beans.Product;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.Category.Category;
 import com.fiuni.sd.Beans.Order.OrderDetail;
+import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;
 import com.fiuni.sd.Beans.Stock.Stock;
-import com.fiuni.sd.Beans.Supplier.ProductsSupplier;
 
 import javax.persistence.Id;
 
@@ -38,24 +34,23 @@ public class Product implements BaseBean {
 
 	@ManyToOne
 	@JoinColumn(name = "category_Id")
-	private Category categories;
-
-	@OneToOne
-	@JoinColumn(name = "product_Supplier_Id")
-	private ProductsSupplier productsSupplier;
+	private Category category;
 
 	@OneToOne
 	private Stock stock;
 
-	@OneToMany
-	private Set<OrderDetail> orderDetail = new HashSet<>();
+	@OneToOne
+	private OrderDetail orderDetail;
 
-	public Category get_categories() {
-		return categories;
+	@OneToOne
+	private PurchaseRecordDetail purchaseRecordDetails;
+
+	public Category get_category() {
+		return category;
 	}
 
-	public void set_categories(Category categories) {
-		this.categories = categories;
+	public void set_category(Category category) {
+		this.category = category;
 	}
 
 	public Stock get_stock() {
@@ -66,20 +61,12 @@ public class Product implements BaseBean {
 		this.stock = stock;
 	}
 
-	public Set<OrderDetail> get_OrderDetail() {
+	public OrderDetail get_OrderDetail() {
 		return orderDetail;
 	}
 
-	public void set_OrderDetail(Set<OrderDetail> orderDetail) {
+	public void set_OrderDetail(OrderDetail orderDetail) {
 		this.orderDetail = orderDetail;
-	}
-
-	public ProductsSupplier get_productsSupplier() {
-		return productsSupplier;
-	}
-
-	public void set_productsSupplier(ProductsSupplier productsSupplier) {
-		this.productsSupplier = productsSupplier;
 	}
 
 	public Integer getProductId() {
@@ -108,8 +95,7 @@ public class Product implements BaseBean {
 
 	public String toString() {
 		return "Product[id=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
-				+ ", categories=" + categories + ", productsSupplier =" + productsSupplier + ", stock =" + stock
-				+ ", orderDetail =" + orderDetail + "]";
+				+ ", categories=" + category;
 	}
 
 }

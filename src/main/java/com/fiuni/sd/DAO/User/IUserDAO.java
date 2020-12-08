@@ -7,10 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-
-
 @Repository
-public interface IUserDAO extends CrudRepository<User,Integer> {
+public interface IUserDAO extends CrudRepository<User, Integer> {
 
 	public Page<User> findAll(Pageable pageable);
 }

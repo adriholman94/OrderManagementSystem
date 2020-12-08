@@ -8,20 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
 import javax.persistence.Table;
+import javax.persistence.Id;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
-import com.fiuni.sd.Beans.Supplier.ProductsSupplier;
-
-import javax.persistence.Id;
+import com.fiuni.sd.Beans.Product.Product;
+import com.fiuni.sd.Beans.Supplier.Supplier;
 
 //registr de compra detalle
 @Entity
 @Table(name = "PurchaseRecordDetails")
 public class PurchaseRecordDetail implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "purchase_Record_Detail_Id", nullable = false, unique = true)
@@ -30,10 +29,6 @@ public class PurchaseRecordDetail implements BaseBean {
 	@ManyToOne
 	@JoinColumn(name = "purchase_Record_Id")
 	private PurchaseRecord purchaseRecord;
-
-	@OneToOne
-	@JoinColumn(name = "product_Supplier_id")
-	private ProductsSupplier productsSupplier;
 
 	@Column(name = "productQuantity")
 	private Integer productQuantity;
@@ -44,28 +39,20 @@ public class PurchaseRecordDetail implements BaseBean {
 	@Column(name = "totalPrice")
 	private Integer totalPrice;
 
+	@OneToOne
+	@JoinColumn(name = "productId")
+	private Product product;
+
+	@OneToOne
+	@JoinColumn(name = "suppliertId")
+	private Supplier supplier;
+
 	public Integer getPurchaseRecordDetailId() {
 		return purchaseRecordDetailId;
 	}
 
 	public void setPurchaseRecordDetailId(Integer purchaseRecordDetailId) {
 		this.purchaseRecordDetailId = purchaseRecordDetailId;
-	}
-
-	public PurchaseRecord get_purchaseRecords() {
-		return purchaseRecord;
-	}
-
-	public void set_purchaseRecords(PurchaseRecord purchaseRecords) {
-		this.purchaseRecord = purchaseRecords;
-	}
-
-	public ProductsSupplier get_productsSupplier() {
-		return productsSupplier;
-	}
-
-	public void set_productsSupplier(ProductsSupplier productsSupplier) {
-		this.productsSupplier = productsSupplier;
 	}
 
 	public Integer getProductQuantity() {
@@ -94,8 +81,31 @@ public class PurchaseRecordDetail implements BaseBean {
 
 	public String toString() {
 		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", purchaseRecords=" + purchaseRecord
-				+ ", productsSupplier=" + productsSupplier + ", productsSupplier=" + productsSupplier
-				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", orderDetail ="
-				+ totalPrice + "]";
+				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", totalPrice =" + totalPrice
+				+ "]";
+	}
+
+	public PurchaseRecord getPurchaseRecord() {
+		return purchaseRecord;
+	}
+
+	public void setPurchaseRecord(PurchaseRecord purchaseRecord) {
+		this.purchaseRecord = purchaseRecord;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 }

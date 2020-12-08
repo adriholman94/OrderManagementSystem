@@ -12,8 +12,6 @@ public class PurchaseRecordDTO extends BaseDTO{
 	private Date date;
 	private Integer finalPrice;
 	
-	
-	
 	public Date getDate() {
 		return date;
 	}

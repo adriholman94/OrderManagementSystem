@@ -16,7 +16,6 @@ import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.User.IUserService;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -30,8 +29,8 @@ public class UserController {
 	}
 
 	@GetMapping(path = "/page/{page_num}")
-	public UserResult getUsers(@PathVariable(value = "page_num")Integer pageNum) {
-		return userService.getAll(PageRequest.of(pageNum,3));
+	public UserResult getUsers(@PathVariable(value = "page_num") Integer pageNum) {
+		return userService.getAll(PageRequest.of(pageNum, 3));
 	}
 
 	@PostMapping()

@@ -10,7 +10,6 @@ public class StockResult extends BaseResult<StockDTO> {
 
 	private static final long serialVersionUID = 1L;
 
-	@XmlElement
 	public List<StockDTO> getStocks() {
 		return getList();
 	}
