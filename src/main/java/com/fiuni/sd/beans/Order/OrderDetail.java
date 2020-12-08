@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
@@ -33,7 +34,7 @@ public class OrderDetail implements BaseBean {
 	@JoinColumn(name = "orderId")
 	private Order order;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "productId")
 	private Product product;
 

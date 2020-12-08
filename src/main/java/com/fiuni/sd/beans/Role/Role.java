@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import com.fiuni.sd.Beans.Base.BaseBean;
 
 @Entity(name = "Roles")
-public class Role implements BaseBean{
-	
+public class Role implements BaseBean {
+
 	/**
 	 *
 	 */
@@ -18,10 +18,10 @@ public class Role implements BaseBean{
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="role_id")
-    private int roleId;
+	@Column(name = "role_id")
+	private int roleId;
 
-    @Column(name = "role_Name")
+	@Column(name = "role_Name")
 	private String roleName;
 
 	public int getRoleId() {

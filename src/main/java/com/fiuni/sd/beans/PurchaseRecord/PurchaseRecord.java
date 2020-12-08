@@ -20,7 +20,7 @@ import javax.persistence.Id;
 @Table(name = "PurchaseRecords")
 public class PurchaseRecord implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "purchase_Record_Id", nullable = false, unique = true)
