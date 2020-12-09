@@ -28,9 +28,6 @@ public class User implements BaseBean {
 	@Column(name = "user_Password")
 	private String password;
 
-	@OneToOne(mappedBy = "user")
-	private Client client;
-
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
@@ -70,7 +67,15 @@ public class User implements BaseBean {
 	@Override
 	public String toString() {
 		return "Users [userId=" + id + ", userName=" + userName + ", userMail=" + email + ", userPassword=" + password
-				+ "]";
+				+ ", roles=" + roles + "]";
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }

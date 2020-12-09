@@ -1,7 +1,5 @@
 package com.fiuni.sd.Service.User;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +16,6 @@ import com.fiuni.sd.DAO.User.IUserDAO;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
-
-
 
 @Service
 public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> implements IUserService {
@@ -38,21 +34,21 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO getById(Integer id) {
-		if (userDAO.findById(id).isPresent()){
+		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
 			return convertDomainToDto(userBeans);
-		}else {
+		} else {
 			return null;
 		}
 	}
-
 
 	@Override
 	@Transactional
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
-		Page<User> results=userDAO.findAll(pageable);
-		results.forEach(user->users.add(convertDomainToDto(user)));
+		Page<User> results = userDAO.findAll(pageable);
+		System.out.println(results.getSize());
+		results.forEach(user -> users.add(convertDomainToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
 		return userResult;
@@ -65,7 +61,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(bean.getUserName());
 		user.setUserMail(bean.getEmail());
 		user.setUserPassword(bean.getPassword());
-		//user.set (bean.getRol_id());
+		user.setRoles(bean.getRoles());
 		return user;
 	}
 
@@ -73,7 +69,9 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	protected User convertDtoToDomain(UserDTO dto) {
 		User user = new User();
 		user.setUserName(dto.getUserName());
-		//user.setRol_id(dto.getRol_id());
+		user.setPassword(dto.getUserPassword());
+		user.setEmail(dto.getUserMail());
+		user.setRoles(dto.getRoles());
 		return user;
 	}
 
@@ -83,14 +81,10 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		return null;
 	}
 
-	
-
 	@Override
 	public Optional<User> deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 }
-

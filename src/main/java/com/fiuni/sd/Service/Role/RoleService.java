@@ -1,6 +1,5 @@
 package com.fiuni.sd.Service.Role;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +18,6 @@ import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 
-
 @Service
 public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> implements IRoleService {
 
@@ -34,13 +32,12 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		return convertDomainToDto(role);
 	}
 
-
 	@Override
 	@Transactional
 	public RoleResult getAll(Pageable pageable) {
 		final List<RoleDTO> roles = new ArrayList<>();
-		Page<Role> results=roleDAO.findAll(pageable);
-		results.forEach(role->roles.add(convertDomainToDto(role)));
+		Page<Role> results = roleDAO.findAll(pageable);
+		results.forEach(role -> roles.add(convertDomainToDto(role)));
 		final RoleResult roleResult = new RoleResult();
 		roleResult.setRoles(roles);
 		return roleResult;
@@ -62,13 +59,11 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		return role;
 	}
 
-
 	@Override
 	public RoleDTO update(RoleDTO dto, Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public Optional<Role> deleteById(Integer id) {
@@ -76,17 +71,15 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		return null;
 	}
 
-
 	@Override
 	@Transactional
 	public RoleDTO getById(Integer roleId) {
 		// TODO Auto-generated method stub
-		if (roleDAO.findById(roleId).isPresent()){
+		if (roleDAO.findById(roleId).isPresent()) {
 			final Role userBeans = roleDAO.findById(roleId).get();
 			return convertDomainToDto(userBeans);
-		}else {
+		} else {
 			return null;
 		}
 	}
 }
-
