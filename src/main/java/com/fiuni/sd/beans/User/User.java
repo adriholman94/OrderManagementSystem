@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
-import com.fiuni.sd.Beans.Client.Client;
 import com.fiuni.sd.Beans.Role.Role;
 
 @Entity

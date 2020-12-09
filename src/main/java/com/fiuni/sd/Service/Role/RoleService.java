@@ -44,7 +44,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	}
 
 	@Override
-	protected RoleDTO convertDomainToDto(Role bean) {
+	public RoleDTO convertDomainToDto(Role bean) {
 		final RoleDTO role = new RoleDTO();
 		role.setId(bean.getRoleId());
 		role.setRoleName(bean.getRoleName());

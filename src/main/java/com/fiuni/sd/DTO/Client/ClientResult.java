@@ -2,8 +2,6 @@ package com.fiuni.sd.DTO.Client;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-
 import com.fiuni.sd.DTO.Base.BaseResult;
 
 public class ClientResult extends BaseResult<ClientDTO> {
