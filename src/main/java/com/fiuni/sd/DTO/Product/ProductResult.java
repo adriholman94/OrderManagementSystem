@@ -2,8 +2,6 @@ package com.fiuni.sd.DTO.Product;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlElement;
-
 import com.fiuni.sd.DTO.Base.BaseResult;
 
 public class ProductResult extends BaseResult<ProductDTO> {

@@ -24,7 +24,4 @@ public class PurchaseRecordDTO extends BaseDTO{
 	public void setFinalPrice(Integer finalPrice) {
 		this.finalPrice = finalPrice;
 	}
-
-
-
 }

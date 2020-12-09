@@ -32,7 +32,7 @@ public class UserController {
 		return userService.getAll(PageRequest.of(pageNum, 3));
 	}
 
-	@PostMapping()
+	@PostMapping("/users")
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
 	}

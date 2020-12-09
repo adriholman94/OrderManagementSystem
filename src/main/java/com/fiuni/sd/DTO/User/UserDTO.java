@@ -2,8 +2,8 @@ package com.fiuni.sd.DTO.User;
 
 import java.util.Set;
 
-import com.fiuni.sd.Beans.Role.Role;
 import com.fiuni.sd.DTO.Base.BaseDTO;
+import com.fiuni.sd.DTO.Role.RoleDTO;
 
 public class UserDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
@@ -11,7 +11,7 @@ public class UserDTO extends BaseDTO {
 	private String userName;
 	private String userPassword;
 	private String userMail;
-	private Set<Role> roles;
+	private Set<RoleDTO> roles;
 
 	public String getUserName() {
 		return userName;
@@ -37,11 +37,11 @@ public class UserDTO extends BaseDTO {
 		this.userMail = userMail;
 	}
 
-	public Set<Role> getRoles() {
+	public Set<RoleDTO> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Set<RoleDTO> roles) {
 		this.roles = roles;
 	}
 

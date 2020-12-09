@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,7 +48,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
 		Page<User> results = userDAO.findAll(pageable);
-		System.out.println(results.getSize());
 		results.forEach(user -> users.add(convertDomainToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
@@ -61,7 +61,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(bean.getUserName());
 		user.setUserMail(bean.getEmail());
 		user.setUserPassword(bean.getPassword());
-		user.setRoles(bean.getRoles());
 		return user;
 	}
 
@@ -71,7 +70,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(dto.getUserName());
 		user.setPassword(dto.getUserPassword());
 		user.setEmail(dto.getUserMail());
-		user.setRoles(dto.getRoles());
 		return user;
 	}
 
