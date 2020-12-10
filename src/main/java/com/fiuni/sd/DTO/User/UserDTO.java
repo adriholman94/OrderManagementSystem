@@ -1,7 +1,6 @@
 package com.fiuni.sd.DTO.User;
 
-import java.util.Set;
-
+import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +14,7 @@ public class UserDTO extends BaseDTO {
 	private String userName;
 	private String userPassword;
 	private String userMail;
-	private Set<RoleDTO> roles;
+	private List<RoleDTO> roles;
 
 	@XmlElement
 	public String getUserName() {
@@ -45,11 +44,11 @@ public class UserDTO extends BaseDTO {
 	}
 
 	@XmlElement
-	public Set<RoleDTO> getRoles() {
+	public List<RoleDTO> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<RoleDTO> roles) {
+	public void setRoles(List<RoleDTO> roles) {
 		this.roles = roles;
 	}
 
