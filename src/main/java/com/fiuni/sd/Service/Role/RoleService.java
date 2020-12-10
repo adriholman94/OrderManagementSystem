@@ -17,6 +17,7 @@ import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 
+
 @Service
 public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> implements IRoleService {
 
@@ -44,32 +45,52 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	public RoleDTO convertBeanToDto(Role bean) {
-		final RoleDTO role = new RoleDTO();
-		role.setId(bean.getRoleId());
-		role.setRoleName(bean.getRoleName());
-		return role;
+		final RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setId(bean.getRoleId());
+		roleDTO.setRoleName(bean.getRoleName());
+		return roleDTO;
 	}
 
 	@Override
 	protected Role convertDtoToBean(RoleDTO dto) {
-		final Role role = new Role();
-		role.setRoleId(dto.getId());
-		role.setRoleName(dto.getRoleName());
-		return role;
+		final Role roleBean = new Role();
+		roleBean.setRoleId(dto.getId());
+		roleBean.setRoleName(dto.getRoleName());
+		return roleBean;
 	}
 
 	@Override
-	public RoleDTO update(RoleDTO dto, Integer id) {
 
-		return null;
+	@Transactional
+	public RoleDTO update(RoleDTO dto,Integer id) {
+		if (roleDAO.findById(id).isPresent()){
+            Role roleBean = roleDAO.findById(id).get();
+            roleBean.setRoleName(dto.getRoleName());
+            
+            Role updatedRole = roleDAO.save(roleBean);
+            return convertBeanToDto(updatedRole);
+        }else{
+            return null;
+        }
 	}
-
+	
+	@Override
+	@Transactional
+	public Optional<Role> deleteById(Integer id){
+		Optional<Role> roleBean = null;	
+		if(roleDAO.existsById(id)) {
+			roleBean = roleDAO.findById(id);
+			roleDAO.deleteById(id);
+		}
+		return roleBean;
+	}
+  
 	@Override
 	@Transactional
 	public RoleDTO getById(Integer roleId) {
 		if (roleDAO.findById(roleId).isPresent()) {
-			final Role userBeans = roleDAO.findById(roleId).get();
-			return convertBeanToDto(userBeans);
+			final Role roleBean = roleDAO.findById(roleId).get();
+			return convertBeanToDto(roleBean);
 		} else {
 			return null;
 		}
