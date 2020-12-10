@@ -82,4 +82,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		return null;
 	}
 
+	
+
 }

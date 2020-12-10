@@ -28,27 +28,30 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 
-	@GetMapping(path = "/{id}", produces = {"application/xml", "application/json"})
+	@GetMapping(path = "/{id}", produces = { "application/xml", "application/json" })
 	public UserDTO getById(@PathVariable(value = "id") Integer userId) {
 		return userService.getById(userId);
 	}
 
-	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
+	@GetMapping(path = "/page/{page_num}", produces = { "application/xml", "application/json" })
 	public UserResult getUsers(@PathVariable(value = "page_num") Integer pageNum) {
-		  return userService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
+		return userService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
-	@PostMapping(produces = {"application/xml", "application/json"})
+	@PostMapping(produces = { "application/xml", "application/json" })
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
 	}
-	
+
 	@PutMapping("/{id}")
-	public UserDTO update(@PathVariable(value = "id") Integer userId,@Valid @RequestBody UserDTO user) {
-		return userService.update(user,userId);
+	public UserDTO update(@PathVariable(value = "id") Integer userId, @Valid @RequestBody UserDTO user) {
+		return userService.update(user, userId);
 	}
+
 	@DeleteMapping("/{id}")
 	public Optional<User> delete(@PathVariable int id) {
 		return userService.deleteById(id);
 	}
+
+	
 }
