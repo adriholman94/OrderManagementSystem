@@ -22,17 +22,17 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 
-	@GetMapping("/{id}")
+	@GetMapping(path = "/{id}", produces = {"application/xml", "application/json"})
 	public UserDTO getById(@PathVariable(value = "id") Integer userId) {
 		return userService.getById(userId);
 	}
 
-	@GetMapping(path = "/page/{page_num}")
+	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
 	public UserResult getUsers(@PathVariable(value = "page_num") Integer pageNum) {
 		return userService.getAll(PageRequest.of(pageNum, 3));
 	}
 
-	@PostMapping("/users")
+	@PostMapping(path ="/users", produces = {"application/xml", "application/json"})
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
 	}
