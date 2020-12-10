@@ -71,7 +71,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserMail(bean.getUserMail());
 		user.setUserPassword(bean.getUserPassword());
 		Set<RoleDTO> roles = new HashSet<>();
-		bean.getRoles().forEach(role -> convertBeanToDto(role));
+		bean.getRoles().forEach(role -> roles.add(convertBeanToDto(role)));
 		user.setRoles(roles);
 		return user;
 	}
@@ -83,7 +83,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserPassword(dto.getUserPassword());
 		user.setUserMail(dto.getUserMail());
 		Set<Role> roles = new HashSet<>();
-		dto.getRoles().forEach(role -> convertDtoToBean(role));
+		dto.getRoles().forEach(role -> roles.add(convertDtoToBean(role)));
 		user.setRoles(roles);
 		return user;
 	}
