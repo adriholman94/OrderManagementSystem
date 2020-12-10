@@ -9,7 +9,7 @@ public class ClientResult extends BaseResult<ClientDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<ClientDTO> getClients() {
-		return getList();
+		return list();
 	}
 
 	public void setClient(List<ClientDTO> dtos) {

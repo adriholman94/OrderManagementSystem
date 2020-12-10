@@ -12,7 +12,7 @@ public class PurchaseRecordResult extends BaseResult<PurchaseRecordDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<PurchaseRecordDTO> getPurchaseRecords() {
-		return getList();
+		return list();
 	}
 
 	public void setPurchaseRecord(List<PurchaseRecordDTO> dtos) {

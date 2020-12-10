@@ -15,6 +15,7 @@ public interface IBaseService<DTO extends BaseDTO, R extends BaseResult<DTO>> {
 	public DTO getById(Integer id);
 	
 	public R getAll(Pageable pageable);
+
 	
 	public DTO deleteById(Integer id);
 

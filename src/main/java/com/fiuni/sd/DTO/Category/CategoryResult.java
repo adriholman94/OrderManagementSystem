@@ -9,7 +9,7 @@ public class CategoryResult extends BaseResult<CategoryDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<CategoryDTO> getCategories() {
-		return getList();
+		return list();
 	}
 
 	public void setCategory(List<CategoryDTO> dtos) {

@@ -11,7 +11,7 @@ public class SupplierResult extends BaseResult<SupplierDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<SupplierDTO> getSuppliers() {
-		return getList();
+		return list();
 	}
 
 	public void setSupplier(List<SupplierDTO> dtos) {

@@ -17,9 +17,13 @@ import com.fiuni.sd.DAO.User.IUserDAO;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Service
 public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> implements IUserService {
+	
+	private Logger logger = LogManager.getLogger(UserService.class);
 
 	@Autowired
 	private IUserDAO userDAO;
@@ -51,7 +55,8 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
-		return userResult;
+		logger.info(userResult.list().size() + " " + userResult.getUsers().size());
+        return userResult;
 	}
 
 	@Override
@@ -59,17 +64,17 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		final UserDTO user = new UserDTO();
 		user.setId(bean.getId());
 		user.setUserName(bean.getUserName());
-		user.setUserMail(bean.getEmail());
-		user.setUserPassword(bean.getPassword());
+		user.setUserMail(bean.getUserMail());
+		user.setUserPassword(bean.getUserPassword());
 		return user;
 	}
 
 	@Override
 	protected User convertDtoToBean(UserDTO dto) {
-		User user = new User();
+		final User user = new User();
 		user.setUserName(dto.getUserName());
-		user.setPassword(dto.getUserPassword());
-		user.setEmail(dto.getUserMail());
+		user.setUserPassword(dto.getUserPassword());
+		user.setUserMail(dto.getUserMail());
 		return user;
 	}
 

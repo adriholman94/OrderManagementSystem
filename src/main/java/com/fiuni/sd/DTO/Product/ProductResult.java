@@ -9,7 +9,7 @@ public class ProductResult extends BaseResult<ProductDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<ProductDTO> getProducts() {
-		return getList();
+		return list();
 	}
 
 	public void setProduct(List<ProductDTO> dtos) {

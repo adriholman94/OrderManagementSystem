@@ -2,7 +2,6 @@ package com.fiuni.sd.Service.Role;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -43,17 +42,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		roleResult.setRoles(roles);
 		return roleResult;
 	}
-	@Override
-	@Transactional
-	public RoleDTO getById(Integer roleId) {
-		// TODO Auto-generated method stub
-		if (roleDAO.findById(roleId).isPresent()) {
-			final Role roleBean = roleDAO.findById(roleId).get();
-			return convertBeanToDto(roleBean);
-		} else {
-			return null;
-		}
-	}
+
 	@Override
 	public RoleDTO convertBeanToDto(Role bean) {
 		final RoleDTO roleDTO = new RoleDTO();
@@ -71,6 +60,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	}
 
 	@Override
+
 	@Transactional
 	public RoleDTO update(RoleDTO dto,Integer id) {
 		if (roleDAO.findById(id).isPresent()){
@@ -96,5 +86,18 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		}
 		return roleBean;
 	}
+
+  
+	@Override
+	@Transactional
+	public RoleDTO getById(Integer roleId) {
+		if (roleDAO.findById(roleId).isPresent()) {
+			final Role roleBean = roleDAO.findById(roleId).get();
+			return convertBeanToDto(roleBean);
+		} else {
+			return null;
+		}
+	}
+	
 	
 }
