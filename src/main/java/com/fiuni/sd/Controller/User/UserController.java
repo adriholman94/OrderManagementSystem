@@ -1,20 +1,26 @@
 package com.fiuni.sd.Controller.User;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fiuni.sd.Beans.User.User;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.User.IUserService;
 import com.fiuni.sd.Utils.Setting;
+
 
 @RestController
 @RequestMapping("/users")
@@ -39,5 +45,16 @@ public class UserController {
 	@PostMapping(produces = {"application/xml", "application/json"})
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
+	}
+	
+
+	
+	@PutMapping("/{id}")
+	public UserDTO update(@PathVariable(value = "id") Integer userId,@Valid @RequestBody UserDTO user) {
+		return userService.update(user,userId);
+	}
+	@DeleteMapping("/{id}")
+	public Optional<User> delete(@PathVariable int id) {
+		return userService.deleteById(id);
 	}
 }
