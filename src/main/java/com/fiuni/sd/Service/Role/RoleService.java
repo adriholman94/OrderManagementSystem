@@ -43,7 +43,17 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		roleResult.setRoles(roles);
 		return roleResult;
 	}
-
+	@Override
+	@Transactional
+	public RoleDTO getById(Integer roleId) {
+		// TODO Auto-generated method stub
+		if (roleDAO.findById(roleId).isPresent()) {
+			final Role roleBean = roleDAO.findById(roleId).get();
+			return convertBeanToDto(roleBean);
+		} else {
+			return null;
+		}
+	}
 	@Override
 	public RoleDTO convertBeanToDto(Role bean) {
 		final RoleDTO roleDTO = new RoleDTO();
@@ -76,23 +86,15 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	
 	@Override
 	@Transactional
-	public Optional<Role> deleteById(Integer id){
-		Optional<Role> roleBean = null;	
+	public RoleDTO deleteById(Integer id){
+		RoleDTO roleBean = null;	
 		if(roleDAO.existsById(id)) {
-			roleBean = roleDAO.findById(id);
-			roleDAO.deleteById(id);
+		//	roleBean = roleDAO.deleteById(id);;
+		
+			 //roleDAO.deleteById(id);
+			 //return convertDtoToBean(dto);
 		}
 		return roleBean;
 	}
-	@Override
-	@Transactional
-	public RoleDTO getById(Integer roleId) {
-		// TODO Auto-generated method stub
-		if (roleDAO.findById(roleId).isPresent()) {
-			final Role roleBean = roleDAO.findById(roleId).get();
-			return convertBeanToDto(roleBean);
-		} else {
-			return null;
-		}
-	}
+	
 }
