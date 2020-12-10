@@ -2,7 +2,6 @@ package com.fiuni.sd.Service.Role;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -61,20 +60,13 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	public RoleDTO update(RoleDTO dto, Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Optional<Role> deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	@Transactional
 	public RoleDTO getById(Integer roleId) {
-		// TODO Auto-generated method stub
 		if (roleDAO.findById(roleId).isPresent()) {
 			final Role userBeans = roleDAO.findById(roleId).get();
 			return convertBeanToDto(userBeans);

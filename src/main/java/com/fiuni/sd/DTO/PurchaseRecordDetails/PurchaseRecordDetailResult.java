@@ -11,7 +11,7 @@ public class PurchaseRecordDetailResult extends BaseResult<PurchaseRecordDetailD
 	private static final long serialVersionUID = 1L;
 
 	public List<PurchaseRecordDetailDTO> getPurchaseRecordDetails() {
-		return getList();
+		return list();
 	}
 
 	public void setPurchaseRecordDetail(List<PurchaseRecordDetailDTO> dtos) {

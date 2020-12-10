@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.User.IUserService;
+import com.fiuni.sd.Utils.Setting;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+	@Autowired
+	private Setting setting;
 
 	@Autowired
 	private IUserService userService;
@@ -29,10 +33,10 @@ public class UserController {
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
 	public UserResult getUsers(@PathVariable(value = "page_num") Integer pageNum) {
-		return userService.getAll(PageRequest.of(pageNum, 3));
+		  return userService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
-	@PostMapping(path ="/users", produces = {"application/xml", "application/json"})
+	@PostMapping(produces = {"application/xml", "application/json"})
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
 	}
