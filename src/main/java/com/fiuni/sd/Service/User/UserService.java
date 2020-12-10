@@ -27,9 +27,9 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO save(UserDTO dto) {
-		final User userBeans = convertDtoToDomain(dto);
+		final User userBeans = convertDtoToBean(dto);
 		final User user = userDAO.save(userBeans);
-		return convertDomainToDto(user);
+		return convertBeanToDto(user);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	public UserDTO getById(Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
-			return convertDomainToDto(userBeans);
+			return convertBeanToDto(userBeans);
 		} else {
 			return null;
 		}
@@ -48,14 +48,14 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
 		Page<User> results = userDAO.findAll(pageable);
-		results.forEach(user -> users.add(convertDomainToDto(user)));
+		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
 		return userResult;
 	}
 
 	@Override
-	protected UserDTO convertDomainToDto(User bean) {
+	protected UserDTO convertBeanToDto(User bean) {
 		final UserDTO user = new UserDTO();
 		user.setId(bean.getId());
 		user.setUserName(bean.getUserName());
@@ -65,7 +65,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	}
 
 	@Override
-	protected User convertDtoToDomain(UserDTO dto) {
+	protected User convertDtoToBean(UserDTO dto) {
 		User user = new User();
 		user.setUserName(dto.getUserName());
 		user.setPassword(dto.getUserPassword());

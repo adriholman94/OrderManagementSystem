@@ -9,7 +9,7 @@ import com.fiuni.sd.DTO.Base.BaseDTO;
 import com.fiuni.sd.DTO.Base.BaseResult;
 
 
-public interface IBaseService<DOMAIN extends BaseBean,DTO extends BaseDTO, R extends BaseResult<DTO>> {
+public interface IBaseService<BEAN extends BaseBean,DTO extends BaseDTO, R extends BaseResult<DTO>> {
 	public DTO save(DTO dto);
 	
 	public DTO update(DTO dto,Integer id);
@@ -18,6 +18,6 @@ public interface IBaseService<DOMAIN extends BaseBean,DTO extends BaseDTO, R ext
 	
 	public R getAll(Pageable pageable);
 	
-	public Optional<DOMAIN> deleteById(Integer id);
+	public Optional<BEAN> deleteById(Integer id);
 
 }

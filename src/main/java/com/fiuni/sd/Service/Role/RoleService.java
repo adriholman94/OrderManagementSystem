@@ -27,9 +27,9 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	@Override
 	@Transactional
 	public RoleDTO save(RoleDTO dto) {
-		final Role roleBeans = convertDtoToDomain(dto);
+		final Role roleBeans = convertDtoToBean(dto);
 		final Role role = roleDAO.save(roleBeans);
-		return convertDomainToDto(role);
+		return convertBeanToDto(role);
 	}
 
 	@Override
@@ -37,14 +37,14 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	public RoleResult getAll(Pageable pageable) {
 		final List<RoleDTO> roles = new ArrayList<>();
 		Page<Role> results = roleDAO.findAll(pageable);
-		results.forEach(role -> roles.add(convertDomainToDto(role)));
+		results.forEach(role -> roles.add(convertBeanToDto(role)));
 		final RoleResult roleResult = new RoleResult();
 		roleResult.setRoles(roles);
 		return roleResult;
 	}
 
 	@Override
-	public RoleDTO convertDomainToDto(Role bean) {
+	public RoleDTO convertBeanToDto(Role bean) {
 		final RoleDTO role = new RoleDTO();
 		role.setId(bean.getRoleId());
 		role.setRoleName(bean.getRoleName());
@@ -52,7 +52,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	}
 
 	@Override
-	protected Role convertDtoToDomain(RoleDTO dto) {
+	protected Role convertDtoToBean(RoleDTO dto) {
 		final Role role = new Role();
 		role.setRoleId(dto.getId());
 		role.setRoleName(dto.getRoleName());
@@ -77,7 +77,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		// TODO Auto-generated method stub
 		if (roleDAO.findById(roleId).isPresent()) {
 			final Role userBeans = roleDAO.findById(roleId).get();
-			return convertDomainToDto(userBeans);
+			return convertBeanToDto(userBeans);
 		} else {
 			return null;
 		}
