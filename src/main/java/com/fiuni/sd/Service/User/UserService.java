@@ -64,8 +64,8 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		final UserDTO user = new UserDTO();
 		user.setId(bean.getId());
 		user.setUserName(bean.getUserName());
-		user.setUserMail(bean.getUserMail());
-		user.setUserPassword(bean.getUserPassword());
+		user.setUserMail(bean.getEmail());
+		user.setUserPassword(bean.getPassword());
 		return user;
 	}
 
@@ -73,8 +73,8 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	protected User convertDtoToBean(UserDTO dto) {
 		final User user = new User();
 		user.setUserName(dto.getUserName());
-		user.setUserPassword(dto.getUserPassword());
-		user.setUserMail(dto.getUserMail());
+		user.setPassword(dto.getUserPassword());
+		user.setEmail(dto.getUserMail());
 		return user;
 	}
 
