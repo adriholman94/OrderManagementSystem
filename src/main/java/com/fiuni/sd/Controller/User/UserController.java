@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.User.IUserService;
@@ -45,8 +44,6 @@ public class UserController {
 	public UserDTO save(@Valid @RequestBody UserDTO client) {
 		return userService.save(client);
 	}
-	
-
 
 	@PutMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public UserDTO update(@PathVariable final Integer id, @RequestBody final UserDTO role) {
@@ -55,15 +52,6 @@ public class UserController {
 
 	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public UserDTO delete(@PathVariable int id) {
-
-	@PutMapping("/{id}")
-	public UserDTO update(@PathVariable(value = "id") Integer userId,@Valid @RequestBody UserDTO user) {
-		return userService.update(user,userId);
-	}
-	
-	@DeleteMapping("/{id}")
-	public Optional<User> delete(@PathVariable int id) {
-
-		return userService.deleteById(id);
+		return null;
 	}
 }

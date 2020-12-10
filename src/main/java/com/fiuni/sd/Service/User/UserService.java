@@ -8,14 +8,15 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.fiuni.sd.Beans.Role.Role;
 import com.fiuni.sd.Beans.User.User;
 import com.fiuni.sd.DAO.User.IUserDAO;
+import com.fiuni.sd.DTO.Role.RoleDTO;
 
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
@@ -26,7 +27,7 @@ import org.apache.logging.log4j.Logger;
 
 @Service
 public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> implements IUserService {
-	
+
 	private Logger logger = LogManager.getLogger(UserService.class);
 
 	@Autowired
@@ -42,7 +43,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
-	public UserDTO getById(int id) {
+	public UserDTO getById(Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
 			return convertBeanToDto(userBeans);
@@ -59,7 +60,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
-        return userResult;
+		return userResult;
 	}
 
 	@Override
@@ -67,10 +68,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		final UserDTO user = new UserDTO();
 		user.setId(bean.getId());
 		user.setUserName(bean.getUserName());
-
-		user.setUserMail(bean.getEmail());
-		user.setUserPassword(bean.getPassword());
-
 		user.setUserMail(bean.getUserMail());
 		user.setUserPassword(bean.getUserPassword());
 		Set<RoleDTO> roles = new HashSet<>();
@@ -84,10 +81,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	protected User convertDtoToBean(UserDTO dto) {
 		final User user = new User();
 		user.setUserName(dto.getUserName());
-
-		user.setPassword(dto.getUserPassword());
-		user.setEmail(dto.getUserMail());
-
 		user.setUserPassword(dto.getUserPassword());
 		user.setUserMail(dto.getUserMail());
 		Set<Role> roles = new HashSet<>();
@@ -97,14 +90,12 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		return user;
 	}
 
-
 	public RoleDTO convertBeanToDto(Role bean) {
 		final RoleDTO roleDTO = new RoleDTO();
 		roleDTO.setId(bean.getRoleId());
 		roleDTO.setRoleName(bean.getRoleName());
 		return roleDTO;
 	}
-
 
 	protected Role convertDtoToBean(RoleDTO dto) {
 		final Role roleBean = new Role();
@@ -115,38 +106,27 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
-	public UserDTO update(UserDTO dto, int id) {
-		if (userDAO.findById(id).isPresent()){
-            User userBean = userDAO.findById(id).get();
-            userBean.setUserName(dto.getUserName());
-            User updatedUser = userDAO.save(userBean);
-            return convertBeanToDto(updatedUser);
-        }else{
-            return null;
-        }
+	public UserDTO update(UserDTO dto, Integer id) {
+		if (userDAO.findById(id).isPresent()) {
+			User userBean = userDAO.findById(id).get();
+			userBean.setUserName(dto.getUserName());
+			User updatedUser = userDAO.save(userBean);
+			return convertBeanToDto(updatedUser);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
 	@Transactional
-
-	public UserDTO deleteById( Integer id){
-		if (userDAO.findById(id).isPresent()){
-            User userBean = userDAO.findById(id).get();
-           // userBean.setUserName(dto.getUserName());
-            
-            User updatedUser = userDAO.save(userBean);
-            return convertBeanToDto(updatedUser);
-        }else{
-            return null;
-        }
-
-	public Optional<User> deleteById(int id) {
-		Optional<User> userBean = null;	
-		if(userDAO.existsById(id)) {
-			userBean = userDAO.findById(id);
-			userDAO.deleteById(id);
+	public UserDTO deleteById(Integer id) {
+		if (userDAO.findById(id).isPresent()) {
+			User userBean = userDAO.findById(id).get();
+			// userBean.setUserName(dto.getUserName());
+			User updatedUser = userDAO.save(userBean);
+			return convertBeanToDto(updatedUser);
+		} else {
+			return null;
 		}
-		return userBean;
-
 	}
 }

@@ -42,11 +42,11 @@ public class User implements BaseBean {
 		return userName;
 	}
 
-	public String getEmail() {
+	public String getUserMail() {
 		return email;
 	}
 
-	public String getPassword() {
+	public String getUserPassword() {
 		return password;
 	}
 
@@ -58,13 +58,9 @@ public class User implements BaseBean {
 		this.userName = userName;
 	}
 
-	public void setEmail(String email) {
+	public void setUserMail(String email) {
 		this.email = email;
 	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
 
 	public void setUserPassword(String password) {
 		this.password = new BCryptPasswordEncoder().encode(password);

@@ -60,7 +60,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
-	public RoleDTO update(RoleDTO dto, int id) {
+	public RoleDTO update(RoleDTO dto, Integer id) {
 		if (roleDAO.findById(id).isPresent()) {
 			Role roleBean = roleDAO.findById(id).get();
 			roleBean.setRoleName(dto.getRoleName());
@@ -73,16 +73,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
-
-	public RoleDTO deleteById(Integer id){
-		RoleDTO roleBean = null;	
-		if(roleDAO.existsById(id)) {
-		//	roleBean = roleDAO.deleteById(id);;
-		
-			 //roleDAO.deleteById(id);
-			 //return convertDtoToBean(dto);
-
-	public RoleDTO deleteById(int id) {
+	public RoleDTO deleteById(Integer id) {
 		RoleDTO roleBean = null;
 		if (roleDAO.existsById(id)) {
 			roleBean = null;
@@ -92,10 +83,8 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		return roleBean;
 	}
 
-
-
 	@Override
-	public RoleDTO getById(int id) {
+	public RoleDTO getById(Integer id) {
 		if (roleDAO.findById(id).isPresent()) {
 			final Role roleBeans = roleDAO.findById(id).get();
 			return convertBeanToDto(roleBeans);
@@ -103,6 +92,4 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 			return null;
 		}
 	}
-	
-	
 }
