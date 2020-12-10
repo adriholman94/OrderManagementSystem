@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.Role.Role;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name = "Users")
 public class User implements BaseBean {
@@ -67,7 +69,7 @@ public class User implements BaseBean {
 	}
 
 	public void setUserPassword(String password) {
-		this.password = password;
+		this.password = new BCryptPasswordEncoder().encode(password);
 	}
 
 	@Override
