@@ -1,16 +1,9 @@
 package com.fiuni.sd.Beans.User;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.Role.Role;
@@ -23,7 +16,7 @@ public class User implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_Id", nullable = false, unique = true)
 	private Integer id;
 
@@ -36,9 +29,10 @@ public class User implements BaseBean {
 	@Column(name = "user_Password")
 	private String password;
 
-	@ManyToMany
+	@Column(name = "user_role")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private Set<Role> roles = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -48,11 +42,11 @@ public class User implements BaseBean {
 		return userName;
 	}
 
-	public String getUserMail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public String getUserPassword() {
+	public String getPassword() {
 		return password;
 	}
 
@@ -64,18 +58,22 @@ public class User implements BaseBean {
 		this.userName = userName;
 	}
 
-	public void setUserMail(String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
+
+	public void setPassword(String password) {
+		this.password = password;
+
 	public void setUserPassword(String password) {
 		this.password = new BCryptPasswordEncoder().encode(password);
+
 	}
 
 	@Override
 	public String toString() {
-		return "Users [userId=" + id + ", userName=" + userName + ", userMail=" + email + ", userPassword=" + password
-				+ ", roles=" + roles + "]";
+		return "Users [userId=" + id + ", userName=" + userName + ", userMail=" + email + ", userPassword=" + password+ ", roles=" + roles + "]";
 	}
 
 	public Set<Role> getRoles() {

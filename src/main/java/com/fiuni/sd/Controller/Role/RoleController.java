@@ -11,15 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
-import com.fiuni.sd.Beans.Role.Role;
-import com.fiuni.sd.Beans.User.User;
+
 import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
-import com.fiuni.sd.DTO.User.UserDTO;
+
 import com.fiuni.sd.Service.Role.IRoleService;
 
 //import com.fiuni.sd.tienda.utils.Setting;
@@ -41,16 +40,18 @@ public class RoleController {
 		return roleService.getAll(PageRequest.of(pageNum, 3));
 	}
 
-	@PostMapping()
+	@PostMapping
 	public RoleDTO save(@Valid @RequestBody RoleDTO client) {
 		return roleService.save(client);
 	}
 
-	@PutMapping(path ="/{id}")
-	public RoleDTO update(@PathVariable(value = "id") Integer roleId,@Valid @RequestBody RoleDTO role) {
-		return roleService.update(role,roleId);
+	@PutMapping(path ="/{id}", produces = {"application/xml", "application/json"})
+	public RoleDTO update(@PathVariable final Integer id, @RequestBody final RoleDTO role) {
+		return roleService.update(role, id);
 	}
 
+
+	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	@DeleteMapping(path ="/{id}")
 	public RoleDTO delete(@PathVariable int id) {
 		return roleService.deleteById(id);

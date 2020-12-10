@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface IUserDAO extends CrudRepository<User, Integer> {
 	
 	public Page<User> findAll(Pageable pageable);
+	
 }

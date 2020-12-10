@@ -73,14 +73,26 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
+
+	public RoleDTO deleteById(Integer id){
+		RoleDTO roleBean = null;	
+		if(roleDAO.existsById(id)) {
+		//	roleBean = roleDAO.deleteById(id);;
+		
+			 //roleDAO.deleteById(id);
+			 //return convertDtoToBean(dto);
+
 	public RoleDTO deleteById(int id) {
 		RoleDTO roleBean = null;
 		if (roleDAO.existsById(id)) {
 			roleBean = null;
 			roleDAO.deleteById(id);
+
 		}
 		return roleBean;
 	}
+
+
 
 	@Override
 	public RoleDTO getById(int id) {
@@ -91,4 +103,6 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 			return null;
 		}
 	}
+	
+	
 }
