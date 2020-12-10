@@ -50,8 +50,9 @@ public class RoleController {
 	public RoleDTO update(@PathVariable(value = "id") Integer roleId,@Valid @RequestBody RoleDTO role) {
 		return roleService.update(role,roleId);
 	}
+
 	@DeleteMapping(path ="/{id}")
-	public Optional<Role> delete(@PathVariable int id) {
+	public RoleDTO delete(@PathVariable int id) {
 		return roleService.deleteById(id);
 	}
 }

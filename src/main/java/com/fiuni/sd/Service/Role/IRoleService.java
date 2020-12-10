@@ -6,6 +6,6 @@ import com.fiuni.sd.Service.Base.IBaseService;
 
 public interface IRoleService extends IBaseService<RoleDTO, RoleResult> {
 
-	RoleDTO getById(Integer roleId);
+	RoleDTO deleteById(int id);
 
 }

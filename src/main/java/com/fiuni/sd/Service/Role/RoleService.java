@@ -17,7 +17,6 @@ import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 
-
 @Service
 public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> implements IRoleService {
 
@@ -60,37 +59,34 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	}
 
 	@Override
-
 	@Transactional
-	public RoleDTO update(RoleDTO dto,Integer id) {
-		if (roleDAO.findById(id).isPresent()){
-            Role roleBean = roleDAO.findById(id).get();
-            roleBean.setRoleName(dto.getRoleName());
-            
-            Role updatedRole = roleDAO.save(roleBean);
-            return convertBeanToDto(updatedRole);
-        }else{
-            return null;
-        }
+	public RoleDTO update(RoleDTO dto, int id) {
+		if (roleDAO.findById(id).isPresent()) {
+			Role roleBean = roleDAO.findById(id).get();
+			roleBean.setRoleName(dto.getRoleName());
+			Role updatedRole = roleDAO.save(roleBean);
+			return convertBeanToDto(updatedRole);
+		} else {
+			return null;
+		}
 	}
-	
+
 	@Override
 	@Transactional
-	public Optional<Role> deleteById(Integer id){
-		Optional<Role> roleBean = null;	
-		if(roleDAO.existsById(id)) {
-			roleBean = roleDAO.findById(id);
+	public RoleDTO deleteById(int id) {
+		RoleDTO roleBean = null;
+		if (roleDAO.existsById(id)) {
+			roleBean = null;
 			roleDAO.deleteById(id);
 		}
 		return roleBean;
 	}
-  
+
 	@Override
-	@Transactional
-	public RoleDTO getById(Integer roleId) {
-		if (roleDAO.findById(roleId).isPresent()) {
-			final Role roleBean = roleDAO.findById(roleId).get();
-			return convertBeanToDto(roleBean);
+	public RoleDTO getById(int id) {
+		if (roleDAO.findById(id).isPresent()) {
+			final Role roleBeans = roleDAO.findById(id).get();
+			return convertBeanToDto(roleBeans);
 		} else {
 			return null;
 		}

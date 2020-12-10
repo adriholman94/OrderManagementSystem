@@ -1,7 +1,10 @@
 package com.fiuni.sd.Service.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -18,6 +21,7 @@ import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +43,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
-	public UserDTO getById(Integer id) {
+	public UserDTO getById(int id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
 			return convertBeanToDto(userBeans);
@@ -56,7 +60,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
-		logger.info(userResult.list().size() + " " + userResult.getUsers().size());
         return userResult;
 	}
 
@@ -67,6 +70,9 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(bean.getUserName());
 		user.setUserMail(bean.getUserMail());
 		user.setUserPassword(bean.getUserPassword());
+		Set<RoleDTO> roles = new HashSet<>();
+		bean.getRoles().forEach(role -> convertBeanToDto(role));
+		user.setRoles(roles);
 		return user;
 	}
 
@@ -76,12 +82,31 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(dto.getUserName());
 		user.setUserPassword(dto.getUserPassword());
 		user.setUserMail(dto.getUserMail());
+		Set<Role> roles = new HashSet<>();
+		dto.getRoles().forEach(role -> convertDtoToBean(role));
+		user.setRoles(roles);
 		return user;
+	}
+
+
+	public RoleDTO convertBeanToDto(Role bean) {
+		final RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setId(bean.getRoleId());
+		roleDTO.setRoleName(bean.getRoleName());
+		return roleDTO;
+	}
+
+
+	protected Role convertDtoToBean(RoleDTO dto) {
+		final Role roleBean = new Role();
+		roleBean.setRoleId(dto.getId());
+		roleBean.setRoleName(dto.getRoleName());
+		return roleBean;
 	}
 
 	@Override
 	@Transactional
-	public UserDTO update(UserDTO dto,Integer id) {
+	public UserDTO update(UserDTO dto, int id) {
 		if (userDAO.findById(id).isPresent()){
             User userBean = userDAO.findById(id).get();
             userBean.setUserName(dto.getUserName());
@@ -92,10 +117,10 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
             return null;
         }
 	}
-	
+
 	@Override
 	@Transactional
-	public Optional<User> deleteById(Integer id){
+	public Optional<User> deleteById(int id) {
 		Optional<User> userBean = null;	
 		if(userDAO.existsById(id)) {
 			userBean = userDAO.findById(id);
