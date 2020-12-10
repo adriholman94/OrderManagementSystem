@@ -24,17 +24,17 @@ public class RoleController {
 	@Autowired
 	private IRoleService roleService;
 
-	@GetMapping("/{id}")
+	@GetMapping(path = "/{id}", produces = {"application/xml", "application/json"})
 	public RoleDTO getById(@PathVariable(value = "id") Integer roleId) {
 		return roleService.getById(roleId);
 	}
 
-	@GetMapping(path = "/page/{page_num}")
+	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
 	public RoleResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
 		return roleService.getAll(PageRequest.of(pageNum, 3));
 	}
 
-	@PostMapping
+	@PostMapping(produces = {"application/xml", "application/json"})
 	public RoleDTO save(@Valid @RequestBody RoleDTO client) {
 		return roleService.save(client);
 	}

@@ -1,7 +1,12 @@
 package com.fiuni.sd.DTO.Role;
 
+
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.fiuni.sd.DTO.Base.BaseDTO;
 
+@XmlRootElement(name = "roles")
 public class RoleDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	private String roleName;
