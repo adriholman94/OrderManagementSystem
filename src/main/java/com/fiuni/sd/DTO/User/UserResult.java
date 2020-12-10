@@ -12,9 +12,10 @@ import com.fiuni.sd.DTO.Base.BaseResult;
 public class UserResult extends BaseResult<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
+
 	@XmlElement
 	public List<UserDTO> getUsers() {
-		return getList();
+		return list();
 	}
 
 	public void setUsers(List<UserDTO> dtos) {
