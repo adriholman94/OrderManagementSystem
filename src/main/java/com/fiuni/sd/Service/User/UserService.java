@@ -41,10 +41,10 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
             }
 		}
 		user.setRoles(rolesBean);
-        final User savedUser = userDAO.save(user);
+        final User newUser = userDAO.save(user);
         UserDTO userDTO = null;
-        if (savedUser != null) {
-        	userDTO  = convertBeanToDto(savedUser);
+        if (newUser != null) {
+        	userDTO  = convertBeanToDto(newUser);
 			userDTO.setRoles(roles);
 		}
         return userDTO;
