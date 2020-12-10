@@ -7,9 +7,14 @@
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="client-lib.dir"     value="../OrderClient/lib"/>
+	<property name="lib.dir"     value="buildlib"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+	</path>
 
     <target name="clean">
-		<delete dir="${RIbuild.dir}" />
+		<delete dir="${build.dir}" />
 	</target>
     
 	<target name="init" depends="clean">
@@ -18,12 +23,15 @@
 
 	<target name="compile" depends="init">
 		<mkdir dir="${classes.dir}" />
-		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" />
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" classpathref="classpath"/>
 	</target>
 
 	<target name="jar" depends="compile">
 		<mkdir dir="${client-lib.dir}" />
 		<jar destfile="${client-lib.dir}/DTO.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-class" value=""/>
+			</manifest>
 		</jar>
 	</target>
     
