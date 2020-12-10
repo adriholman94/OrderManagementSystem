@@ -9,7 +9,7 @@ public class OrderDetailResult extends BaseResult<OrderDetailDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<OrderDetailDTO> getProductOrderDetails() {
-		return getList();
+		return list();
 	}
 
 	public void setProductOrderDetail(List<OrderDetailDTO> dtos) {

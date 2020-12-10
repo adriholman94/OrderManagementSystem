@@ -9,7 +9,7 @@ public class OrderResult extends BaseResult<OrderDTO> {
 	private static final long serialVersionUID = 1L;
 
 	public List<OrderDTO> getOrders() {
-		return getList();
+		return list();
 	}
 
 	public void setOrder(List<OrderDTO> dtos) {

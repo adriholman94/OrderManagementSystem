@@ -1,9 +1,16 @@
 package com.fiuni.sd.Beans.User;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.Role.Role;
@@ -14,7 +21,7 @@ public class User implements BaseBean {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "user_Id", nullable = false, unique = true)
 	private Integer id;
 
@@ -27,9 +34,9 @@ public class User implements BaseBean {
 	@Column(name = "user_Password")
 	private String password;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
+	private Set<Role> roles;
 
 	public Integer getId() {
 		return id;
@@ -39,11 +46,11 @@ public class User implements BaseBean {
 		return userName;
 	}
 
-	public String getEmail() {
+	public String getUserMail() {
 		return email;
 	}
 
-	public String getPassword() {
+	public String getUserPassword() {
 		return password;
 	}
 
@@ -55,11 +62,11 @@ public class User implements BaseBean {
 		this.userName = userName;
 	}
 
-	public void setEmail(String email) {
+	public void setUserMail(String email) {
 		this.email = email;
 	}
 
-	public void setPassword(String password) {
+	public void setUserPassword(String password) {
 		this.password = password;
 	}
 
