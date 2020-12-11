@@ -40,9 +40,9 @@ public class RoleController {
 		return roleService.getAll(PageRequest.of(pageNum, 3));
 	}
 
-	@PostMapping
-	public RoleDTO save(@Valid @RequestBody RoleDTO client) {
-		return roleService.save(client);
+	@PostMapping(path = "", produces = {"application/xml"})
+	public RoleDTO save(@Valid @RequestBody RoleDTO role) {
+		return roleService.save(role);
 	}
 
 	@PutMapping(path ="/{id}", produces = {"application/xml"})

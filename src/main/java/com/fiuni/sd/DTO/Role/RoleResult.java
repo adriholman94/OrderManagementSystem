@@ -13,7 +13,7 @@ public class RoleResult extends BaseResult<RoleDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<RoleDTO> getRoleDTOs() {
+	public List<RoleDTO> getRoles() {
 		return list();
 	}
 

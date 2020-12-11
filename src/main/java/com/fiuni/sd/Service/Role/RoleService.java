@@ -26,8 +26,9 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	@Override
 	@Transactional
 	public RoleDTO save(RoleDTO dto) {
-		final Role roleBeans = convertDtoToBean(dto);
-		final Role role = roleDAO.save(roleBeans);
+		final Role roleBean = new Role();
+		roleBean.setRoleName(dto.getRoleName());
+		final Role role = roleDAO.save(roleBean);
 		return convertBeanToDto(role);
 	}
 
