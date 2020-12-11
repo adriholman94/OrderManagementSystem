@@ -1,6 +1,8 @@
 package com.fiuni.sd.DTO.User;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -54,7 +56,8 @@ public class UserDTO extends BaseDTO {
 
 	@Override
 	public String toString() {
-		return "ClientDTO [userName=" + userName + ", email=" + userMail + "password=" + userPassword + " rol="+roles+"]";
+		return "User [userName=" + userName + ", email=" + userMail + "password=" + userPassword + " roles={"
+				+ roles.stream().map(RoleDTO::getRoleName).collect(Collectors.joining(",")) + "}]";
 	}
 
 }
