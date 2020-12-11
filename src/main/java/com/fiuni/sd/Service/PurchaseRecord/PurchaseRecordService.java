@@ -51,7 +51,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		DTO.setFinalPrice(bean.getFinalPrice());
 		List<PurchaseRecordDetailDTO> details = new ArrayList<>();
 		bean.get_purchaseRecordDetails().forEach(detail -> details.add(new PurchaseRecordDetailService().convertBeanToDto(detail)));
-		DTO.setRoles(details);
+		DTO.setPurchaseRecordDetails(details);
 		return DTO;
 	}
 

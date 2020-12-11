@@ -36,11 +36,11 @@ public class PurchaseRecordDTO extends BaseDTO{
 	}
 
 	@XmlElement
-	public List<PurchaseRecordDetailDTO> getRoles() {
+	public List<PurchaseRecordDetailDTO> getPurchaseRecordDetails() {
 		return details;
 	}
 
-	public void setRoles(List<PurchaseRecordDetailDTO> details) {
+	public void setPurchaseRecordDetails(List<PurchaseRecordDetailDTO> details) {
 		this.details = details;
 	}
 }
