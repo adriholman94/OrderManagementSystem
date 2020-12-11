@@ -54,7 +54,7 @@ public class UserDTO extends BaseDTO {
 
 	@Override
 	public String toString() {
-		return "ClientDTO [userName=" + userName + ", email=" + userMail + "password=" + userPassword + "]";
+		return "ClientDTO [userName=" + userName + ", email=" + userMail + "password=" + userPassword + " rol="+roles+"]";
 	}
 
 }
