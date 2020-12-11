@@ -30,12 +30,12 @@ public class RoleController {
 	@Autowired
 	private IRoleService roleService;
 
-	@GetMapping(path = "/{id}", produces = {"application/xml", "application/json"})
+	@GetMapping(path = "/{id}", produces = {"application/xml"})
 	public RoleDTO getById(@PathVariable(value = "id") Integer roleId) {
 		return roleService.getById(roleId);
 	}
 
-	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
+	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
 	public RoleResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
 		return roleService.getAll(PageRequest.of(pageNum, 3));
 	}
@@ -45,13 +45,13 @@ public class RoleController {
 		return roleService.save(client);
 	}
 
-	@PutMapping(path ="/{id}", produces = {"application/xml", "application/json"})
+	@PutMapping(path ="/{id}", produces = {"application/xml"})
 	public RoleDTO update(@PathVariable final Integer id, @RequestBody final RoleDTO role) {
 		return roleService.update(role, id);
 	}
 
 
-	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
+	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
 	public RoleDTO delete(@PathVariable int id) {
 		return roleService.deleteById(id);
 	}
