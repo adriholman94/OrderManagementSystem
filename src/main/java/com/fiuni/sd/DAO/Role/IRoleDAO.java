@@ -11,6 +11,4 @@ import org.springframework.stereotype.Repository;
 public interface IRoleDAO extends CrudRepository<Role, Integer> {
 
 	public Page<Role> findAll(Pageable pageable);
-	
-	//public Boolean existingId(Integer id);
 }

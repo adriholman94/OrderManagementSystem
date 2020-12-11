@@ -21,13 +21,8 @@ import com.fiuni.sd.DTO.User.UserDTO;
 import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 @Service
 public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> implements IUserService {
-
-	private Logger logger = LogManager.getLogger(UserService.class);
 
 	@Autowired
 	private IUserDAO userDAO;
@@ -35,9 +30,24 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO save(UserDTO dto) {
-		final User userBeans = convertDtoToBean(dto);
-		final User user = userDAO.save(userBeans);
-		return convertBeanToDto(user);
+		final User user = convertDtoToBean(dto);
+		final Set<Role> rolesBean = new HashSet<>();
+        final List<RoleDTO> roles = new ArrayList<>();
+        if (dto.getRoles() != null) {
+            for (RoleDTO role : dto.getRoles()) {
+                final Role roleBean = convertDtoToBean(role);
+                rolesBean.add(roleBean);
+                roles.add(convertBeanToDto(roleBean));
+            }
+		}
+		user.setRoles(rolesBean);
+        final User newUser = userDAO.save(user);
+        UserDTO userDTO = null;
+        if (newUser != null) {
+        	userDTO  = convertBeanToDto(newUser);
+			userDTO.setRoles(roles);
+		}
+        return userDTO;
 	}
 
 	@Override
@@ -69,10 +79,9 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		user.setUserName(bean.getUserName());
 		user.setUserMail(bean.getUserMail());
 		user.setUserPassword(bean.getUserPassword());
-		Set<RoleDTO> roles = new HashSet<>();
+		List<RoleDTO> roles = new ArrayList<>();
 		bean.getRoles().forEach(role -> roles.add(convertBeanToDto(role)));
 		user.setRoles(roles);
-
 		return user;
 	}
 
@@ -85,7 +94,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		Set<Role> roles = new HashSet<>();
 		dto.getRoles().forEach(role -> roles.add(convertDtoToBean(role)));
 		user.setRoles(roles);
-
 		return user;
 	}
 
