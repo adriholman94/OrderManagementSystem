@@ -1,36 +1,29 @@
 package com.fiuni.sd.Beans.Category;
 
-import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.Product.Product;
-
 import javax.persistence.Id;
 
-@Entity
-@Table(name = "Categories")
+@Entity(name = "Categories")
 public class Category implements BaseBean {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	@Column(name = "category_Id", nullable = false, unique = true,columnDefinition = "serial")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "category_Id", nullable = false, unique = true)
 	private Integer Id;
 
 	@Column(name = "category_Name")
 	private String categoryName;
 
 	@OneToMany(mappedBy = "category")
-	private Set<Product> products = new HashSet<>();
+	private Set<Product> products;
 
 	public Integer getId() {
 		return Id;
@@ -48,15 +41,7 @@ public class Category implements BaseBean {
 		this.categoryName = categoryName;
 	}
 
-	public void set_products(Set<Product> products) {
-		this.products = products;
-	}
-
-	public Set<Product> get_products() {
-		return products;
-	}
-
 	public String toString() {
-		return "Categories [id=" + Id + ", category=" + categoryName + ", products=" + products +"]";
+		return "Categories [id=" + Id + ", category=" + categoryName + ", products=" + products + "]";
 	}
 }

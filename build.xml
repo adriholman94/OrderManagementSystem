@@ -6,7 +6,7 @@
 	<property name="build.dir" value="build" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
-	<property name="client-lib.dir"     value="../OrderClient-API/lib"/>
+	<property name="client-lib.dir"     value="../OrderClient/lib"/>
 	<property name="lib.dir"     value="buildlib"/>
 
 	<path id="classpath">
