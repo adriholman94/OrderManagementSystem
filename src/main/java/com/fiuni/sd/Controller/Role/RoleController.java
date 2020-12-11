@@ -49,7 +49,6 @@ public class RoleController {
 		return roleService.update(role, id);
 	}
 
-
 	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
 	public RoleDTO delete(@PathVariable int id) {
 		return roleService.deleteById(id);

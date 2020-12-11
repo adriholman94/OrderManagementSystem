@@ -42,6 +42,6 @@ public class Category implements BaseBean {
 	}
 
 	public String toString() {
-		return "Categories [id=" + Id + ", category=" + categoryName + ", products=" + products + "]";
+		return "Category [id=" + Id + ", category=" + categoryName + ", products=" + products + "]";
 	}
 }

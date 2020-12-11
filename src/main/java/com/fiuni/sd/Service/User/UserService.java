@@ -127,13 +127,12 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO deleteById(Integer id) {
-		if (userDAO.findById(id).isPresent()) {
-			User userBean = userDAO.findById(id).get();
-			// userBean.setUserName(dto.getUserName());
-			User updatedUser = userDAO.save(userBean);
-			return convertBeanToDto(updatedUser);
-		} else {
-			return null;
+		UserDTO bean = null;
+		if (userDAO.existsById(id)) {
+			bean = null;
+			userDAO.deleteById(id);
+
 		}
+		return bean;
 	}
 }
