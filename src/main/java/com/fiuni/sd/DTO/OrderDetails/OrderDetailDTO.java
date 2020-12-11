@@ -1,7 +1,10 @@
 package com.fiuni.sd.DTO.OrderDetails;
 
-import com.fiuni.sd.DTO.Base.BaseDTO;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fiuni.sd.DTO.Base.BaseDTO;
+@XmlRootElement
 public class OrderDetailDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private Integer orderId;
@@ -10,7 +13,7 @@ public class OrderDetailDTO extends BaseDTO {
 	private Integer quantityPrice;
 
 	private Integer orderDetailId;
-
+	@XmlElement
 	public Integer getOrderDetailId() {
 		return orderDetailId;
 	}
@@ -18,7 +21,7 @@ public class OrderDetailDTO extends BaseDTO {
 	public void setOrderDetailId(Integer orderDetailId) {
 		this.orderDetailId = orderDetailId;
 	}
-
+	@XmlElement
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -26,7 +29,7 @@ public class OrderDetailDTO extends BaseDTO {
 	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-
+	@XmlElement
 	public Integer getProductId() {
 		return productId;
 	}
@@ -34,7 +37,7 @@ public class OrderDetailDTO extends BaseDTO {
 	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
-
+	@XmlElement
 	public Integer getProductQuantity() {
 		return productQuantity;
 	}
@@ -42,7 +45,7 @@ public class OrderDetailDTO extends BaseDTO {
 	public void setProductQuantity(Integer productQuantity) {
 		this.productQuantity = productQuantity;
 	}
-
+	@XmlElement
 	public Integer getQuantityPrice() {
 		return quantityPrice;
 	}
