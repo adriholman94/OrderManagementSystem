@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseResult;
 
-@XmlRootElement
+@XmlRootElement(name = "categoryResult")
 public class CategoryResult extends BaseResult<CategoryDTO> {
 
 	private static final long serialVersionUID = 1L;
@@ -20,4 +20,6 @@ public class CategoryResult extends BaseResult<CategoryDTO> {
 	public void setCategories(List<CategoryDTO> dtos) {
 		super.setList(dtos);
 	}
+	
+	
 }
