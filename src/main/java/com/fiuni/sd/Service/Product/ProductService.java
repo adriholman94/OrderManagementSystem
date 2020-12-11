@@ -30,6 +30,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		final Product bean = new Product();
 		bean.setProductName(dto.getProductName());
 		bean.setProductPrice(dto.getProductPrice());
+		bean.setCategory(convertDtoToBean(dto.getCategory()));
 		final Product product = productDAO.save(bean);
 		return convertBeanToDto(product);
 	}
@@ -69,9 +70,13 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Transactional
 	public ProductDTO update(ProductDTO dto, Integer id) {
 		if (productDAO.findById(id).isPresent()) {
-			Product roleBean = productDAO.findById(id).get();
-			Product updatedRole = productDAO.save(roleBean);
-			return convertBeanToDto(updatedRole);
+			Product bean = productDAO.findById(id).get();
+			bean.setProductId(dto.getId());
+			bean.setProductName(dto.getProductName());
+			bean.setProductPrice(dto.getProductPrice());
+			bean.setCategory(convertDtoToBean(dto.getCategory()));
+			Product updated = productDAO.save(bean);
+			return convertBeanToDto(updated);
 		} else {
 			return null;
 		}
@@ -80,12 +85,12 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Override
 	@Transactional
 	public ProductDTO deleteById(Integer id) {
-		ProductDTO roleBean = null;
+		ProductDTO bean = null;
 		if (productDAO.existsById(id)) {
-			roleBean = null;
+			bean = null;
 			productDAO.deleteById(id);
 		}
-		return roleBean;
+		return bean;
 	}
 
 	@Override
@@ -101,7 +106,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	public CategoryDTO convertBeanToDto(Category bean) {
 		final CategoryDTO DTO = new CategoryDTO();
-		DTO.setId(bean.getId());
+		DTO.setId(bean.getCategoryId());
 		DTO.setCategoryName(bean.getCategoryName());
 		return DTO;
 	}
@@ -109,7 +114,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	protected Category convertDtoToBean(CategoryDTO dto) {
 		final Category bean = new Category();
-		bean.setId(dto.getId());
+		bean.setCategoryId(dto.getId());
 		bean.setCategoryName(dto.getCategoryName());
 		return bean;
 	}

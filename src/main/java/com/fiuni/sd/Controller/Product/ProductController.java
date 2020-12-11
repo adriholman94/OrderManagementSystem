@@ -39,13 +39,13 @@ public class ProductController {
     }
 
     @PostMapping(path = "", produces = { "application/xml" })
-    public ProductDTO save(@Valid @RequestBody ProductDTO category) {
-        return productService.save(category);
+    public ProductDTO save(@Valid @RequestBody ProductDTO product) {
+        return productService.save(product);
     }
 
     @PutMapping(path = "/{id}", produces = { "application/xml" })
-    public ProductDTO update(@PathVariable final Integer id, @RequestBody final ProductDTO category) {
-        return productService.update(category, id);
+    public ProductDTO update(@PathVariable final Integer id, @RequestBody final ProductDTO product) {
+        return productService.update(product, id);
     }
 
     @DeleteMapping(path = "/{id}", produces = { "application/xml" })
