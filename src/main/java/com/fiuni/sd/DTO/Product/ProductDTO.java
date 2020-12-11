@@ -32,7 +32,7 @@ public class ProductDTO extends BaseDTO {
 	}
 	
 	@XmlElement
-	public Integer getCategory() {
+	public CategoryDTO getCategory() {
 		return category;
 	}
 
