@@ -17,6 +17,7 @@ import com.fiuni.sd.DTO.Category.CategoryDTO;
 import com.fiuni.sd.DTO.Product.ProductDTO;
 import com.fiuni.sd.DTO.Product.ProductResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
+import com.fiuni.sd.Service.Category.CategoryService;
 
 @Service
 public class ProductService extends BaseServiceImpl<ProductDTO, Product, ProductResult> implements IProductService {
@@ -52,7 +53,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		dto.setId(bean.getProductId());
 		dto.setProductName(bean.getProductName());
 		dto.setProductPrice(bean.getProductPrice());
-		dto.setCategory(convertBeanToDto(bean.getCategory()));
+		dto.setCategory(new CategoryService().convertBeanToDto(bean.getCategory()));
 		return dto;
 	}
 
@@ -62,7 +63,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		bean.setProductId(dto.getId());
 		bean.setProductName(dto.getProductName());
 		bean.setProductPrice(dto.getProductPrice());
-		bean.setCategory(convertDtoToBean(dto.getCategory()));
+		bean.setCategory(new CategoryService().convertDtoToBean(dto.getCategory()));
 		return bean;
 	}
 

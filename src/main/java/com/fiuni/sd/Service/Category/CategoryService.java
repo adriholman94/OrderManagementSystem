@@ -52,7 +52,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	protected Category convertDtoToBean(CategoryDTO dto) {
+	public Category convertDtoToBean(CategoryDTO dto) {
 		final Category bean = new Category();
 		bean.setCategoryId(dto.getId());
 		bean.setCategoryName(dto.getCategoryName());
