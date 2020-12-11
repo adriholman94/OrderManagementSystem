@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-import com.fiuni.sd.DTO.OrderDetails.OrderDetailDTO;
-import com.fiuni.sd.DTO.OrderDetails.OrderDetailResult;
-import com.fiuni.sd.Service.OrderDetail.IOrderDetailService;
+import com.fiuni.sd.DTO.Order.OrderDTO;
+import com.fiuni.sd.DTO.Order.OrderResult;
+import com.fiuni.sd.Service.Order.IOrderService;
 import com.fiuni.sd.Utils.Setting;
 
 @RestController
-@RequestMapping("/orderDetails")
-public class OrderDetailController {
+@RequestMapping("/orders")
+public class OrderController {
 	
 	@Autowired
 	private Setting setting;
 
 	@Autowired
-	private IOrderDetailService orderDetailService;
+	private IOrderService orderService;
 
 	@GetMapping(path = "/{id}", produces = {"application/xml"})
-	public OrderDetailDTO getById(@PathVariable(value = "id") Integer orderDetailId) {
-		return orderDetailService.getById(orderDetailId);
+	public OrderDTO getById(@PathVariable(value = "id") Integer orderId) {
+		return orderService.getById(orderId);
 	}
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
-	public OrderDetailResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
-		return orderDetailService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
+	public OrderResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
+		return orderService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
 	@PostMapping(path = "", produces = {"application/xml"})
-	public OrderDetailDTO save(@Valid @RequestBody OrderDetailDTO orderDetail) {
-		return orderDetailService.save(orderDetail);
+	public OrderDTO save(@Valid @RequestBody OrderDTO order) {
+		return orderService.save(order);
 	}
 
 	@PutMapping(path ="/{id}", produces = {"application/xml"})
-	public OrderDetailDTO update(@PathVariable final Integer id, @RequestBody final OrderDetailDTO orderDetail) {
-		return orderDetailService.update(orderDetail, id);
+	public OrderDTO update(@PathVariable final Integer id, @RequestBody final OrderDTO order) {
+		return orderService.update(order, id);
 	}
 
 	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
-	public OrderDetailDTO delete(@PathVariable int id) {
-		return orderDetailService.deleteById(id);
+	public OrderDTO delete(@PathVariable int id) {
+		return orderService.deleteById(id);
 	}
 }
