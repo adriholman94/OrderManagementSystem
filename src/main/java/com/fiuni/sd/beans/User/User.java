@@ -64,7 +64,6 @@ public class User implements BaseBean {
 
 	public void setUserPassword(String password) {
 		this.password = new BCryptPasswordEncoder().encode(password);
-
 	}
 
 	@Override

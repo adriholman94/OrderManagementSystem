@@ -79,12 +79,6 @@ public class PurchaseRecordDetail implements BaseBean {
 		this.totalPrice = totalPrice;
 	}
 
-	public String toString() {
-		return "purchaseRecordDetail[id=" + purchaseRecordDetailId + ", purchaseRecords=" + purchaseRecord
-				+ ", productQuantity =" + productQuantity + ", unitPrice =" + unitPrice + ", totalPrice =" + totalPrice
-				+ "]";
-	}
-
 	public PurchaseRecord getPurchaseRecord() {
 		return purchaseRecord;
 	}
