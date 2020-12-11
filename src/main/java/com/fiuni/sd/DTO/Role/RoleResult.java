@@ -7,18 +7,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseResult;
 
-@XmlRootElement(name = "roleResult")
+@XmlRootElement
 public class RoleResult extends BaseResult<RoleDTO> {
 
 	private static final long serialVersionUID = 1L;
 
 	@XmlElement
-	public List<RoleDTO> getRoleDTOs() {
+	public List<RoleDTO> getRoles() {
 		return list();
 	}
 
 	public void setRoles(List<RoleDTO> dtos) {
 		super.setList(dtos);
 	}
-
 }
