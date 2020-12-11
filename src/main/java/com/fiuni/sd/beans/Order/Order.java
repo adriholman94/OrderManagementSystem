@@ -35,7 +35,7 @@ public class Order implements BaseBean {
 	private Boolean isCanceled;
 
 	@OneToMany(mappedBy = "order")
-	private Set<OrderDetail> orderDetails = new HashSet<>();
+	private Set<OrderDetail> orderDetails;
 
 	public Set<OrderDetail> get_orderDetails() {
 		return orderDetails;

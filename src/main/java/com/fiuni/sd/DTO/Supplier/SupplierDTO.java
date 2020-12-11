@@ -7,6 +7,8 @@ import com.fiuni.sd.DTO.Base.BaseDTO;
 public class SupplierDTO extends BaseDTO{
 	private static final long serialVersionUID = 1L;
 	
+	private String supplierName;
+	
 	public String getSupplierName() {
 		return supplierName;
 	}
@@ -15,7 +17,7 @@ public class SupplierDTO extends BaseDTO{
 		this.supplierName = supplierName;
 	}
 
-	private String supplierName;
+	
 
 
 }
