@@ -20,5 +20,4 @@ public class RoleResult extends BaseResult<RoleDTO> {
 	public void setRoles(List<RoleDTO> dtos) {
 		super.setList(dtos);
 	}
-
 }

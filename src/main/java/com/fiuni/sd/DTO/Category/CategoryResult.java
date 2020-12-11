@@ -17,7 +17,7 @@ public class CategoryResult extends BaseResult<CategoryDTO> {
 		return list();
 	}
 
-	public void setCategory(List<CategoryDTO> dtos) {
+	public void setCategories(List<CategoryDTO> dtos) {
 		super.setList(dtos);
 	}
 }

@@ -1,5 +1,6 @@
 package com.fiuni.sd.DTO.Category;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseDTO;
@@ -10,6 +11,7 @@ public class CategoryDTO extends BaseDTO {
 
 	private String categoryName;
 
+	@XmlElement
 	public String getCategoryName() {
 		return categoryName;
 	}

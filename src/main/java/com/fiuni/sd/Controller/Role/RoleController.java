@@ -16,14 +16,15 @@ import javax.validation.Valid;
 
 import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Role.RoleResult;
-
 import com.fiuni.sd.Service.Role.IRoleService;
-
-//import com.fiuni.sd.tienda.utils.Setting;
+import com.fiuni.sd.Utils.Setting;
 
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
+	
+	@Autowired
+	private Setting setting;
 
 	@Autowired
 	private IRoleService roleService;
@@ -35,7 +36,7 @@ public class RoleController {
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
 	public RoleResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
-		return roleService.getAll(PageRequest.of(pageNum, 3));
+		return roleService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
 	@PostMapping(path = "", produces = {"application/xml"})

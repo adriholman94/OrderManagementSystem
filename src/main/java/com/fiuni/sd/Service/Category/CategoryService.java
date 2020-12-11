@@ -39,7 +39,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 		Page<Category> results = categoryDAO.findAll(pageable);
 		results.forEach(category -> categories.add(convertBeanToDto(category)));
 		final CategoryResult result = new CategoryResult();
-		result.setCategory(categories);
+		result.setCategories(categories);
 		return result;
 	}
 

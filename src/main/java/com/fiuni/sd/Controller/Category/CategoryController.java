@@ -16,10 +16,14 @@ import javax.validation.Valid;
 import com.fiuni.sd.DTO.Category.CategoryDTO;
 import com.fiuni.sd.DTO.Category.CategoryResult;
 import com.fiuni.sd.Service.Category.ICategoryService;
+import com.fiuni.sd.Utils.Setting;
 
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
+	
+	@Autowired
+	private Setting setting;
 
 	@Autowired
 	private ICategoryService categoryService;
@@ -31,7 +35,7 @@ public class CategoryController {
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
 	public CategoryResult getCategories(@PathVariable(value = "page_num") Integer pageNum) {
-		return categoryService.getAll(PageRequest.of(pageNum, 3));
+		return categoryService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
 	@PostMapping(path = "", produces = {"application/xml"})
