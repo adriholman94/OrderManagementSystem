@@ -25,11 +25,11 @@ public class Category implements BaseBean {
 	@OneToMany(mappedBy = "category")
 	private Set<Product> products;
 
-	public Integer getId() {
+	public Integer getCategoryId() {
 		return Id;
 	}
 
-	public void setId(Integer Id) {
+	public void setCategoryId(Integer Id) {
 		this.Id = Id;
 	}
 
