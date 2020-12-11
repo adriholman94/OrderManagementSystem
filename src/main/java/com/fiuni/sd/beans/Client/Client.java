@@ -4,12 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fiuni.sd.Beans.Base.BaseBean;
-import com.fiuni.sd.Beans.User.User;
 
 import javax.persistence.Id;
 
@@ -35,10 +32,6 @@ public class Client implements BaseBean {
 	@Column(name = "client_Phone")
 	private String clientPhone;
 
-	@OneToOne
-	@JoinColumn(name = "userId")
-	private User user;
-
 	public Integer getId() {
 		return id;
 	}
@@ -57,10 +50,6 @@ public class Client implements BaseBean {
 
 	public String getPhone() {
 		return clientPhone;
-	}
-
-	public User getUser() {
-		return user;
 	}
 
 	public void setId(Integer id) {
@@ -83,13 +72,9 @@ public class Client implements BaseBean {
 		this.clientPhone = phone;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", name=" + firstName + ", lastName=" + lastName + ", clientRuc=" + clientRuc
-				+ ", clientPhone=" + clientPhone + ", user=" + user + "]";
+				+ ", clientPhone=" + clientPhone;
 	}
 }

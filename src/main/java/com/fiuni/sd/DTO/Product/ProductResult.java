@@ -7,10 +7,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseResult;
 
-@XmlRootElement(name = "productResult")
+@XmlRootElement
 public class ProductResult extends BaseResult<ProductDTO> {
 
 	private static final long serialVersionUID = 1L;
+	
 	@XmlElement
 	public List<ProductDTO> getProducts() {
 		return list();

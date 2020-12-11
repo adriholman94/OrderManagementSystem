@@ -52,6 +52,6 @@ public class UserController {
 
 	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public UserDTO delete(@PathVariable int id) {
-		return null;
+		return userService.deleteById(id);
 	}
 }

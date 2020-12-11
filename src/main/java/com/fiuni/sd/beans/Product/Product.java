@@ -48,23 +48,23 @@ public class Product implements BaseBean {
 	@OneToMany(mappedBy = "product")
 	private Set<PurchaseRecordDetail> purchaseRecordDetails;
 
-	public Category get_category() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void set_category(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-	public Stock get_stock() {
+	public Stock getStock() {
 		return stock;
 	}
 
-	public void set_stock(Stock stock) {
+	public void setStock(Stock stock) {
 		this.stock = stock;
 	}
 
-	public Set<OrderDetail> get_OrderDetail() {
+	public Set<OrderDetail> getOrderDetail() {
 		return orderDetail;
 	}
 
@@ -97,8 +97,8 @@ public class Product implements BaseBean {
 	}
 
 	public String toString() {
-		return "Product[id=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
-				+ ", categories=" + category;
+		return "Product [id=" + productId + ", productName=" + productName + ", productPrice=" + productPrice
+				+ ", category=" + category.toString();
 	}
 
 }
