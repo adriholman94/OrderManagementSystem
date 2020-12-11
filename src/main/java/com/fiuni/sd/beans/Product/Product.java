@@ -1,11 +1,14 @@
 package com.fiuni.sd.Beans.Product;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,14 +39,14 @@ public class Product implements BaseBean {
 	@JoinColumn(name = "category_Id")
 	private Category category;
 
-	@OneToOne
+	@OneToOne(mappedBy = "product")
 	private Stock stock;
 
-	@OneToOne
-	private OrderDetail orderDetail;
+	@OneToMany(mappedBy = "product")
+	private Set<OrderDetail> orderDetail;
 
-	@OneToOne
-	private PurchaseRecordDetail purchaseRecordDetails;
+	@OneToMany(mappedBy = "product")
+	private Set<PurchaseRecordDetail> purchaseRecordDetails;
 
 	public Category get_category() {
 		return category;
@@ -61,11 +64,11 @@ public class Product implements BaseBean {
 		this.stock = stock;
 	}
 
-	public OrderDetail get_OrderDetail() {
+	public Set<OrderDetail> get_OrderDetail() {
 		return orderDetail;
 	}
 
-	public void set_OrderDetail(OrderDetail orderDetail) {
+	public void set_OrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 

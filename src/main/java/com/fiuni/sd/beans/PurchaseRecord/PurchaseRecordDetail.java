@@ -39,11 +39,11 @@ public class PurchaseRecordDetail implements BaseBean {
 	@Column(name = "totalPrice")
 	private Integer totalPrice;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "productId")
 	private Product product;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "suppliertId")
 	private Supplier supplier;
 

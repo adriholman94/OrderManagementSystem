@@ -1,5 +1,7 @@
 package com.fiuni.sd.Beans.Supplier;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import com.fiuni.sd.Beans.Base.BaseBean;
 import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 //proveedores
 @Entity
@@ -26,8 +29,8 @@ public class Supplier implements BaseBean {
 	@Column(name = "supplier_Name")
 	private String supplierName;
 
-	@OneToOne
-	private PurchaseRecordDetail purchaseRecordDetails;
+	@OneToMany(mappedBy = "supplier")
+	private Set<PurchaseRecordDetail> purchaseRecordDetails;
 
 	public Integer getSupplierId() {
 		return supplierId;
