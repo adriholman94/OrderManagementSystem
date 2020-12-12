@@ -33,6 +33,17 @@ public class Order implements BaseBean {
 
 	@Column(name = "is_Canceled")
 	private Boolean isCanceled;
+	
+	@Column(name = "clienteRuc")
+	private String clientRuc;
+
+	public String getClientRuc() {
+		return clientRuc;
+	}
+
+	public void setClientRuc(String clientRuc) {
+		this.clientRuc = clientRuc;
+	}
 
 	@OneToMany(mappedBy = "order")
 	private Set<OrderDetail> orderDetails;
@@ -79,6 +90,6 @@ public class Order implements BaseBean {
 
 	public String toString() {
 		return "Order [id=" + orderId + ", orderDate=" + orderDate + ", final price=" + finalPrice + ", estado ="
-				+ isCanceled + ", orderDetails =" + orderDetails + "]";
+				+ isCanceled + ", orderDetails =" + orderDetails +"clientRuc = "+ clientRuc+"]";
 	}
 }

@@ -1,5 +1,5 @@
 <project name="OrderManagementSystem - DTO LIB">
-	<description>Adrian Holman
+	<description>
 	</description>
 	
     <property name="src.dir" value="src/main/java/com/fiuni/sd/DTO" />
