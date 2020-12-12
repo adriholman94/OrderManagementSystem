@@ -1,11 +1,14 @@
 package com.fiuni.sd.DTO.Order;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseDTO;
+import com.fiuni.sd.DTO.OrderDetails.OrderDetailDTO;
+
 @XmlRootElement
 public class OrderDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
@@ -13,6 +16,27 @@ public class OrderDTO extends BaseDTO {
 	private String clientRuc;
 	private Integer finalPrice;
 	private Boolean isCanceled;
+
+	private List<OrderDetailDTO> orderDetail;
+	@XmlElement
+	public List<OrderDetailDTO> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(List<OrderDetailDTO> orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+
+	@XmlElement
+	public List<OrderDetailDTO> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetailDTO> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	private List<OrderDetailDTO> orderDetails;
 	@XmlElement
 	public Date getOrderDate() {
 		return orderDate;
