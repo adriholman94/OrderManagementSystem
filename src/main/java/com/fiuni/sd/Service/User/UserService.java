@@ -127,6 +127,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO deleteById(Integer id) {
+
 		UserDTO bean = null;
 		if (userDAO.existsById(id)) {
 			bean = null;
@@ -134,5 +135,8 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 		}
 		return bean;
+
+
+
 	}
 }

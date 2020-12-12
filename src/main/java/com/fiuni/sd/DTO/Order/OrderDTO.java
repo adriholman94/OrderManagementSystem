@@ -28,6 +28,16 @@ public class OrderDTO extends BaseDTO {
 	}
 
 	@XmlElement
+	public List<OrderDetailDTO> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetailDTO> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	private List<OrderDetailDTO> orderDetails;
+	@XmlElement
 	public Date getOrderDate() {
 		return orderDate;
 	}
