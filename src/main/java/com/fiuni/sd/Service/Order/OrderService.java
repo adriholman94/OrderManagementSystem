@@ -1,20 +1,22 @@
 package com.fiuni.sd.Service.Order;
 
-
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import com.fiuni.sd.Beans.Order.Order;
 import com.fiuni.sd.Beans.Order.OrderDetail;
 import com.fiuni.sd.DAO.Order.IOrderDAO;
+import com.fiuni.sd.Beans.Role.Role;
+import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Order.OrderDTO;
 import com.fiuni.sd.DTO.Order.OrderResult;
 import com.fiuni.sd.DTO.OrderDetails.OrderDetailDTO;
@@ -24,12 +26,14 @@ import com.fiuni.sd.Service.Base.BaseServiceImpl;
 public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> implements IOrderService {
 
 	@Autowired
+
 	private IOrderDAO orderDAO;
 
 
 	@Override
 	@Transactional
 	public OrderDTO save(OrderDTO dto) {
+
 		final Order order = convertDtoToBean(dto);
 		final Set<OrderDetail> orderDetailsBean = new HashSet<>();
         final List<OrderDetailDTO> orderDetails = new ArrayList<>();
@@ -49,6 +53,9 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		}
         return orderDTO;
 	}
+		
+
+	
 
 	@Override
 	@Transactional
@@ -59,10 +66,13 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		final OrderResult orderResult = new OrderResult();
 		orderResult.setOrder(orders);
 		return orderResult;
+
+
 	}
 
 	@Override
 	protected OrderDTO convertBeanToDto(Order bean) {
+
 		final OrderDTO order = new OrderDTO();
 		order.setId(bean.getOrderId());
 		order.setClientRuc(bean.getClientRuc());
@@ -85,11 +95,31 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		dto.getOrderDetail().forEach(role -> roles.add(convertDtoToBean(role)));
 		order.set_orderDetails (roles);
 		return order;
+
+		
+	}
+
+	
+
+	public RoleDTO convertBeanToDto(Role bean) {
+		final RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setId(bean.getRoleId());
+		roleDTO.setRoleName(bean.getRoleName());
+		return roleDTO;
+	}
+
+	protected Role convertDtoToBean(RoleDTO dto) {
+		final Role roleBean = new Role();
+		roleBean.setRoleId(dto.getId());
+		roleBean.setRoleName(dto.getRoleName());
+		return roleBean;
+
 	}
 
 	@Override
 	@Transactional
 	public OrderDTO update(OrderDTO dto, Integer id) {
+
 		if (orderDAO.findById(id).isPresent()) {
 			Order order = orderDAO.findById(id).get();
 			order.setClientRuc(dto.getClientRuc());
@@ -97,6 +127,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 			order.setIsCanceled(dto.getIsCanceled());
 			order.setFinalPrice(dto.getFinalPrice());
 			Order updatedOrder = orderDAO.save(order);
+
 			return convertBeanToDto(updatedOrder);
 		} else {
 			return null;
@@ -115,15 +146,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		return orderBean;
 	}
 
-	@Override
-	public OrderDTO getById(Integer id) {
-		if (orderDAO.findById(id).isPresent()) {
-			final Order orderBeans = orderDAO.findById(id).get();
-			return convertBeanToDto(orderBeans);
-		} else {
-			return null;
-		}
-	}
+	
 	
 	public OrderDetailDTO convertBeanToDto(OrderDetail bean) {
 		final OrderDetailDTO orderDTO = new OrderDetailDTO();
@@ -139,5 +162,18 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		orderBean.setProductQuantity(dto.getProductQuantity());
 		orderBean.setQuantityPrice(dto.getQuantityPrice());
 		return orderBean;
+
+
+	}
+
+
+	@Override
+	public OrderDTO getById(Integer id) {
+		if (orderDAO.findById(id).isPresent()) {
+			final Order userBeans = orderDAO.findById(id).get();
+			return convertBeanToDto(userBeans);
+		} else {
+			return null;
+		}
 	}
 }
