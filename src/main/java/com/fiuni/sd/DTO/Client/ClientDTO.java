@@ -1,0 +1,30 @@
+package com.fiuni.sd.DTO.Client;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fiuni.sd.DTO.Base.BaseDTO;
+@XmlRootElement
+public class ClientDTO extends BaseDTO {
+	private static final long serialVersionUID = 1L;
+
+	private Integer userId;
+	private String clientRuc;
+	@XmlElement
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	@XmlElement
+	public String getClientRuc() {
+		return clientRuc;
+	}
+
+	public void setClientRuc(String clientRuc) {
+		this.clientRuc = clientRuc;
+	}
+
+}
