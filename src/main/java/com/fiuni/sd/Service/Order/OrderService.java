@@ -33,7 +33,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 	@Override
 	@Transactional
 	public OrderDTO save(OrderDTO dto) {
-
 		final Order order = convertDtoToBean(dto);
 		final Set<OrderDetail> orderDetailsBean = new HashSet<>();
         final List<OrderDetailDTO> orderDetails = new ArrayList<>();
@@ -53,9 +52,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		}
         return orderDTO;
 	}
-		
-
-	
 
 	@Override
 	@Transactional
@@ -72,7 +68,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 	@Override
 	protected OrderDTO convertBeanToDto(Order bean) {
-
 		final OrderDTO order = new OrderDTO();
 		order.setId(bean.getOrderId());
 		order.setClientRuc(bean.getClientRuc());

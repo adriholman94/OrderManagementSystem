@@ -52,7 +52,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 	}
 
 	@Override
-	protected Supplier convertDtoToBean(SupplierDTO dto) {
+	public Supplier convertDtoToBean(SupplierDTO dto) {
 		final Supplier supplierBean = new Supplier();
 		supplierBean.setSupplierId(dto.getId());
 		supplierBean.setSupplierName(dto.getSupplierName());

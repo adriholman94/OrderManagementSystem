@@ -58,7 +58,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	}
 
 	@Override
-	protected Product convertDtoToBean(ProductDTO dto) {
+	public Product convertDtoToBean(ProductDTO dto) {
 		final Product bean = new Product();
 		bean.setProductId(dto.getId());
 		bean.setProductName(dto.getProductName());

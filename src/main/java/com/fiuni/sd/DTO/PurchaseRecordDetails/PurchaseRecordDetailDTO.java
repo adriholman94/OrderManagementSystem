@@ -5,13 +5,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseDTO;
 import com.fiuni.sd.DTO.Product.ProductDTO;
+import com.fiuni.sd.DTO.PurchaseRecord.PurchaseRecordDTO;
 import com.fiuni.sd.DTO.Supplier.SupplierDTO;
 
 //registr de compra detalle
 @XmlRootElement
 public class PurchaseRecordDetailDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
-	private Integer purchaseRecordId;
+	private PurchaseRecordDTO purchaseRecord;
 	private SupplierDTO supplier;
 	private ProductDTO product;
 	private Integer productQuantity;
@@ -19,12 +20,12 @@ public class PurchaseRecordDetailDTO extends BaseDTO {
 	private Integer totalPrice;
 
 	@XmlElement
-	public Integer getPurchaseRecordId() {
-		return purchaseRecordId;
+	public PurchaseRecordDTO getPurchaseRecord() {
+		return purchaseRecord;
 	}
 
-	public void setPurchaseRecordId(Integer purchaseRecordId) {
-		this.purchaseRecordId = purchaseRecordId;
+	public void setPurchaseRecord(PurchaseRecordDTO purchaseRecord) {
+		this.purchaseRecord = purchaseRecord;
 	}
 
 	@XmlElement

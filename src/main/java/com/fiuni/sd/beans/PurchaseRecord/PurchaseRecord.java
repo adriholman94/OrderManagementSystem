@@ -35,11 +35,11 @@ public class PurchaseRecord implements BaseBean {
 	@OneToMany(mappedBy = "purchaseRecord")
 	private Set<PurchaseRecordDetail> purchaseRecordDetails;
 
-	public Set<PurchaseRecordDetail> get_purchaseRecordDetails() {
+	public Set<PurchaseRecordDetail> getPurchaseRecordDetails() {
 		return purchaseRecordDetails;
 	}
 
-	public void set_purchaseRecordDetails(Set<PurchaseRecordDetail> purchaseRecordDetails) {
+	public void setPurchaseRecordDetails(Set<PurchaseRecordDetail> purchaseRecordDetails) {
 		this.purchaseRecordDetails = purchaseRecordDetails;
 	}
 
