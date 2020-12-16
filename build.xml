@@ -7,6 +7,7 @@
 	<property name="classes.dir" value="${build.dir}/classes" />
 	<property name="jar.dir" value="${build.dir}/jar" />
 	<property name="client-lib.dir"     value="../OrderClient/lib"/>
+	<property name="grails-lib.dir"     value="../OrderClient-Grails/lib"/>
 	<property name="lib.dir"     value="buildlib"/>
 
 	<path id="classpath">
@@ -29,6 +30,12 @@
 	<target name="jar" depends="compile">
 		<mkdir dir="${client-lib.dir}" />
 		<jar destfile="${client-lib.dir}/DTO.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-class" value=""/>
+			</manifest>
+		</jar>
+		<mkdir dir="${grails-lib.dir}" />
+		<jar destfile="${grails-lib.dir}/DTO.jar" basedir="${classes.dir}">
 			<manifest>
 				<attribute name="Main-class" value=""/>
 			</manifest>
