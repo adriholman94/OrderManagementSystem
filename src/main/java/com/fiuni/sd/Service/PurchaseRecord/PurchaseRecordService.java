@@ -58,6 +58,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		results.forEach(purchase -> purchases.add(convertBeanToDto(purchase)));
 		final PurchaseRecordResult purchaseResult = new PurchaseRecordResult();
 		purchaseResult.setPurchaseRecord(purchases);
+		purchaseResult.setPages(results.getTotalPages());
 		return purchaseResult;
 	}
 

@@ -40,6 +40,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 		results.forEach(category -> categories.add(convertBeanToDto(category)));
 		final CategoryResult result = new CategoryResult();
 		result.setCategories(categories);
+		result.setPages(results.getTotalPages());
 		return result;
 	}
 

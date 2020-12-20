@@ -10,6 +10,7 @@ import com.fiuni.sd.DTO.Base.BaseResult;
 public class ClientResult extends BaseResult<ClientDTO> {
 
 	private static final long serialVersionUID = 1L;
+	
 	@XmlElement
 	public List<ClientDTO> getClients() {
 		return list();
@@ -17,5 +18,15 @@ public class ClientResult extends BaseResult<ClientDTO> {
 
 	public void setClient(List<ClientDTO> dtos) {
 		super.setList(dtos);
+	}
+
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
 	}
 }

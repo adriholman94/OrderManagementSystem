@@ -21,4 +21,14 @@ public class UserResult extends BaseResult<UserDTO> {
 	public void setUsers(List<UserDTO> dtos) {
 		super.setList(dtos);
 	}
+
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
 }

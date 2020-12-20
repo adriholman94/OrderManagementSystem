@@ -20,4 +20,14 @@ public class ProductResult extends BaseResult<ProductDTO> {
 	public void setProduct(List<ProductDTO> dtos) {
 		super.setList(dtos);
 	}
+
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
 }
