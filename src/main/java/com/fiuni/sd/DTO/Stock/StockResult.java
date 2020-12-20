@@ -18,4 +18,14 @@ public class StockResult extends BaseResult<StockDTO> {
 	public void setStock(List<StockDTO> dtos) {
 		super.setList(dtos);
 	}
+
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
 }

@@ -61,9 +61,8 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		results.forEach(order -> orders.add(convertBeanToDto(order)));
 		final OrderResult orderResult = new OrderResult();
 		orderResult.setOrder(orders);
+		orderResult.setPages(results.getTotalPages());
 		return orderResult;
-
-
 	}
 
 	@Override
@@ -90,11 +89,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		dto.getOrderDetail().forEach(role -> roles.add(convertDtoToBean(role)));
 		order.set_orderDetails (roles);
 		return order;
-
-		
 	}
-
-	
 
 	public RoleDTO convertBeanToDto(Role bean) {
 		final RoleDTO roleDTO = new RoleDTO();
@@ -108,7 +103,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		roleBean.setRoleId(dto.getId());
 		roleBean.setRoleName(dto.getRoleName());
 		return roleBean;
-
 	}
 
 	@Override
@@ -157,8 +151,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		orderBean.setProductQuantity(dto.getProductQuantity());
 		orderBean.setQuantityPrice(dto.getQuantityPrice());
 		return orderBean;
-
-
 	}
 
 

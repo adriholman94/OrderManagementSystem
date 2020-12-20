@@ -44,6 +44,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		results.forEach(product -> products.add(convertBeanToDto(product)));
 		final ProductResult productResult = new ProductResult();
 		productResult.setProduct(products);
+		productResult.setPages(results.getTotalPages());
 		return productResult;
 	}
 

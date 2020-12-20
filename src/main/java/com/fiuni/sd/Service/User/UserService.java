@@ -69,6 +69,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
+		userResult.setPages(results.getTotalPages());
 		return userResult;
 	}
 

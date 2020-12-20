@@ -21,5 +21,14 @@ public class CategoryResult extends BaseResult<CategoryDTO> {
 		super.setList(dtos);
 	}
 	
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
 	
 }

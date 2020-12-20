@@ -40,6 +40,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 		results.forEach(supplier -> suppliers.add(convertBeanToDto(supplier)));
 		final SupplierResult supplierResult = new SupplierResult();
 		supplierResult.setSupplier(suppliers);
+		supplierResult.setPages(results.getTotalPages());
 		return supplierResult;
 	}
 

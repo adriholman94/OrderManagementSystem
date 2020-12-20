@@ -20,4 +20,14 @@ public class SupplierResult extends BaseResult<SupplierDTO> {
 	public void setSupplier(List<SupplierDTO> dtos) {
 		super.setList(dtos);
 	}
+
+	private Integer pages;
+
+	public Integer getPages() {
+		return this.pages;
+	}
+
+	public void setPages(Integer pages) {
+		this.pages = pages;
+	}
 }
