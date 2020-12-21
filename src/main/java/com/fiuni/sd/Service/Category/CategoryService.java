@@ -76,13 +76,12 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	@Override
 	@Transactional
 	public CategoryDTO deleteById(Integer id) {
-		CategoryDTO bean = null;
+		CategoryDTO dto = new CategoryDTO();
 		if (categoryDAO.existsById(id)) {
-			bean = null;
+			dto = convertBeanToDto(categoryDAO.findById(id).get());
 			categoryDAO.deleteById(id);
-
 		}
-		return bean;
+		return dto;
 	}
 
 	@Override
@@ -93,5 +92,15 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public CategoryResult getCategories() {
+		final List<CategoryDTO> categories = new ArrayList<>();
+		List<Category> results = categoryDAO.findAll();
+		results.forEach(category -> categories.add(convertBeanToDto(category)));
+		final CategoryResult result = new CategoryResult();
+		result.setCategories(categories);
+		return result;
 	}
 }

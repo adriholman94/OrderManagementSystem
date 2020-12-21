@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/page/{page_num}", produces = { "application/xml" })
-    public ProductResult getCategories(@PathVariable(value = "page_num") Integer pageNum) {
+    public ProductResult getProducts(@PathVariable(value = "page_num") Integer pageNum) {
         return productService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
     }
 
