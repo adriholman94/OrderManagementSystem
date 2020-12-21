@@ -8,4 +8,6 @@ import com.fiuni.sd.Service.Base.IBaseService;
 public interface ICategoryService extends IBaseService<CategoryDTO, CategoryResult> {
 
 	CategoryDTO getById(Integer Id);
+
+	CategoryResult getCategories();
 }

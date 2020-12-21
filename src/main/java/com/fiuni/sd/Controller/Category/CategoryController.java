@@ -28,29 +28,34 @@ public class CategoryController {
 	@Autowired
 	private ICategoryService categoryService;
 
-	@GetMapping(path = "/{id}", produces = {"application/xml"})
+	@GetMapping(path = "/{id}", produces = {"application/xml", "application/json"})
 	public CategoryDTO getById(@PathVariable(value = "id") Integer Id) {
 		return categoryService.getById(Id);
 	}
 
-	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
+	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
 	public CategoryResult getCategories(@PathVariable(value = "page_num") Integer pageNum) {
 		return categoryService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
-	@PostMapping(path = "", produces = {"application/xml"})
+	@PostMapping(path = "", produces = {"application/xml", "application/json"})
 	public CategoryDTO save(@Valid @RequestBody CategoryDTO category) {
 		return categoryService.save(category);
 	}
 
-	@PutMapping(path ="/{id}", produces = {"application/xml"})
+	@PutMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public CategoryDTO update(@PathVariable final Integer id, @RequestBody final CategoryDTO category) {
 		return categoryService.update(category, id);
 	}
 
 
-	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
+	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public CategoryDTO delete(@PathVariable int id) {
 		return categoryService.deleteById(id);
+	}
+
+	@GetMapping(path = "/all", produces = {"application/xml", "application/json"})
+	public CategoryResult getAll() {
+		return categoryService.getCategories();
 	}
 }
