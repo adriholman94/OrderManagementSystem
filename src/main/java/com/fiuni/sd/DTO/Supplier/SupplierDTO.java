@@ -8,6 +8,7 @@ import com.fiuni.sd.DTO.Base.BaseDTO;
 //proveedores
 @XmlRootElement(name="suppliers")
 public class SupplierDTO extends BaseDTO{
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String supplierName;

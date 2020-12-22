@@ -49,9 +49,13 @@ public class SupplierController {
 		return supplierService.update(Supplier, id);
 	}
 
-
 	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
 	public SupplierDTO delete(@PathVariable int id) {
 		return supplierService.deleteById(id);
+	}
+
+	@GetMapping(path = "/all", produces = {"application/xml", "application/json"})
+	public SupplierResult getAll() {
+		return supplierService.getSuppliers();
 	}
 }

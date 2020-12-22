@@ -12,6 +12,7 @@ import com.fiuni.sd.DTO.Base.BaseResult;
 public class SupplierResult extends BaseResult<SupplierDTO> {
 
 	private static final long serialVersionUID = 1L;
+
 	@XmlElement
 	public List<SupplierDTO> getSuppliers() {
 		return list();

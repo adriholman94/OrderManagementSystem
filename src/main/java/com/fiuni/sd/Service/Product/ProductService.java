@@ -102,4 +102,14 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 			return null;
 		}
 	}
+
+	@Override
+	public ProductResult getProducts() {
+		final List<ProductDTO> products = new ArrayList<>();
+		List<Product> results = productDAO.findAll();
+		results.forEach(category -> products.add(convertBeanToDto(category)));
+		final ProductResult result = new ProductResult();
+		result.setProducts(products);
+		return result;
+	}
 }

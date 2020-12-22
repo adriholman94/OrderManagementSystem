@@ -18,6 +18,7 @@ public class OrderDTO extends BaseDTO {
 	private Boolean isCanceled;
 
 	private List<OrderDetailDTO> orderDetail;
+
 	@XmlElement
 	public List<OrderDetailDTO> getOrderDetail() {
 		return orderDetail;
@@ -37,6 +38,7 @@ public class OrderDTO extends BaseDTO {
 	}
 
 	private List<OrderDetailDTO> orderDetails;
+
 	@XmlElement
 	public Date getOrderDate() {
 		return orderDate;
@@ -45,6 +47,7 @@ public class OrderDTO extends BaseDTO {
 	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
+
 	@XmlElement
 	public String getClientRuc() {
 		return clientRuc;
@@ -53,6 +56,7 @@ public class OrderDTO extends BaseDTO {
 	public void setClientRuc(String clientRuc) {
 		this.clientRuc = clientRuc;
 	}
+
 	@XmlElement
 	public Integer getFinalPrice() {
 		return finalPrice;
@@ -61,6 +65,7 @@ public class OrderDTO extends BaseDTO {
 	public void setFinalPrice(Integer finalPrice) {
 		this.finalPrice = finalPrice;
 	}
+
 	@XmlElement
 	public Boolean getIsCanceled() {
 		return isCanceled;
