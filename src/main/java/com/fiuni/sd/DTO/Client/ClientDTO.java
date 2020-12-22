@@ -43,14 +43,7 @@ public class ClientDTO extends BaseDTO {
 	}
 
 
-	@XmlElement
-	public Integer getUserId() {
-		return userId;
-	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
 	@XmlElement
 	public String getClientRuc() {
 		return clientRuc;

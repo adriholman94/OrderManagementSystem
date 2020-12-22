@@ -1,5 +1,4 @@
 package com.fiuni.sd.Beans.Client;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,7 @@ import javax.persistence.Table;
 import com.fiuni.sd.Beans.Base.BaseBean;
 
 import javax.persistence.Id;
+
 
 @Entity
 @Table(name = "Clients")
@@ -31,6 +31,8 @@ public class Client implements BaseBean {
 
 	@Column(name = "client_Phone")
 	private String clientPhone;
+	
+
 
 	public Integer getId() {
 		return id;
