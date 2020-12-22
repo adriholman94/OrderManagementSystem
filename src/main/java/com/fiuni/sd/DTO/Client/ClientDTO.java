@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseDTO;
+
 @XmlRootElement
 public class ClientDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
@@ -12,6 +13,7 @@ public class ClientDTO extends BaseDTO {
 	private Integer userId;
 
 	private String clientRuc;
+
 	private String firstName;
 	private String lastName;
 
@@ -25,6 +27,8 @@ public class ClientDTO extends BaseDTO {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
+
 	@XmlElement
 	public String getLastName() {
 		return lastName;

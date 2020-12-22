@@ -10,10 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.fiuni.sd.Beans.Category.Category;
 import com.fiuni.sd.Beans.Product.Product;
 import com.fiuni.sd.DAO.Product.IProductDAO;
-import com.fiuni.sd.DTO.Category.CategoryDTO;
 import com.fiuni.sd.DTO.Product.ProductDTO;
 import com.fiuni.sd.DTO.Product.ProductResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
@@ -31,7 +29,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		final Product bean = new Product();
 		bean.setProductName(dto.getProductName());
 		bean.setProductPrice(dto.getProductPrice());
-		bean.setCategory(convertDtoToBean(dto.getCategory()));
+		bean.setCategory(new CategoryService().convertDtoToBean(dto.getCategory()));
 		final Product product = productDAO.save(bean);
 		return convertBeanToDto(product);
 	}
@@ -39,13 +37,13 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Override
 	@Transactional
 	public ProductResult getAll(Pageable pageable) {
-		final List<ProductDTO> products = new ArrayList<>();
+		final List<ProductDTO> categories = new ArrayList<>();
 		Page<Product> results = productDAO.findAll(pageable);
-		results.forEach(product -> products.add(convertBeanToDto(product)));
-		final ProductResult productResult = new ProductResult();
-		productResult.setProduct(products);
-		productResult.setPages(results.getTotalPages());
-		return productResult;
+		results.forEach(category -> categories.add(convertBeanToDto(category)));
+		final ProductResult result = new ProductResult();
+		result.setProducts(categories);
+		result.setPages(results.getTotalPages());
+		return result;
 	}
 
 	@Override
@@ -76,7 +74,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 			bean.setProductId(dto.getId());
 			bean.setProductName(dto.getProductName());
 			bean.setProductPrice(dto.getProductPrice());
-			bean.setCategory(convertDtoToBean(dto.getCategory()));
+			bean.setCategory(new CategoryService().convertDtoToBean(dto.getCategory()));
 			Product updated = productDAO.save(bean);
 			return convertBeanToDto(updated);
 		} else {
@@ -105,19 +103,13 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 		}
 	}
 
-
-	public CategoryDTO convertBeanToDto(Category bean) {
-		final CategoryDTO DTO = new CategoryDTO();
-		DTO.setId(bean.getCategoryId());
-		DTO.setCategoryName(bean.getCategoryName());
-		return DTO;
-	}
-
-
-	protected Category convertDtoToBean(CategoryDTO dto) {
-		final Category bean = new Category();
-		bean.setCategoryId(dto.getId());
-		bean.setCategoryName(dto.getCategoryName());
-		return bean;
+	@Override
+	public ProductResult getProducts() {
+		final List<ProductDTO> products = new ArrayList<>();
+		List<Product> results = productDAO.findAll();
+		results.forEach(category -> products.add(convertBeanToDto(category)));
+		final ProductResult result = new ProductResult();
+		result.setProducts(products);
+		return result;
 	}
 }

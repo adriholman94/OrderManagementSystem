@@ -35,7 +35,7 @@ public class SupplierController {
 	}
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
-	public SupplierResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
+	public SupplierResult getSuppliers(@PathVariable(value = "page_num") Integer pageNum) {
 		return supplierService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
@@ -49,9 +49,13 @@ public class SupplierController {
 		return supplierService.update(Supplier, id);
 	}
 
-
 	@DeleteMapping(path ="/{id}", produces = {"application/xml"})
 	public SupplierDTO delete(@PathVariable int id) {
 		return supplierService.deleteById(id);
+	}
+
+	@GetMapping(path = "/all", produces = {"application/xml", "application/json"})
+	public SupplierResult getAll() {
+		return supplierService.getSuppliers();
 	}
 }

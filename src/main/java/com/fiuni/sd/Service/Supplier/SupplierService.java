@@ -94,4 +94,14 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 			return null;
 		}
 	}
+
+	@Override
+	public SupplierResult getSuppliers() {
+		final List<SupplierDTO> suppliers = new ArrayList<>();
+		List<Supplier> results = supplierDAO.findAll();
+		results.forEach(supplier -> suppliers.add(convertBeanToDto(supplier)));
+		final SupplierResult result = new SupplierResult();
+		result.setSupplier(suppliers);
+		return result;
+	}
 }
