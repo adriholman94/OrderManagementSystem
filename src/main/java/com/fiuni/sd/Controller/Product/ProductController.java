@@ -33,10 +33,10 @@ public class ProductController {
         return productService.getById(Id);
     }
 
-    @GetMapping(path = "/page/{page_num}", produces = { "application/xml" })
-    public ProductResult getProducts(@PathVariable(value = "page_num") Integer pageNum) {
-        return productService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
-    }
+	@GetMapping(path = "/page/{page_num}", produces = {"application/xml", "application/json"})
+	public ProductResult getCategories(@PathVariable(value = "page_num") Integer pageNum) {
+		return productService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
+	}
 
     @PostMapping(path = "", produces = { "application/xml" })
     public ProductDTO save(@Valid @RequestBody ProductDTO product) {

@@ -34,7 +34,7 @@ public class OrderController {
 	}
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
-	public OrderResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
+	public OrderResult getOrders(@PathVariable(value = "page_num") Integer pageNum) {
 		return orderService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
