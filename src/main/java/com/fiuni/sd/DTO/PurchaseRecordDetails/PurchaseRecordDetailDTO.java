@@ -5,14 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fiuni.sd.DTO.Base.BaseDTO;
 import com.fiuni.sd.DTO.Product.ProductDTO;
-import com.fiuni.sd.DTO.PurchaseRecord.PurchaseRecordDTO;
 import com.fiuni.sd.DTO.Supplier.SupplierDTO;
 
 //registr de compra detalle
-@XmlRootElement
+@XmlRootElement(name = "purchaseRecordDetail")
 public class PurchaseRecordDetailDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
-	private PurchaseRecordDTO purchaseRecord;
+	private Integer purchaseRecord;
 	private SupplierDTO supplier;
 	private ProductDTO product;
 	private Integer productQuantity;
@@ -20,11 +19,11 @@ public class PurchaseRecordDetailDTO extends BaseDTO {
 	private Integer totalPrice;
 
 	@XmlElement
-	public PurchaseRecordDTO getPurchaseRecord() {
+	public Integer getPurchaseRecord() {
 		return purchaseRecord;
 	}
 
-	public void setPurchaseRecord(PurchaseRecordDTO purchaseRecord) {
+	public void setPurchaseRecord(Integer purchaseRecord) {
 		this.purchaseRecord = purchaseRecord;
 	}
 
@@ -71,5 +70,13 @@ public class PurchaseRecordDetailDTO extends BaseDTO {
 
 	public void setProduct(ProductDTO product) {
 		this.product = product;
+	}
+
+	@Override
+	public String toString() {
+		return "PurcaseRecordDetail [product= " + product.getProductName() + ", category= "
+				+ product.getCategory().getCategoryName() + ", supplier= " + supplier.getSupplierName() + ", quantity= "
+				+ String.valueOf(productQuantity) + ", unitPrice= " + String.valueOf(unitPrice) + ", totalPrice= "
+				+ String.valueOf(totalPrice) + "]";
 	}
 }

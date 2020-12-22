@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fiuni.sd.DTO.Base.BaseResult;
 
 //registr de compra detalle
-@XmlRootElement
+@XmlRootElement(name = "purchaseRecordDetailResult")
 public class PurchaseRecordDetailResult extends BaseResult<PurchaseRecordDetailDTO> {
 
 	private static final long serialVersionUID = 1L;

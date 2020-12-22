@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import com.fiuni.sd.Beans.Order.Order;
 import com.fiuni.sd.Beans.Order.OrderDetail;
 import com.fiuni.sd.DAO.Order.IOrderDAO;
-import com.fiuni.sd.Beans.Role.Role;
-import com.fiuni.sd.DTO.Role.RoleDTO;
 import com.fiuni.sd.DTO.Order.OrderDTO;
 import com.fiuni.sd.DTO.Order.OrderResult;
 import com.fiuni.sd.DTO.OrderDetails.OrderDetailDTO;
@@ -91,24 +89,9 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 		return order;
 	}
 
-	public RoleDTO convertBeanToDto(Role bean) {
-		final RoleDTO roleDTO = new RoleDTO();
-		roleDTO.setId(bean.getRoleId());
-		roleDTO.setRoleName(bean.getRoleName());
-		return roleDTO;
-	}
-
-	protected Role convertDtoToBean(RoleDTO dto) {
-		final Role roleBean = new Role();
-		roleBean.setRoleId(dto.getId());
-		roleBean.setRoleName(dto.getRoleName());
-		return roleBean;
-	}
-
 	@Override
 	@Transactional
 	public OrderDTO update(OrderDTO dto, Integer id) {
-
 		if (orderDAO.findById(id).isPresent()) {
 			Order order = orderDAO.findById(id).get();
 			order.setClientRuc(dto.getClientRuc());
@@ -116,7 +99,6 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 			order.setIsCanceled(dto.getIsCanceled());
 			order.setFinalPrice(dto.getFinalPrice());
 			Order updatedOrder = orderDAO.save(order);
-
 			return convertBeanToDto(updatedOrder);
 		} else {
 			return null;
@@ -128,14 +110,12 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 	public OrderDTO deleteById(Integer id) {
 		OrderDTO orderBean = null;
 		if (orderDAO.existsById(id)) {
-			orderBean = null;
+			orderBean = convertBeanToDto(orderDAO.findById(id).get());
 			orderDAO.deleteById(id);
 
 		}
 		return orderBean;
 	}
-
-	
 	
 	public OrderDetailDTO convertBeanToDto(OrderDetail bean) {
 		final OrderDetailDTO orderDTO = new OrderDetailDTO();

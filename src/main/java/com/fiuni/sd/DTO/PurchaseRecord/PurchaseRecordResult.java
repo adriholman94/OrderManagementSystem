@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fiuni.sd.DTO.Base.BaseResult;
 
 //registro de compras
-@XmlRootElement
+@XmlRootElement(name = "purchaseRecordResult")
 public class PurchaseRecordResult extends BaseResult<PurchaseRecordDTO> {
 
 	private static final long serialVersionUID = 1L;
@@ -31,4 +31,5 @@ public class PurchaseRecordResult extends BaseResult<PurchaseRecordDTO> {
 	public void setPages(Integer pages) {
 		this.pages = pages;
 	}
+
 }

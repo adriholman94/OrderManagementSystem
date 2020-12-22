@@ -40,7 +40,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		final PurchaseRecordDTO purchaseDTO = convertBeanToDto(purchase);
 		if (DTO.getPurchaseRecordDetails() != null) {
 			for (PurchaseRecordDetailDTO detail : DTO.getPurchaseRecordDetails()) {
-				detail.setPurchaseRecord(purchaseDTO);
+				detail.setPurchaseRecord(purchaseDTO.getId());
 				final PurchaseRecordDetail detailBean = purchaseDetailDAO
 						.save(new PurchaseRecordDetailService().convertDtoToBean(detail));
 				details.add(new PurchaseRecordDetailService().convertBeanToDto(detailBean));
@@ -68,10 +68,9 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		DTO.setId(bean.getPurchaseRecordsId());
 		DTO.setDate(bean.getDate());
 		DTO.setFinalPrice(bean.getFinalPrice());
-		// List<PurchaseRecordDetailDTO> details = new ArrayList<>();
-		// bean.getPurchaseRecordDetails().forEach(detail -> details.add(new
-		// PurchaseRecordDetailService().convertBeanToDto(detail)));
-		// DTO.setPurchaseRecordDetails(details);
+		List<PurchaseRecordDetailDTO> d = new ArrayList<>();
+		bean.getPurchaseRecordDetails().forEach(detail -> d.add(new PurchaseRecordDetailService().convertBeanToDto(detail)));
+		DTO.setPurchaseRecordDetails(d);
 		return DTO;
 	}
 
@@ -81,10 +80,9 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		bean.setPurchaseRecordsId(DTO.getId());
 		bean.setDate(DTO.getDate());
 		bean.setFinalPrice(DTO.getFinalPrice());
-		// Set<PurchaseRecordDetail> details = new HashSet<>();
-		// DTO.getPurchaseRecordDetails().forEach(detail -> details.add(new
-		// PurchaseRecordDetailService().convertDtoToBean(detail)));
-		// bean.setPurchaseRecordDetails(details);
+		Set<PurchaseRecordDetail> d = new HashSet<>();
+		DTO.getPurchaseRecordDetails().forEach(detail -> d.add(new PurchaseRecordDetailService().convertDtoToBean(detail)));
+		bean.setPurchaseRecordDetails(d);
 		return bean;
 	}
 
@@ -123,7 +121,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 			}
 
 			for (PurchaseRecordDetailDTO s : dbsave) {
-				s.setPurchaseRecord(DTO);
+				s.setPurchaseRecord(DTO.getId());
 				final PurchaseRecordDetail detailBean = purchaseDetailDAO
 						.save(new PurchaseRecordDetailService().convertDtoToBean(s));
 				detailsDTO.add(new PurchaseRecordDetailService().convertBeanToDto(detailBean));
@@ -150,12 +148,12 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 	@Override
 	@Transactional
 	public PurchaseRecordDTO deleteById(Integer id) {
-		PurchaseRecordDTO roleBean = null;
+		PurchaseRecordDTO bean = null;
 		if (purchaseDAO.existsById(id)) {
-			roleBean = null;
+			bean = convertBeanToDto(purchaseDAO.findById(id).get());
 			purchaseDAO.deleteById(id);
 		}
-		return roleBean;
+		return bean;
 	}
 
 	@Override

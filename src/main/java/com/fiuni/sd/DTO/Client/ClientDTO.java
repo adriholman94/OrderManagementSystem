@@ -28,7 +28,6 @@ public class ClientDTO extends BaseDTO {
 		this.firstName = firstName;
 	}
 
-
 	@XmlElement
 	public String getLastName() {
 		return lastName;
@@ -45,8 +44,6 @@ public class ClientDTO extends BaseDTO {
 	public void setClientPhone(String clientPhone) {
 		this.clientPhone = clientPhone;
 	}
-
-
 
 	@XmlElement
 	public String getClientRuc() {
