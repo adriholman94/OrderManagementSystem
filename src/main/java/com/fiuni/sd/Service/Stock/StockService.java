@@ -9,15 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import com.fiuni.sd.Beans.Product.Product;
 import com.fiuni.sd.Beans.Stock.Stock;
 import com.fiuni.sd.DAO.Stock.IStockDAO;
-import com.fiuni.sd.DTO.Product.ProductDTO;
+
 import com.fiuni.sd.DTO.Stock.StockDTO;
 import com.fiuni.sd.DTO.Stock.StockResult;
+
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Service.Product.ProductService;
+import com.fiuni.sd.Service.Stock.StockService;
 
 @Service
 public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> implements IStockService {
@@ -29,24 +29,22 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 	@Transactional
 	public StockDTO save(StockDTO dto) {
 		final Stock bean = new Stock();
-
 		bean.setProductQuantity(dto.getProductQuantity());
-		bean.set_products(convertDtoToBean(dto.getProduct()));
-
-		final Stock stock = stockDAO.save(bean);
-		return convertBeanToDto(stock);
+		bean.set_products(new ProductService().convertDtoToBean(dto.getProduct()));
+		final Stock product = stockDAO.save(bean);
+		return convertBeanToDto(product);
 	}
 
 	@Override
 	@Transactional
 	public StockResult getAll(Pageable pageable) {
-		final List<StockDTO> stocks = new ArrayList<>();
+		final List<StockDTO> products = new ArrayList<>();
 		Page<Stock> results = stockDAO.findAll(pageable);
-		results.forEach(stock -> stocks.add(convertBeanToDto(stock)));
-		final StockResult stockResult = new StockResult();
-		stockResult.setStock(stocks);
-		stockResult.setPages(results.getTotalPages());
-		return stockResult;
+		results.forEach(category -> products.add(convertBeanToDto(category)));
+		final StockResult result = new StockResult();
+		result.setStock(products);
+		result.setPages(results.getTotalPages());
+		return result;
 	}
 
 	@Override
@@ -54,7 +52,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 		final StockDTO dto = new StockDTO();
 		dto.setId(bean.getStockId());
 		dto.setProductQuantity(bean.getProductQuantity());
-		dto.setProduct(new ProductService().convertBeanToDto(bean.get_product()));
+		bean.set_products(new ProductService().convertDtoToBean(dto.getProduct()));
 		return dto;
 	}
 
@@ -62,7 +60,6 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 	public Stock convertDtoToBean(StockDTO dto) {
 		final Stock bean = new Stock();
 		bean.setStockId(dto.getId());
-
 		bean.setProductQuantity(dto.getProductQuantity());
 		bean.set_products(new ProductService().convertDtoToBean(dto.getProduct()));
 		return bean;
@@ -74,9 +71,8 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 		if (stockDAO.findById(id).isPresent()) {
 			Stock bean = stockDAO.findById(id).get();
 			bean.setStockId(dto.getId());
-
 			bean.setProductQuantity(dto.getProductQuantity());
-			bean.set_products(convertDtoToBean(dto.getProduct()));
+			bean.set_products(new ProductService().convertDtoToBean(dto.getProduct()));
 			Stock updated = stockDAO.save(bean);
 			return convertBeanToDto(updated);
 		} else {
@@ -105,19 +101,13 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 		}
 	}
 
-
-	public ProductDTO convertBeanToDto(Product bean) {
-		final ProductDTO DTO = new ProductDTO();
-		DTO.setId(bean.getProductId());
-		DTO.setProductName(bean.getProductName());
-		return DTO;
-	}
-
-
-	protected Product convertDtoToBean(ProductDTO dto) {
-		final Product bean = new Product();
-		bean.setProductId(dto.getId());
-		bean.setProductName(dto.getProductName());
-		return bean;
+	@Override
+	public StockResult getStocks() {
+		final List<StockDTO> products = new ArrayList<>();
+		List<Stock> results = stockDAO.findAll();
+		results.forEach(product -> products.add(convertBeanToDto(product)));
+		final StockResult result = new StockResult();
+		result.setStock(products);
+		return result;
 	}
 }
