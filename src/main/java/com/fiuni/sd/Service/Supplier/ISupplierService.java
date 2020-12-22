@@ -7,4 +7,6 @@ import com.fiuni.sd.Service.Base.IBaseService;
 public interface ISupplierService extends IBaseService<SupplierDTO, SupplierResult> {
 
 	SupplierDTO getById(Integer roleId);
+
+	SupplierResult getSuppliers();
 }

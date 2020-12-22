@@ -52,4 +52,9 @@ public class ProductController {
     public ProductDTO delete(@PathVariable int id) {
         return productService.deleteById(id);
     }
+
+    @GetMapping(path = "/all", produces = {"application/xml", "application/json"})
+	public ProductResult getAll() {
+		return productService.getProducts();
+	}
 }

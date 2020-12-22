@@ -7,4 +7,6 @@ import com.fiuni.sd.Service.Base.IBaseService;
 public interface IProductService extends IBaseService<ProductDTO, ProductResult> {
 
 	ProductDTO getById(Integer roleId);
+
+	ProductResult getProducts();
 }
