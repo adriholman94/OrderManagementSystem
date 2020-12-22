@@ -37,13 +37,13 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Override
 	@Transactional
 	public ProductResult getAll(Pageable pageable) {
-		final List<ProductDTO> products = new ArrayList<>();
+		final List<ProductDTO> categories = new ArrayList<>();
 		Page<Product> results = productDAO.findAll(pageable);
-		results.forEach(product -> products.add(convertBeanToDto(product)));
-		final ProductResult productResult = new ProductResult();
-		productResult.setProduct(products);
-		productResult.setPages(results.getTotalPages());
-		return productResult;
+		results.forEach(category -> categories.add(convertBeanToDto(category)));
+		final ProductResult result = new ProductResult();
+		result.setProducts(categories);
+		result.setPages(results.getTotalPages());
+		return result;
 	}
 
 	@Override

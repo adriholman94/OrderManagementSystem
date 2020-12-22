@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.fiuni.sd.DTO.Base.BaseDTO;
 import com.fiuni.sd.DTO.Category.CategoryDTO;
 
-@XmlRootElement
+@XmlRootElement(name="products")
 public class ProductDTO extends BaseDTO {
 	private static final long serialVersionUID = 1L;
 	private String productName;
@@ -38,6 +38,12 @@ public class ProductDTO extends BaseDTO {
 
 	public void setCategory(CategoryDTO category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString(){
+		return "Product [productName= " + productName + ", category= " + category.getCategoryName() +
+		", productPrice" + productPrice;
 	}
 
 }

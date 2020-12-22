@@ -48,7 +48,6 @@ public class CategoryController {
 		return categoryService.update(category, id);
 	}
 
-
 	@DeleteMapping(path ="/{id}", produces = {"application/xml", "application/json"})
 	public CategoryDTO delete(@PathVariable int id) {
 		return categoryService.deleteById(id);

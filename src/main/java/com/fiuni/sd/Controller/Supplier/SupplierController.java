@@ -35,7 +35,7 @@ public class SupplierController {
 	}
 
 	@GetMapping(path = "/page/{page_num}", produces = {"application/xml"})
-	public SupplierResult getRols(@PathVariable(value = "page_num") Integer pageNum) {
+	public SupplierResult getSuppliers(@PathVariable(value = "page_num") Integer pageNum) {
 		return supplierService.getAll(PageRequest.of(pageNum, setting.getPage_size()));
 	}
 
