@@ -87,12 +87,12 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Override
 	@Transactional
 	public ProductDTO deleteById(Integer id) {
-		ProductDTO bean = null;
+		ProductDTO dto = new ProductDTO();
 		if (productDAO.existsById(id)) {
-			bean = null;
+			dto = convertBeanToDto(productDAO.findById(id).get());
 			productDAO.deleteById(id);
 		}
-		return bean;
+		return dto;
 	}
 
 	@Override
