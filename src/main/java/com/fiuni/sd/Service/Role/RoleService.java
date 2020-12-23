@@ -49,7 +49,6 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 		final RoleDTO roleDTO = new RoleDTO();
 		roleDTO.setId(bean.getRoleId());
 		roleDTO.setRoleName(bean.getRoleName());
-		
 		return roleDTO;
 	}
 
