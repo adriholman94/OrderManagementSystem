@@ -15,7 +15,8 @@ import com.fiuni.sd.DTO.PurchaseRecord.PurchaseRecordDTO;
 import com.fiuni.sd.DTO.PurchaseRecord.PurchaseRecordResult;
 import com.fiuni.sd.DTO.PurchaseRecordDetails.PurchaseRecordDetailDTO;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
-import com.fiuni.sd.Service.PurchaseRecordDetail.PurchaseRecordDetailService;
+import com.fiuni.sd.Service.Product.ProductService;
+import com.fiuni.sd.Service.Supplier.SupplierService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,18 +36,40 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 	@Override
 	@Transactional
 	public PurchaseRecordDTO save(PurchaseRecordDTO DTO) {
-		final PurchaseRecord purchase = purchaseDAO.save(convertDtoToBean(DTO));
-		final List<PurchaseRecordDetailDTO> details = new ArrayList<>();
-		final PurchaseRecordDTO purchaseDTO = convertBeanToDto(purchase);
+		final PurchaseRecord purchase = new PurchaseRecord();
+		purchase.setDate(DTO.getDate());
+		purchase.setFinalPrice(DTO.getFinalPrice());
+
+		final PurchaseRecord savedPurchase = purchaseDAO.save(purchase);
+
+		final Set<PurchaseRecordDetail> details = new HashSet<PurchaseRecordDetail>();
 		if (DTO.getPurchaseRecordDetails() != null) {
 			for (PurchaseRecordDetailDTO detail : DTO.getPurchaseRecordDetails()) {
-				detail.setPurchaseRecord(purchaseDTO.getId());
-				final PurchaseRecordDetail detailBean = purchaseDetailDAO
-						.save(new PurchaseRecordDetailService().convertDtoToBean(detail));
-				details.add(new PurchaseRecordDetailService().convertBeanToDto(detailBean));
+				
+				PurchaseRecordDetail saveBean = new PurchaseRecordDetail();
+				
+				saveBean.setProduct(new ProductService().convertDtoToBean(detail.getProduct()));
+				saveBean.setSupplier(new SupplierService().convertDtoToBean(detail.getSupplier()));
+				saveBean.setUnitPrice(detail.getUnitPrice());
+				saveBean.setProductQuantity(detail.getProductQuantity());
+				saveBean.setPurchaseRecord(savedPurchase);
+				
+				final PurchaseRecordDetail detailBean = purchaseDetailDAO.save(saveBean);
+
+				/*PurchaseRecordDetailDTO savedDTO = new PurchaseRecordDetailDTO();
+				
+				savedDTO.setId(detailBean.getPurchaseRecordDetailId());
+				savedDTO.setProduct(new ProductService().convertBeanToDto(detailBean.getProduct()));
+				savedDTO.setSupplier(new SupplierService().convertBeanToDto(detailBean.getSupplier()));
+				savedDTO.setUnitPrice(detailBean.getUnitPrice());
+				savedDTO.setProductQuantity(detailBean.getProductQuantity());
+				savedDTO.setPurchaseRecord(detailBean.getPurchaseRecord().getPurchaseRecordsId());
+				*/
+				details.add(detailBean);
 			}
 		}
-		purchaseDTO.setPurchaseRecordDetails(details);
+		savedPurchase.setPurchaseRecordDetails(details);
+		final PurchaseRecordDTO purchaseDTO = convertBeanToDto(savedPurchase);
 		return purchaseDTO;
 	}
 
@@ -69,7 +92,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		DTO.setDate(bean.getDate());
 		DTO.setFinalPrice(bean.getFinalPrice());
 		List<PurchaseRecordDetailDTO> d = new ArrayList<>();
-		bean.getPurchaseRecordDetails().forEach(detail -> d.add(new PurchaseRecordDetailService().convertBeanToDto(detail)));
+		bean.getPurchaseRecordDetails().forEach(detail -> d.add(convertBeanToDto(detail)));
 		DTO.setPurchaseRecordDetails(d);
 		return DTO;
 	}
@@ -81,7 +104,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		bean.setDate(DTO.getDate());
 		bean.setFinalPrice(DTO.getFinalPrice());
 		Set<PurchaseRecordDetail> d = new HashSet<>();
-		DTO.getPurchaseRecordDetails().forEach(detail -> d.add(new PurchaseRecordDetailService().convertDtoToBean(detail)));
+		DTO.getPurchaseRecordDetails().forEach(detail -> d.add(convertDtoToBean(detail)));
 		bean.setPurchaseRecordDetails(d);
 		return bean;
 	}
@@ -116,15 +139,15 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 					}
 				}
 				if (!isthere) {
-					dbdelete.add(new PurchaseRecordDetailService().convertBeanToDto(beans));
+					dbdelete.add(convertBeanToDto(beans));
 				}
 			}
 
 			for (PurchaseRecordDetailDTO s : dbsave) {
 				s.setPurchaseRecord(DTO.getId());
 				final PurchaseRecordDetail detailBean = purchaseDetailDAO
-						.save(new PurchaseRecordDetailService().convertDtoToBean(s));
-				detailsDTO.add(new PurchaseRecordDetailService().convertBeanToDto(detailBean));
+						.save(convertDtoToBean(s));
+				detailsDTO.add(convertBeanToDto(detailBean));
 			}
 
 			for (PurchaseRecordDetailDTO s : dbdelete) {
@@ -133,8 +156,8 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 			dbupdate.forEach(update -> {
 				final PurchaseRecordDetail detailBean = purchaseDetailDAO
-						.save(new PurchaseRecordDetailService().convertDtoToBean(update));
-				detailsDTO.add(new PurchaseRecordDetailService().convertBeanToDto(detailBean));
+						.save(convertDtoToBean(update));
+				detailsDTO.add(convertBeanToDto(detailBean));
 			});
 
 			final PurchaseRecordDTO updatedDTO = convertBeanToDto(bean);
@@ -162,12 +185,35 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 			final PurchaseRecord bean = purchaseDAO.findById(id).get();
 			final PurchaseRecordDTO DTO = convertBeanToDto(bean);
 			List<PurchaseRecordDetailDTO> details = new ArrayList<>();
-			bean.getPurchaseRecordDetails().forEach(detail -> details.add(new
-			PurchaseRecordDetailService().convertBeanToDto(detail)));
+			bean.getPurchaseRecordDetails().forEach(detail -> details.add(convertBeanToDto(detail)));
 			DTO.setPurchaseRecordDetails(details);
 			return DTO;
 		} else {
 			return null;
 		}
 	}
+
+	public PurchaseRecordDetailDTO convertBeanToDto(PurchaseRecordDetail bean) {
+        final PurchaseRecordDetailDTO DTO = new PurchaseRecordDetailDTO();
+        DTO.setId(bean.getPurchaseRecordDetailId());
+        DTO.setProduct(new ProductService().convertBeanToDto(bean.getProduct()));
+        DTO.setSupplier(new SupplierService().convertBeanToDto(bean.getSupplier()));
+        DTO.setProductQuantity(bean.getProductQuantity());
+        DTO.setUnitPrice(bean.getUnitPrice());
+        DTO.setTotalPrice(bean.getTotalPrice());
+        DTO.setPurchaseRecord(bean.getPurchaseRecord().getPurchaseRecordsId());
+        return DTO;
+    }
+
+    public PurchaseRecordDetail convertDtoToBean(PurchaseRecordDetailDTO dto) {
+        final PurchaseRecordDetail bean = new PurchaseRecordDetail();
+        bean.setPurchaseRecordDetailId(dto.getId());
+        bean.setProduct(new ProductService().convertDtoToBean(dto.getProduct()));
+        bean.setSupplier(new SupplierService().convertDtoToBean(dto.getSupplier()));
+        bean.setProductQuantity(dto.getProductQuantity());
+        bean.setUnitPrice(dto.getUnitPrice());
+        bean.setTotalPrice(dto.getTotalPrice());
+        bean.setPurchaseRecord(convertDtoToBean(getById(dto.getPurchaseRecord())));
+        return bean;
+    }
 }
