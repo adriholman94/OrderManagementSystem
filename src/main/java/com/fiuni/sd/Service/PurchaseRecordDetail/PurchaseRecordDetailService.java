@@ -23,6 +23,8 @@ public class PurchaseRecordDetailService
     @Autowired
     private IPurchaseRecordDetailDAO purchaseDetailDAO;
 
+    private PurchaseRecordService purchaseService = new PurchaseRecordService();
+
     @Override
     @Transactional
     public PurchaseRecordDetailDTO save(PurchaseRecordDetailDTO dto) {
@@ -47,16 +49,21 @@ public class PurchaseRecordDetailService
     public PurchaseRecordDetailDTO deleteById(Integer id) {
 		PurchaseRecordDetailDTO roleBean = null;
 		if (purchaseDetailDAO.existsById(id)) {
-			roleBean = null;
+			roleBean = convertBeanToDto(purchaseDetailDAO.findById(id).get());
 			purchaseDetailDAO.deleteById(id);
 		}
 		return roleBean;
     }
 
     @Override
-    public PurchaseRecordDetailDTO getById(Integer Id) {
-        // TODO Auto-generated method stub
-        return null;
+    public PurchaseRecordDetailDTO getById(Integer id) {
+		if (purchaseDetailDAO.findById(id).isPresent()) {
+			final PurchaseRecordDetail bean = purchaseDetailDAO.findById(id).get();
+			final PurchaseRecordDetailDTO DTO = convertBeanToDto(bean);
+			return DTO;
+		} else {
+			return null;
+		}
     }
 
     @Override
@@ -68,7 +75,7 @@ public class PurchaseRecordDetailService
         DTO.setProductQuantity(bean.getProductQuantity());
         DTO.setUnitPrice(bean.getUnitPrice());
         DTO.setTotalPrice(bean.getTotalPrice());
-        DTO.setPurchaseRecord(new PurchaseRecordService().convertBeanToDto(bean.getPurchaseRecord()));
+        DTO.setPurchaseRecord(bean.getPurchaseRecord().getPurchaseRecordsId());
         return DTO;
     }
 
@@ -81,7 +88,7 @@ public class PurchaseRecordDetailService
         bean.setProductQuantity(dto.getProductQuantity());
         bean.setUnitPrice(dto.getUnitPrice());
         bean.setTotalPrice(dto.getTotalPrice());
-        bean.setPurchaseRecord(new PurchaseRecordService().convertDtoToBean(dto.getPurchaseRecord()));
+        bean.setPurchaseRecord(purchaseService.convertDtoToBean(purchaseService.getById(dto.getPurchaseRecord())));
         return bean;
     }
 

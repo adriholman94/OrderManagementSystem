@@ -56,7 +56,7 @@ public class UserDTO extends BaseDTO {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", email=" + userMail + "password=" + userPassword + " roles={"
+		return "User [userName=" + userName + ", email=" + userMail + ", password=" + userPassword + ", roles={"
 				+ roles.stream().map(RoleDTO::getRoleName).collect(Collectors.joining(",")) + "}]";
 	}
 
