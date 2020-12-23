@@ -30,7 +30,11 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	@Override
 	@Transactional
 	public UserDTO save(UserDTO dto) {
-		final User user = convertDtoToBean(dto);
+		final User user = new User();
+		user.setUserMail(dto.getUserMail());
+		user.setUserName(dto.getUserName());
+		user.setUserPassword(dto.getUserPassword());
+		
 		final Set<Role> rolesBean = new HashSet<>();
         final List<RoleDTO> roles = new ArrayList<>();
         if (dto.getRoles() != null) {
@@ -40,6 +44,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
                 roles.add(convertBeanToDto(roleBean));
             }
 		}
+		
 		user.setRoles(rolesBean);
         final User newUser = userDAO.save(user);
         UserDTO userDTO = null;
@@ -69,7 +74,6 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		results.forEach(user -> users.add(convertBeanToDto(user)));
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
-		userResult.setPages(results.getTotalPages());
 		userResult.setPages(results.getTotalPages());
 		return userResult;
 	}
