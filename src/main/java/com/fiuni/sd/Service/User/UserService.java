@@ -70,6 +70,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		final UserResult userResult = new UserResult();
 		userResult.setUsers(users);
 		userResult.setPages(results.getTotalPages());
+		userResult.setPages(results.getTotalPages());
 		return userResult;
 	}
 
