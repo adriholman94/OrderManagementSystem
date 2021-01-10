@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,7 @@ import com.fiuni.sd.DTO.Product.ProductDTO;
 import com.fiuni.sd.DTO.Product.ProductResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Service.Category.CategoryService;
+import com.fiuni.sd.Utils.Setting;
 
 @Service
 public class ProductService extends BaseServiceImpl<ProductDTO, Product, ProductResult> implements IProductService {
@@ -23,15 +28,27 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	@Autowired
 	private IProductDAO productDAO;
 
+	private static Logger logger = LogManager.getLogger(ProductService.class);
+
 	@Override
 	@Transactional
+	@CachePut(value = Setting.cacheName, key = "'product_' + #dto.id", condition = "#dto.id!=null")
 	public ProductDTO save(ProductDTO dto) {
-		final Product bean = new Product();
-		bean.setProductName(dto.getProductName());
-		bean.setProductPrice(dto.getProductPrice());
-		bean.setCategory(new CategoryService().convertDtoToBean(dto.getCategory()));
-		final Product product = productDAO.save(bean);
-		return convertBeanToDto(product);
+		try {
+			final Product bean = new Product();
+			bean.setProductName(dto.getProductName());
+			bean.setProductPrice(dto.getProductPrice());
+			bean.setCategory(new CategoryService().convertDtoToBean(dto.getCategory()));
+			final Product product = productDAO.save(bean);
+			final ProductDTO newProduct = convertBeanToDto(product);
+			if (dto.getId() == null) {
+				getCacheManager().getCache(Setting.cacheName).put("product_" + product.getProductId(), newProduct);
+			}
+			return newProduct;
+		} catch (Exception e) {
+			logger.error(e);
+			throw new RuntimeException("Error " + ProductService.class + " " + e.getMessage(), e);
+		}
 	}
 
 	@Override
@@ -84,6 +101,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
+	@Cacheable(value = Setting.cacheName, key = "'product_' + #id")
 	public ProductDTO deleteById(Integer id) {
 		ProductDTO dto = new ProductDTO();
 		if (productDAO.existsById(id)) {
@@ -94,6 +112,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	}
 
 	@Override
+	@Cacheable(value = Setting.cacheName, key = "'product_' + #id")
 	public ProductDTO getById(Integer id) {
 		if (productDAO.findById(id).isPresent()) {
 			final Product roleBeans = productDAO.findById(id).get();
