@@ -20,6 +20,7 @@ import com.fiuni.sd.DTO.Category.CategoryDTO;
 import com.fiuni.sd.DTO.Category.CategoryResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Utils.Setting;
+import org.springframework.cache.CacheManager;
 
 @Service
 public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, CategoryResult>
@@ -29,6 +30,8 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	private ICategoryDAO categoryDAO;
 
 	private static Logger logger = LogManager.getLogger(CategoryService.class);
+
+	private CacheManager cacheManager;
 
 	@Override
 	@Transactional
@@ -40,7 +43,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 			final Category role = categoryDAO.save(bean);
 			final CategoryDTO newDto = convertBeanToDto(role);
 			if (dto.getId() == null) {
-				getCacheManager().getCache(Setting.cacheName).put("category_" + role.getCategoryId(), newDto);
+				cacheManager.getCache(Setting.cacheName).put("category_" + role.getCategoryId(), newDto);
 			}
 			return newDto;
 		} catch (Exception e) {

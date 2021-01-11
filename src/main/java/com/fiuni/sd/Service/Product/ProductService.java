@@ -21,6 +21,7 @@ import com.fiuni.sd.DTO.Product.ProductResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Service.Category.CategoryService;
 import com.fiuni.sd.Utils.Setting;
+import org.springframework.cache.CacheManager;
 
 @Service
 public class ProductService extends BaseServiceImpl<ProductDTO, Product, ProductResult> implements IProductService {
@@ -29,6 +30,8 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	private IProductDAO productDAO;
 
 	private static Logger logger = LogManager.getLogger(ProductService.class);
+
+	private CacheManager cacheManager;
 
 	@Override
 	@Transactional
@@ -42,7 +45,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 			final Product product = productDAO.save(bean);
 			final ProductDTO newProduct = convertBeanToDto(product);
 			if (dto.getId() == null) {
-				getCacheManager().getCache(Setting.cacheName).put("product_" + product.getProductId(), newProduct);
+				cacheManager.getCache(Setting.cacheName).put("product_" + product.getProductId(), newProduct);
 			}
 			return newProduct;
 		} catch (Exception e) {

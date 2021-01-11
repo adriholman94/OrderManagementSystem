@@ -14,11 +14,4 @@ public abstract class BaseServiceImpl<DTO extends BaseDTO, BEAN extends BaseBean
 
 	protected abstract BEAN convertDtoToBean(DTO dto);
 
-	@Autowired
-	private CacheManager cacheManager;
-
-	protected CacheManager getCacheManager() {
-		return cacheManager;
-	}
-
 }
