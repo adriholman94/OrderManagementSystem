@@ -31,11 +31,12 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	private static Logger logger = LogManager.getLogger(ProductService.class);
 
+	@Autowired
 	private CacheManager cacheManager;
 
 	@Override
 	@Transactional
-	@CachePut(value = Setting.cacheName, key = "'product_' + #dto.id", condition = "#dto.id!=null")
+	@CachePut(value = Setting.cache_Name, key = "'product_' + #dto.id", condition = "#dto.id!=null")
 	public ProductDTO save(ProductDTO dto) {
 		try {
 			final Product bean = new Product();
@@ -45,7 +46,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 			final Product product = productDAO.save(bean);
 			final ProductDTO newProduct = convertBeanToDto(product);
 			if (dto.getId() == null) {
-				cacheManager.getCache(Setting.cacheName).put("product_" + product.getProductId(), newProduct);
+				cacheManager.getCache(Setting.cache_Name).put("product_" + product.getProductId(), newProduct);
 			}
 			return newProduct;
 		} catch (Exception e) {
@@ -104,7 +105,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
-	@Cacheable(value = Setting.cacheName, key = "'product_' + #id")
+	@Cacheable(value = Setting.cache_Name, key = "'product_' + #id")
 	public ProductDTO deleteById(Integer id) {
 		ProductDTO dto = new ProductDTO();
 		if (productDAO.existsById(id)) {
@@ -115,7 +116,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	}
 
 	@Override
-	@Cacheable(value = Setting.cacheName, key = "'product_' + #id")
+	@Cacheable(value = Setting.cache_Name, key = "'product_' + #id")
 	public ProductDTO getById(Integer id) {
 		if (productDAO.findById(id).isPresent()) {
 			final Product roleBeans = productDAO.findById(id).get();

@@ -8,12 +8,25 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:settings.properties")
 public class Setting {
 	
-	public static final String cacheName = "system-api-cache";
+	public static final String cache_Name = "system-api-cache";
 	
 	@Value("${page.size}")
-	private int page_size;
+	private int pageSize;
+
+	@Value("${page.max.value}")
+	private int maxPageSize;
+
+	@Value("${cache.name}")
+	private String cacheName;
+
+	@Value("${cache.server.address")
+	private String cacheAddress;
 
 	public int getPage_size() {
-		return page_size;
+		return pageSize;
+	}
+
+	public int getMaxPageSize() {
+		return maxPageSize;
 	}
 }
