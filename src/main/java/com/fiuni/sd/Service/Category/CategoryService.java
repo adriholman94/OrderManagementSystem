@@ -31,11 +31,12 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	private static Logger logger = LogManager.getLogger(CategoryService.class);
 
+	@Autowired
 	private CacheManager cacheManager;
 
 	@Override
 	@Transactional
-	@CachePut(value = Setting.cacheName, key = "'category_' + #dto.id", condition = "#dto.id!=null")
+	@CachePut(value = Setting.cache_Name, key = "'category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
 			final Category bean = new Category();
@@ -43,7 +44,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 			final Category role = categoryDAO.save(bean);
 			final CategoryDTO newDto = convertBeanToDto(role);
 			if (dto.getId() == null) {
-				cacheManager.getCache(Setting.cacheName).put("category_" + role.getCategoryId(), newDto);
+				cacheManager.getCache(Setting.cache_Name).put("category_" + role.getCategoryId(), newDto);
 			}
 			return newDto;
 		} catch (Exception e) {
@@ -95,7 +96,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@Cacheable(value = Setting.cacheName, key = "'category_' + #id")
+	@Cacheable(value = Setting.cache_Name, key = "'category_' + #id")
 	public CategoryDTO deleteById(Integer id) {
 		CategoryDTO dto = new CategoryDTO();
 		if (categoryDAO.existsById(id)) {
@@ -106,7 +107,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Cacheable(value = Setting.cacheName, key = "'category_' + #id")
+	@Cacheable(value = Setting.cache_Name, key = "'category_' + #id")
 	public CategoryDTO getById(Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
 			final Category beans = categoryDAO.findById(id).get();
