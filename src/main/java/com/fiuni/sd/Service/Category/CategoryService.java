@@ -3,13 +3,12 @@ package com.fiuni.sd.Service.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,7 +35,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@CachePut(value = Setting.cache_Name, key = "'category_' + #dto.id", condition = "#dto.id!=null")
+	@CachePut(value = Setting.cache_Name, key = "'api_category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
 			final Category bean = new Category();
@@ -44,7 +43,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 			final Category role = categoryDAO.save(bean);
 			final CategoryDTO newDto = convertBeanToDto(role);
 			if (dto.getId() == null) {
-				cacheManager.getCache(Setting.cache_Name).put("category_" + role.getCategoryId(), newDto);
+				cacheManager.getCache(Setting.cache_Name).put("api_category_" + role.getCategoryId(), newDto);
 			}
 			return newDto;
 		} catch (Exception e) {
@@ -95,8 +94,8 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional
-	@Cacheable(value = Setting.cache_Name, key = "'category_' + #id")
+	@Transactional(readOnly = true)
+	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO deleteById(Integer id) {
 		CategoryDTO dto = new CategoryDTO();
 		if (categoryDAO.existsById(id)) {
@@ -107,7 +106,8 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Cacheable(value = Setting.cache_Name, key = "'category_' + #id")
+	@Transactional(readOnly = true)
+	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO getById(Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
 			final Category beans = categoryDAO.findById(id).get();
