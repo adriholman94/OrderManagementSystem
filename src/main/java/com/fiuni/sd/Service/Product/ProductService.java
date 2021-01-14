@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -105,7 +106,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
-	@Cacheable(value = Setting.cache_Name, key = "'product_' + #id")
+	@CacheEvict(value = Setting.cache_Name, key = "'product_' + #id")
 	public ProductDTO deleteById(Integer id) {
 		ProductDTO dto = new ProductDTO();
 		if (productDAO.existsById(id)) {

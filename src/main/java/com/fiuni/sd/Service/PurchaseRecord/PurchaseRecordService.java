@@ -17,8 +17,12 @@ import com.fiuni.sd.DTO.PurchaseRecordDetails.PurchaseRecordDetailDTO;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Service.Product.ProductService;
 import com.fiuni.sd.Service.Supplier.SupplierService;
+import com.fiuni.sd.Utils.Setting;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,19 +36,23 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 	@Autowired
 	private IPurchaseRecordDetailDAO purchaseDetailDAO;
+	
+	@Autowired
+	private CacheManager cacheManager;
 
 	@Override
 	@Transactional
-	public PurchaseRecordDTO save(PurchaseRecordDTO DTO) {
+	@CachePut(value = Setting.cache_Name, key = "'api_purchase_' + #dto.id", condition = "#dto.id!=null")
+	public PurchaseRecordDTO save(PurchaseRecordDTO dto) {
 		final PurchaseRecord purchase = new PurchaseRecord();
-		purchase.setDate(DTO.getDate());
-		purchase.setFinalPrice(DTO.getFinalPrice());
+		purchase.setDate(dto.getDate());
+		purchase.setFinalPrice(dto.getFinalPrice());
 
 		final PurchaseRecord savedPurchase = purchaseDAO.save(purchase);
 
 		final Set<PurchaseRecordDetail> details = new HashSet<PurchaseRecordDetail>();
-		if (DTO.getPurchaseRecordDetails() != null) {
-			for (PurchaseRecordDetailDTO detail : DTO.getPurchaseRecordDetails()) {
+		if (dto.getPurchaseRecordDetails() != null) {
+			for (PurchaseRecordDetailDTO detail : dto.getPurchaseRecordDetails()) {
 				
 				PurchaseRecordDetail saveBean = new PurchaseRecordDetail();
 				
@@ -53,6 +61,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 				saveBean.setUnitPrice(detail.getUnitPrice());
 				saveBean.setProductQuantity(detail.getProductQuantity());
 				saveBean.setPurchaseRecord(savedPurchase);
+				saveBean.setTotalPrice(detail.getTotalPrice());
 				
 				final PurchaseRecordDetail detailBean = purchaseDetailDAO.save(saveBean);
 
@@ -70,6 +79,9 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 		}
 		savedPurchase.setPurchaseRecordDetails(details);
 		final PurchaseRecordDTO purchaseDTO = convertBeanToDto(savedPurchase);
+		if (dto.getId() == null) {
+			cacheManager.getCache(Setting.cache_Name).put("api_purchase_" + savedPurchase.getPurchaseRecordsId(), purchaseDTO);
+		}
 		return purchaseDTO;
 	}
 
@@ -180,6 +192,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 	}
 
 	@Override
+	@Cacheable(value = Setting.cache_Name, key = "'api_purchase_' + #id")
 	public PurchaseRecordDTO getById(Integer id) {
 		if (purchaseDAO.findById(id).isPresent()) {
 			final PurchaseRecord bean = purchaseDAO.findById(id).get();
