@@ -6,9 +6,10 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.transaction.annotation.Transactional;
+import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -40,10 +41,10 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 		try {
 			final Category bean = new Category();
 			bean.setCategoryName(dto.getCategoryName());
-			final Category role = categoryDAO.save(bean);
-			final CategoryDTO newDto = convertBeanToDto(role);
+			final Category categoryBean = categoryDAO.save(bean);
+			final CategoryDTO newDto = convertBeanToDto(categoryBean);
 			if (dto.getId() == null) {
-				cacheManager.getCache(Setting.cache_Name).put("api_category_" + role.getCategoryId(), newDto);
+				cacheManager.getCache(Setting.cache_Name).put("api_category_" + categoryBean.getCategoryId(), newDto);
 			}
 			return newDto;
 		} catch (Exception e) {
@@ -94,8 +95,8 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
+	@Transactional
+	@CacheEvict(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO deleteById(Integer id) {
 		CategoryDTO dto = new CategoryDTO();
 		if (categoryDAO.existsById(id)) {
@@ -106,7 +107,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional
 	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO getById(Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
