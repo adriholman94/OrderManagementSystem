@@ -9,7 +9,6 @@ import com.fiuni.sd.Beans.Base.BaseBean;
 
 import javax.persistence.Id;
 
-
 @Entity
 @Table(name = "Clients")
 public class Client implements BaseBean {
@@ -31,8 +30,6 @@ public class Client implements BaseBean {
 
 	@Column(name = "client_Phone")
 	private String clientPhone;
-	
-
 
 	public Integer getId() {
 		return id;
