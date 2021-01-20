@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Propagation;
 //import javax.transaction.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
@@ -36,7 +37,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	private CacheManager cacheManager;
 
 	@Override
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	@CachePut(value = Setting.cache_Name, key = "'api_category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
