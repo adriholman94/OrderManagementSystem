@@ -1,6 +1,6 @@
 package com.fiuni.sd.Service.PurchaseRecordDetail;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;
 import com.fiuni.sd.DAO.PurchaseRecord.IPurchaseRecordDetailDAO;
