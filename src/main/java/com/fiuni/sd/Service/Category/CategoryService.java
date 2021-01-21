@@ -21,6 +21,7 @@ import com.fiuni.sd.DTO.Category.CategoryResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 import com.fiuni.sd.Utils.Setting;
 import org.springframework.cache.CacheManager;
+import org.springframework.security.access.annotation.Secured;
 
 @Service
 public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, CategoryResult>
@@ -36,6 +37,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
+	@Secured("ADMIN")
 	@CachePut(value = Setting.cache_Name, key = "'api_category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
@@ -55,6 +57,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
+	@Secured("ADMIN")
 	public CategoryResult getAll(Pageable pageable) {
 		final List<CategoryDTO> categories = new ArrayList<>();
 		Page<Category> results = categoryDAO.findAll(pageable);
@@ -83,6 +86,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
+	@Secured("ADMIN")
 	public CategoryDTO update(CategoryDTO dto, Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
 			Category bean = categoryDAO.findById(id).get();
@@ -108,6 +112,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
+	@Secured("ADMIN")
 	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO getById(Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
