@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
-@ImportResource({"classpath:xmemcached.xml", "classpath:springSecurity.xml"})
+@ImportResource({"classpath:xmemcached.xml"})
 public class OrderManagementSystemApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
