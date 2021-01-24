@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.fiuni.sd.Beans.Product.Product;
@@ -37,6 +38,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	@CachePut(value = Setting.cache_Name, key = "'product_' + #dto.id", condition = "#dto.id!=null")
 	public ProductDTO save(ProductDTO dto) {
 		try {
@@ -58,6 +60,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public ProductResult getAll(Pageable pageable) {
 		final List<ProductDTO> categories = new ArrayList<>();
 		Page<Product> results = productDAO.findAll(pageable);
@@ -90,6 +93,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN"})
 	public ProductDTO update(ProductDTO dto, Integer id) {
 		if (productDAO.findById(id).isPresent()) {
 			Product bean = productDAO.findById(id).get();
@@ -106,6 +110,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN"})
 	@CacheEvict(value = Setting.cache_Name, key = "'product_' + #id")
 	public ProductDTO deleteById(Integer id) {
 		ProductDTO dto = new ProductDTO();
@@ -117,6 +122,7 @@ public class ProductService extends BaseServiceImpl<ProductDTO, Product, Product
 	}
 
 	@Override
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	@Cacheable(value = Setting.cache_Name, key = "'product_' + #id")
 	public ProductDTO getById(Integer id) {
 		if (productDAO.findById(id).isPresent()) {

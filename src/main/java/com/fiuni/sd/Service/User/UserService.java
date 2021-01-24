@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.fiuni.sd.Beans.Role.Role;
@@ -29,6 +30,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public UserDTO save(UserDTO dto) {
 		final User user = new User();
 		user.setUserMail(dto.getUserMail());
@@ -57,6 +59,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public UserDTO getById(Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
@@ -68,6 +71,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public UserResult getAll(Pageable pageable) {
 		final List<UserDTO> users = new ArrayList<>();
 		Page<User> results = userDAO.findAll(pageable);
@@ -119,6 +123,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public UserDTO update(UserDTO dto, Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			User userBean = userDAO.findById(id).get();
@@ -132,8 +137,8 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public UserDTO deleteById(Integer id) {
-
 		UserDTO bean = null;
 		if (userDAO.existsById(id)) {
 			bean = null;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.fiuni.sd.Beans.Role.Role;
@@ -25,6 +26,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public RoleDTO save(RoleDTO dto) {
 		final Role roleBean = new Role();
 		roleBean.setRoleName(dto.getRoleName());
@@ -34,6 +36,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public RoleResult getAll(Pageable pageable) {
 		final List<RoleDTO> roles = new ArrayList<>();
 		Page<Role> results = roleDAO.findAll(pageable);
@@ -62,6 +65,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public RoleDTO update(RoleDTO dto, Integer id) {
 		if (roleDAO.findById(id).isPresent()) {
 			Role roleBean = roleDAO.findById(id).get();
@@ -75,6 +79,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public RoleDTO deleteById(Integer id) {
 		RoleDTO roleBean = null;
 		if (roleDAO.existsById(id)) {
@@ -86,6 +91,7 @@ public class RoleService extends BaseServiceImpl<RoleDTO, Role, RoleResult> impl
 	}
 
 	@Override
+	@Secured("ROLE_ADMIN")
 	public RoleDTO getById(Integer id) {
 		if (roleDAO.findById(id).isPresent()) {
 			final Role roleBeans = roleDAO.findById(id).get();

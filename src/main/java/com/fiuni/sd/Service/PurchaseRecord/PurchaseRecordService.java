@@ -25,6 +25,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,6 +43,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	@CachePut(value = Setting.cache_Name, key = "'api_purchase_' + #dto.id", condition = "#dto.id!=null")
 	public PurchaseRecordDTO save(PurchaseRecordDTO dto) {
 		final PurchaseRecord purchase = new PurchaseRecord();
@@ -87,6 +89,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public PurchaseRecordResult getAll(Pageable pageable) {
 		final List<PurchaseRecordDTO> purchases = new ArrayList<>();
 		Page<PurchaseRecord> results = purchaseDAO.findAll(pageable);
@@ -123,6 +126,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public PurchaseRecordDTO update(PurchaseRecordDTO DTO, Integer id) {
 		if (purchaseDAO.findById(id).isPresent()) {
 			if (DTO.getPurchaseRecordDetails() == null) {
@@ -182,6 +186,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public PurchaseRecordDTO deleteById(Integer id) {
 		PurchaseRecordDTO bean = null;
 		if (purchaseDAO.existsById(id)) {
@@ -192,6 +197,7 @@ public class PurchaseRecordService extends BaseServiceImpl<PurchaseRecordDTO, Pu
 	}
 
 	@Override
+	@Secured("ROLE_ADMIN")
 	@Cacheable(value = Setting.cache_Name, key = "'api_purchase_' + #id")
 	public PurchaseRecordDTO getById(Integer id) {
 		if (purchaseDAO.findById(id).isPresent()) {

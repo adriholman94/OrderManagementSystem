@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.fiuni.sd.Beans.Supplier.Supplier;
@@ -25,6 +26,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public SupplierDTO save(SupplierDTO dto) {
 		final Supplier supplierBean = new Supplier();
 		supplierBean.setSupplierName(dto.getSupplierName());
@@ -34,6 +36,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public SupplierResult getAll(Pageable pageable) {
 		final List<SupplierDTO> suppliers = new ArrayList<>();
 		Page<Supplier> results = supplierDAO.findAll(pageable);
@@ -62,6 +65,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public SupplierDTO update(SupplierDTO dto, Integer id) {
 		if (supplierDAO.findById(id).isPresent()) {
 			Supplier supplierBean = supplierDAO.findById(id).get();
@@ -75,6 +79,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public SupplierDTO deleteById(Integer id) {
 		SupplierDTO supplierBean = null;
 		if (supplierDAO.existsById(id)) {
@@ -86,6 +91,7 @@ public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, Supp
 	}
 
 	@Override
+	@Secured("ROLE_ADMIN")
 	public SupplierDTO getById(Integer id) {
 		if (supplierDAO.findById(id).isPresent()) {
 			final Supplier supplierBeans = supplierDAO.findById(id).get();

@@ -37,7 +37,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@Secured("ADMIN")
+	@Secured("ROLE_ADMIN")
 	@CachePut(value = Setting.cache_Name, key = "'api_category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
@@ -57,7 +57,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@Secured("ADMIN")
+	@Secured("ROLE_ADMIN")
 	public CategoryResult getAll(Pageable pageable) {
 		final List<CategoryDTO> categories = new ArrayList<>();
 		Page<Category> results = categoryDAO.findAll(pageable);
@@ -86,7 +86,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@Secured("ADMIN")
+	@Secured("ROLE_ADMIN")
 	public CategoryDTO update(CategoryDTO dto, Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
 			Category bean = categoryDAO.findById(id).get();
@@ -112,7 +112,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 
 	@Override
 	@Transactional
-	@Secured("ADMIN")
+	@Secured("ROLE_ADMIN")
 	@Cacheable(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO getById(Integer id) {
 		if (categoryDAO.findById(id).isPresent()) {
