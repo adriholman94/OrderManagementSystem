@@ -23,18 +23,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
+    AuthenticationProviderConfig customAuthProvider;
+
+	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http.authorizeRequests().antMatchers("/home", "/login", "/logout").permitAll()
 				.antMatchers("/clients/**", "/products/**", "/orders/**").hasAnyRole("CLIENT", "ADMIN")
 				.antMatchers("/users/**", "purchases/**", "/categories/**", "/roles/**", "/suppliers/**", "/stocks/**")
 				.hasRole("ADMIN").anyRequest().authenticated().and().httpBasic().and().formLogin().loginPage("/login")
 				.defaultSuccessUrl("/home");
+		http.csrf().disable();
 	}
 
 	@Autowired
