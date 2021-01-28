@@ -25,8 +25,7 @@ import com.fiuni.sd.Beans.User.User;
 public class OrderManagementSystemApplication extends SpringBootServletInitializer implements CommandLineRunner{
     @Autowired
     private JavaMailSender javaMailSender;
-    
-public class OrderManagementSystemApplication extends SpringBootServletInitializer{
+
 
 
 	public static void main(String[] args) {
