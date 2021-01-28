@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.fiuni.sd.Beans.Order.Order;
@@ -30,6 +31,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public OrderDTO save(OrderDTO dto) {
 		final Order order = convertDtoToBean(dto);
 		final Set<OrderDetail> orderDetailsBean = new HashSet<>();
@@ -53,6 +55,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public OrderResult getAll(Pageable pageable) {
 		final List<OrderDTO> orders = new ArrayList<>();
 		Page<Order> results = orderDAO.findAll(pageable);
@@ -91,6 +94,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public OrderDTO update(OrderDTO dto, Integer id) {
 		if (orderDAO.findById(id).isPresent()) {
 			Order order = orderDAO.findById(id).get();
@@ -107,6 +111,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public OrderDTO deleteById(Integer id) {
 		OrderDTO orderBean = null;
 		if (orderDAO.existsById(id)) {
@@ -135,6 +140,7 @@ public class OrderService extends BaseServiceImpl<OrderDTO, Order, OrderResult> 
 
 
 	@Override
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public OrderDTO getById(Integer id) {
 		if (orderDAO.findById(id).isPresent()) {
 			final Order userBeans = orderDAO.findById(id).get();

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<sec:http auto-config="true" use-expressions="true"
+		pattern="/**" create-session="stateless">
+		<!-- url sin proteccion para el acceso del cliente-web -->
+		<sec:intercept-url pattern="/**"
+			access="isAuthenticated()" />
+		<sec:http-basic />
+	</sec:http>
+
+	<!-- login -->
+	<sec:authentication-manager>
+		<sec:authentication-provider>
+		<sec:user-service>
+		<sec:user name="admin" password="{noop}admin" authorities="ROLE_USER, ROLE_ADMIN"/>
+		<sec:user name="client" password="{noop}client" authorities="ROLE_USER, ROLE_CLIENT"/>
+		</sec:user-service>
+<!-- 			<sec:password-encoder ref="encoder" />
+			<sec:jdbc-user-service
+				data-source-ref="myDataSource"
+				users-by-username-query="select user_name, user_password as password from users where user_name = ?"
+				authorities-by-username-query="select u.user_name, r.role_name as authority 
+            from users u, users_roles ur, roles r
+                where u.user_id = ur.user_id
+                and r.role_id = ur.role_id 
+                and u.user_name  = ?" /> -->
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<!-- database configuration (database = postgres) -->
+	<bean id="myDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/DBOrder" />
+		<property name="username" value="postgres" />
+		<property name="password" value="120598" />
+	</bean>
+
+	<!-- bean para el encoder de password -->
+	<bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!--anotacion @Secured de Spring -->
+	<sec:global-method-security
+		secured-annotations="enabled" />
+</beans> 
