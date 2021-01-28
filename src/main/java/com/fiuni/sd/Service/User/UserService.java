@@ -146,8 +146,13 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 
 		}
 		return bean;
+	}
 
-
-
+	@Override
+	@Transactional
+	public UserDTO findByUserName(String username) {
+        List<User> results = userDAO.findByUserName(username);
+        final UserDTO user = 0 == results.size() ? new UserDTO() : convertBeanToDto(results.get(0));
+        return user;
 	}
 }
