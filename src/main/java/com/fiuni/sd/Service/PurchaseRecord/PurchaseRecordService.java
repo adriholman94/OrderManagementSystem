@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecord;
 import com.fiuni.sd.Beans.PurchaseRecord.PurchaseRecordDetail;

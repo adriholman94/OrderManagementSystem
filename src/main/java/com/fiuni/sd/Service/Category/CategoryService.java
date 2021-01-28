@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -99,7 +101,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	@CacheEvict(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO deleteById(Integer id) {
 		CategoryDTO dto = new CategoryDTO();

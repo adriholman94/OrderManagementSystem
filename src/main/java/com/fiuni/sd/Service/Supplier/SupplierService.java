@@ -3,7 +3,7 @@ package com.fiuni.sd.Service.Supplier;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +17,9 @@ import com.fiuni.sd.DAO.Supplier.ISupplierDAO;
 import com.fiuni.sd.DTO.Supplier.SupplierDTO;
 import com.fiuni.sd.DTO.Supplier.SupplierResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SupplierService extends BaseServiceImpl<SupplierDTO, Supplier, SupplierResult> implements ISupplierService {

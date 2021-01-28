@@ -3,7 +3,7 @@ package com.fiuni.sd.Service.Role;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
