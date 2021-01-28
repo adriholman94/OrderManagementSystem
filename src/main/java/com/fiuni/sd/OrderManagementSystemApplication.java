@@ -16,15 +16,12 @@ import com.fiuni.sd.Beans.User.User;
 
 @SpringBootApplication
 @ImportResource({"classpath:xmemcached.xml"})
-<<<<<<< Updated upstream
-public class OrderManagementSystemApplication {
 
-=======
 public class OrderManagementSystemApplication extends SpringBootServletInitializer implements CommandLineRunner{
     @Autowired
     private JavaMailSender javaMailSender;
     
->>>>>>> Stashed changes
+
 	public static void main(String[] args) {
 		SpringApplication.run(OrderManagementSystemApplication.class, args);
 	}
