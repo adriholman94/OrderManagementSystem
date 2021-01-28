@@ -54,4 +54,9 @@ public class UserController {
 	public UserDTO delete(@PathVariable int id) {
 		return userService.deleteById(id);
 	}
+
+	@GetMapping(path = "/search/{user_name}", produces = {"application/xml", "application/json"})
+	public UserDTO findByUserName(@PathVariable(value = "user_name")String userName) {
+		return userService.findByUserName(userName);
+	}
 }

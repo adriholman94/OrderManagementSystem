@@ -1,6 +1,5 @@
 package com.fiuni.sd.Beans.User;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;

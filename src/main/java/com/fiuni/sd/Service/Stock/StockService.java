@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import com.fiuni.sd.Beans.Stock.Stock;
 import com.fiuni.sd.DAO.Stock.IStockDAO;
@@ -27,6 +28,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public StockDTO save(StockDTO dto) {
 		final Stock bean = new Stock();
 		bean.setProductQuantity(dto.getProductQuantity());
@@ -37,6 +39,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public StockResult getAll(Pageable pageable) {
 		final List<StockDTO> products = new ArrayList<>();
 		Page<Stock> results = stockDAO.findAll(pageable);
@@ -67,6 +70,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public StockDTO update(StockDTO dto, Integer id) {
 		if (stockDAO.findById(id).isPresent()) {
 			Stock bean = stockDAO.findById(id).get();
@@ -82,6 +86,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 
 	@Override
 	@Transactional
+	@Secured("ROLE_ADMIN")
 	public StockDTO deleteById(Integer id) {
 		StockDTO dto = new StockDTO();
 		if (stockDAO.existsById(id)) {
@@ -92,6 +97,7 @@ public class StockService extends BaseServiceImpl<StockDTO, Stock, StockResult> 
 	}
 
 	@Override
+	@Secured("ROLE_ADMIN")
 	public StockDTO getById(Integer id) {
 		if (stockDAO.findById(id).isPresent()) {
 			final Stock roleBeans = stockDAO.findById(id).get();

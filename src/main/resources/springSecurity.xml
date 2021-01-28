@@ -39,7 +39,11 @@
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/DBOrder" />
 		<property name="username" value="postgres" />
+
 		<property name="password" value="123" />
+
+		<property name="password" value="120598" />
+
 	</bean>
 
 	<!-- bean para el encoder de password -->

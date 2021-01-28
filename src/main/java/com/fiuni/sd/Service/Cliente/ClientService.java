@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 
@@ -38,6 +39,7 @@ public class ClientService extends BaseServiceImpl<ClientDTO, Client, ClientResu
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	//@CacheEvict(value = Setting.cache_Name, key = "'api_client_' + #dto.id")
 	@CachePut(value = Setting.cache_Name, key = "'api_client_' + #dto.id", condition = "#dto.id!=null")
 	public ClientDTO save(ClientDTO dto) {
@@ -64,6 +66,7 @@ public class ClientService extends BaseServiceImpl<ClientDTO, Client, ClientResu
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public ClientResult getAll(Pageable pageable) {
 		final List<ClientDTO> clients = new ArrayList<>();
 		Page<Client> results = clientDAO.findAll(pageable);
@@ -97,6 +100,7 @@ public class ClientService extends BaseServiceImpl<ClientDTO, Client, ClientResu
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	public ClientDTO update(ClientDTO dto, Integer id) {
 		if (clientDAO.findById(id).isPresent()) {
 			Client bean = clientDAO.findById(id).get();
@@ -113,6 +117,7 @@ public class ClientService extends BaseServiceImpl<ClientDTO, Client, ClientResu
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	@CacheEvict(value = Setting.cache_Name, key = "'api_client_' + #id")
 	public ClientDTO deleteById(Integer id) {
 		ClientDTO bean = null;
@@ -126,6 +131,7 @@ public class ClientService extends BaseServiceImpl<ClientDTO, Client, ClientResu
 
 	@Override
 	@Transactional
+	@Secured({"ROLE_ADMIN", "ROLE_CLIENT"})
 	@Cacheable(value = Setting.cache_Name, key = "'api_client_' + #id")
 	public ClientDTO getById(Integer id) {
 		if (clientDAO.findById(id).isPresent()) {
