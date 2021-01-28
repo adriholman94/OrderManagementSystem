@@ -12,12 +12,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
+import com.fiuni.sd.Beans.Category.Category;
 import com.fiuni.sd.Beans.Role.Role;
 import com.fiuni.sd.Beans.User.User;
 import com.fiuni.sd.DAO.User.IUserDAO;
+import com.fiuni.sd.DTO.Category.CategoryDTO;
+import com.fiuni.sd.DTO.Category.CategoryResult;
 import com.fiuni.sd.DTO.Role.RoleDTO;
 
 import com.fiuni.sd.DTO.User.UserDTO;
@@ -25,6 +29,7 @@ import com.fiuni.sd.DTO.User.UserResult;
 import com.fiuni.sd.Service.Base.BaseServiceImpl;
 
 @Service
+@EnableScheduling
 public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> implements IUserService {
 
 	@Autowired
@@ -65,8 +70,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	public UserDTO getById(Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
-			//envio de correo cuando hace la consulta
-			sendEmail(convertBeanToDto(userBeans),"Hola","has sido notificado desde la aplicacion");
+
 			return convertBeanToDto(userBeans);
 			
 		} else {
@@ -74,16 +78,7 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 		}
 	}
 	
-    @Autowired
-    private JavaMailSender javaMailSender;
-	public void sendEmail(UserDTO to, String asunto, String content) {
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(to.getUserMail());
-        email.setSubject(asunto);
-        email.setText(content);
-        javaMailSender.send(email);
-        System.out.println("mesaje enviado "+to.getUserMail());
-    }
+
 	@Override
 	@Transactional
 	@Secured("ROLE_ADMIN")
@@ -170,4 +165,15 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
         final UserDTO user = 0 == results.size() ? new UserDTO() : convertBeanToDto(results.get(0));
         return user;
 	}
+	
+	
+	@Override
+	public UserResult getUsers() {
+		final List<UserDTO> users = new ArrayList<>();
+		List<User> results = userDAO.findAll();
+		results.forEach(user -> users.add(convertBeanToDto(user)));
+		final UserResult result = new UserResult();
+		result.setUsers(users);
+		return result;
+}
 }

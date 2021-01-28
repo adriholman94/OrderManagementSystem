@@ -15,13 +15,14 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.fiuni.sd.Beans.User.User;
 import com.fiuni.sd.DTO.User.UserDTO;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
 @ImportResource({"classpath:xmemcached.xml"})
-
+@EnableScheduling
 public class OrderManagementSystemApplication extends SpringBootServletInitializer{
 //implements CommandLineRunner{
   //  @Autowired
