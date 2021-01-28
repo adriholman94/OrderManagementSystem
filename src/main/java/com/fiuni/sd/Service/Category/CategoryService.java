@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,8 +38,12 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	private CacheManager cacheManager;
 
 	@Override
-	@Transactional
+
+
 	@Secured("ROLE_ADMIN")
+
+	@Transactional(propagation=Propagation.REQUIRED)
+
 	@CachePut(value = Setting.cache_Name, key = "'api_category_' + #dto.id", condition = "#dto.id!=null")
 	public CategoryDTO save(CategoryDTO dto) {
 		try {
@@ -56,8 +62,9 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional
 	@Secured("ROLE_ADMIN")
+	@Transactional(readOnly=true)
+
 	public CategoryResult getAll(Pageable pageable) {
 		final List<CategoryDTO> categories = new ArrayList<>();
 		Page<Category> results = categoryDAO.findAll(pageable);
@@ -99,7 +106,7 @@ public class CategoryService extends BaseServiceImpl<CategoryDTO, Category, Cate
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	@CacheEvict(value = Setting.cache_Name, key = "'api_category_' + #id")
 	public CategoryDTO deleteById(Integer id) {
 		CategoryDTO dto = new CategoryDTO();
