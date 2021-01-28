@@ -1,8 +1,7 @@
 package com.fiuni.sd;
 
 import java.io.IOException;
-
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,13 +17,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import com.fiuni.sd.Beans.User.User;
+import com.fiuni.sd.DTO.User.UserDTO;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
 @ImportResource({"classpath:xmemcached.xml"})
 
-public class OrderManagementSystemApplication extends SpringBootServletInitializer implements CommandLineRunner{
-    @Autowired
-    private JavaMailSender javaMailSender;
+public class OrderManagementSystemApplication extends SpringBootServletInitializer{
+//implements CommandLineRunner{
+  //  @Autowired
+    //private JavaMailSender javaMailSender;
 
 
 
@@ -33,27 +34,27 @@ public class OrderManagementSystemApplication extends SpringBootServletInitializ
 	}
 	
 
-    public void run(String... args) {
-
-        System.out.println("Sending Email...");
-     
-            sendEmail();
-            //sendEmailWithAttachment();
-
-        System.out.println("Done");
-
-    }
-
-    void sendEmail() {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-     //   User b=new User();
-        msg.setTo("zai.fleitas@gmail.com");
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-
-    }
+	/*
+	 * public void run(String... args) {
+	 * 
+	 * System.out.println("Sending Email...");
+	 * 
+	 * sendEmail(); //sendEmailWithAttachment();
+	 * 
+	 * System.out.println("Done");
+	 * 
+	 * }
+	 * 
+	 * void sendEmail() {
+	 * 
+	 * List<UserDTO> listClients;
+	 * 
+	 * // b=new UserDTO(); //"zai.fleitas@gmail.com" for (UserDTO c : listClients) {
+	 * SimpleMailMessage msg = new SimpleMailMessage(); msg.setTo(c.getUserMail());
+	 * 
+	 * msg.setSubject("Testing from Spring Boot");
+	 * msg.setText("Hello World \n Spring Boot Email");
+	 * 
+	 * javaMailSender.send(msg); } }
+	 */
 }

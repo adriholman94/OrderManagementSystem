@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
@@ -63,12 +65,25 @@ public class UserService extends BaseServiceImpl<UserDTO, User, UserResult> impl
 	public UserDTO getById(Integer id) {
 		if (userDAO.findById(id).isPresent()) {
 			final User userBeans = userDAO.findById(id).get();
+			//envio de correo cuando hace la consulta
+			sendEmail(convertBeanToDto(userBeans),"Hola","has sido notificado desde la aplicacion");
 			return convertBeanToDto(userBeans);
+			
 		} else {
 			return null;
 		}
 	}
-
+	
+    @Autowired
+    private JavaMailSender javaMailSender;
+	public void sendEmail(UserDTO to, String asunto, String content) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(to.getUserMail());
+        email.setSubject(asunto);
+        email.setText(content);
+        javaMailSender.send(email);
+        System.out.println("mesaje enviado "+to.getUserMail());
+    }
 	@Override
 	@Transactional
 	@Secured("ROLE_ADMIN")
