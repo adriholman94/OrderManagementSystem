@@ -13,6 +13,7 @@ import com.fiuni.sd.Service.Supplier.SupplierService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,6 +47,7 @@ public class PurchaseRecordDetailService
     }
 
     @Override
+    @Secured({"ROLE_ADMIN"})
     public PurchaseRecordDetailDTO deleteById(Integer id) {
 		PurchaseRecordDetailDTO roleBean = null;
 		if (purchaseDetailDAO.existsById(id)) {
@@ -56,6 +58,7 @@ public class PurchaseRecordDetailService
     }
 
     @Override
+    @Secured({"ROLE_ADMIN"})
     public PurchaseRecordDetailDTO getById(Integer id) {
 		if (purchaseDetailDAO.findById(id).isPresent()) {
 			final PurchaseRecordDetail bean = purchaseDetailDAO.findById(id).get();
