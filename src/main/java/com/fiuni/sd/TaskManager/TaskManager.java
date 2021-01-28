@@ -21,14 +21,14 @@ public class TaskManager {
 	@Scheduled(cron = "${cron.secondPeriod}")
 	public void task() {
 		for (UserDTO user : userService.getUsers().getUsers()) {
-			SimpleMailMessage email = new SimpleMailMessage();
-	        email.setTo(user.getUserMail());
-	        email.setSubject("");
-	        email.setText("notificado desde la aplicacion");
-	        javaMailSender.send(email);
-	        System.out.println("mesaje enviado a "+user.getUserMail());
+			if(user.getUserMail() != ""){
+				SimpleMailMessage email = new SimpleMailMessage();
+				email.setTo(user.getUserMail());
+				email.setSubject("");
+				email.setText("notificado desde la aplicacion");
+				javaMailSender.send(email);
+				System.out.println("mesaje enviado a "+user.getUserMail());
+			}
 		}
-		
-        
     }
 }
